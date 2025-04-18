@@ -3,7 +3,7 @@
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {useState} from "react";
-import {Dialog, DialogContent, DialogTrigger} from "@/components/ui/dialog";
+import {Dialog, DialogContent, DialogTrigger, DialogTitle} from "@/components/ui/dialog";
 import {Menu} from "lucide-react";
 
 const Header = () => {
@@ -40,6 +40,7 @@ const Header = () => {
               </Button>
             </DialogTrigger>
             <DialogContent className="w-full bg-background shadow-lg">
+              <DialogTitle>Menu</DialogTitle>
               <nav className="flex flex-col space-y-4 p-4">
                 <Link href="/" className="text-2xl font-semibold" onClick={handleNavigation}>
                   Codenies Solutions
