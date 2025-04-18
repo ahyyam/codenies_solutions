@@ -6,18 +6,21 @@
  * - sendContactForm - A server action that handles the contact form submission.
  */
 
-import { Resend } from 'resend';
-import { z } from 'zod';
-import { contactFormSchema } from './page';
-
-// Initialize Resend only if the API key is available
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+import {Resend} from 'resend';
+import {z} from 'zod';
+import {contactFormSchema} from './page';
 
 export async function sendContactForm(data: z.infer<typeof contactFormSchema>) {
   try {
+    // Initialize Resend only if the API key is available
+    const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+
     if (!resend) {
       console.error('RESEND_API_KEY is not defined. Cannot send email.');
-      return { message: 'Failed to send email due to missing API key.', success: false };
+      return {
+        message: 'Failed to send email due to missing API key.',
+        success: false,
+      };
     }
 
     const emailHtml = `
@@ -37,13 +40,13 @@ export async function sendContactForm(data: z.infer<typeof contactFormSchema>) {
 
     if (resendResult.error) {
       console.error('Resend error:', resendResult.error);
-      return { message: 'Failed to send email.', success: false };
+      return {message: 'Failed to send email.', success: false};
     }
 
     console.log('Resend success:', resendResult);
-    return { message: 'Email sent successfully!', success: true };
+    return {message: 'Email sent successfully!', success: true};
   } catch (error) {
     console.error('Error sending email:', error);
-    return { message: 'An unexpected error occurred.', success: false };
+    return {message: 'An unexpected error occurred.', success: false};
   }
 }
