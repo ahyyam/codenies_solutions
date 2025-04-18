@@ -30,7 +30,7 @@ export async function sendContactForm(data: z.infer<typeof contactFormSchema>) {
 
     const resendResult = await resend.emails.send({
       from: 'Codenies Solutions <onboarding@resend.dev>',
-      to: ['your-email@example.com'], // Replace with your email
+      to: ['codenies.solutions@gmail.com'], // Replace with your email
       subject: 'New Contact Form Submission',
       html: emailHtml,
     });
