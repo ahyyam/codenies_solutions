@@ -49,9 +49,7 @@ const Header = () => {
           </Dialog>
         </div>
 
-        <Button asChild>
-          <Link href="/contact">Get a Quote</Link>
-        </Button>
+        
       </div>
     </header>
   );

@@ -1,6 +1,7 @@
 'use client';
 
 import {Button} from "@/components/ui/button";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -18,8 +19,8 @@ const Hero = () => {
           We transform ideas into innovative software solutions.
         </p>
         <div className="text-center">
-          <Button size="lg">
-            Get Started
+          <Button asChild size="lg">
+            <Link href="/contact">Get Started</Link>
           </Button>
         </div>
       </div>
