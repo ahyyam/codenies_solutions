@@ -10,10 +10,16 @@ import { Resend } from 'resend';
 import { z } from 'zod';
 import { contactFormSchema } from './page';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend only if the API key is available
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function sendContactForm(data: z.infer<typeof contactFormSchema>) {
   try {
+    if (!resend) {
+      console.error('RESEND_API_KEY is not defined. Cannot send email.');
+      return { message: 'Failed to send email due to missing API key.', success: false };
+    }
+
     const emailHtml = `
       <h1>New Contact Form Submission</h1>
       <p><strong>Name:</strong> ${data.name}</p>
