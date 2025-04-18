@@ -10,7 +10,7 @@ const Hero = () => {
       <div
         className="absolute inset-0 bg-cover bg-center opacity-70">
         <Image
-          src="https://images.unsplash.com/photo-1519389950473-47a0f98a54a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="https://picsum.photos/1920/1080"
           alt="Hero Image"
           layout="fill"
           objectFit="cover"
