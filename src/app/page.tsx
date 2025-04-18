@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import Contact from '@/components/Contact';
 import { Button } from '@/components/ui/button';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -10,12 +11,7 @@ export default function Home() {
       <Hero />
       <Services />
       <Contact />
-        <footer className="bg-secondary py-6 text-center text-secondary-foreground">
-            <p className="text-sm">
-                © {new Date().getFullYear()} Codenies Solutions. All rights reserved.
-            </p>
-        </footer>
+      <Footer />
     </>
   );
 }
-
