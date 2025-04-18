@@ -14,6 +14,7 @@ const Header = () => {
                         <li><Link href="/services" className="hover:text-primary">Services</Link></li>
                         <li><Link href="/about" className="hover:text-primary">About</Link></li>
                         <li><Link href="/contact" className="hover:text-primary">Contact</Link></li>
+                        <li><Link href="/blog" className="hover:text-primary">Blog</Link></li>
                     </ul>
                 </nav>
                 <Button asChild>
@@ -25,3 +26,4 @@ const Header = () => {
 };
 
 export default Header;
+
