@@ -1,5 +1,7 @@
+'use client';
 
 import Link from "next/link";
+import {motion} from 'framer-motion';
 
 const Services = () => {
   const services = [
@@ -39,12 +41,14 @@ const Services = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <Link key={index} href={`/services#${service.id}`}>
-              <div
+              <motion.div
                 className="p-6 rounded-lg shadow-md bg-card hover:shadow-lg transition-shadow duration-300"
+                whileHover={{scale: 1.05}}
+                transition={{duration: 0.3}}
               >
                 <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
                 <p className="text-muted-foreground">{service.description}</p>
-              </div>
+              </motion.div>
             </Link>
           ))}
         </div>
@@ -54,3 +58,4 @@ const Services = () => {
 };
 
 export default Services;
+
