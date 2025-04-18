@@ -1,10 +1,9 @@
 'use client';
 import React from 'react';
-import {motion} from 'framer-motion';
 
 const AboutPage = () => {
   return (
-    <motion.section
+    <section
       className="py-16 bg-background"
       initial={{opacity: 0}}
       animate={{opacity: 1}}
@@ -38,8 +37,9 @@ const AboutPage = () => {
           collaboratively to ensure every project is a success.
         </p>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
 export default AboutPage;
+
