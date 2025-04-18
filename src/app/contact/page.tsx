@@ -18,8 +18,9 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {isSpam} from "@/services/spam-protection";
 import {useToast} from "@/hooks/use-toast";
 import {useEffect} from "react";
+import { sendContactForm } from './actions';
 
-const contactFormSchema = z.object({
+export const contactFormSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
@@ -59,12 +60,23 @@ const ContactPage = () => {
       });
       return;
     }
-    // Here you would handle the form submission, e.g., sending the data to your server
-    console.log(values);
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you soon.",
-    });
+
+    // Call the server action to send the email
+    const result = await sendContactForm(values);
+
+    if (result?.success) {
+      toast({
+        title: "Message sent!",
+        description: "We'll get back to you soon.",
+      });
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Error sending message!",
+        description: result?.message || "Failed to send the message. Please try again.",
+      });
+    }
+
     form.reset();
   };
 
@@ -130,8 +142,3 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
-
-
-    
-
-    
