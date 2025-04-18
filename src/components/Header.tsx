@@ -9,20 +9,24 @@ import {Menu} from "lucide-react";
 const Header = () => {
   const [open, setOpen] = useState(false);
 
+  const handleNavigation = () => {
+    setOpen(false); // Close the dialog
+  };
+
   return (
     <header className="bg-background py-4 shadow-sm">
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-semibold">
+        <Link href="/" className="text-2xl font-semibold" onClick={handleNavigation}>
           Codenies Solutions
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:block">
           <ul className="flex space-x-6">
-            <li><Link href="/services" className="hover:text-primary">Services</Link></li>
-            <li><Link href="/about" className="hover:text-primary">About</Link></li>
-            <li><Link href="/contact" className="hover:text-primary">Contact</Link></li>
-            <li><Link href="/blog" className="hover:text-primary">Blog</Link></li>
+            <li><Link href="/services" className="hover:text-primary" onClick={handleNavigation}>Services</Link></li>
+            <li><Link href="/about" className="hover:text-primary" onClick={handleNavigation}>About</Link></li>
+            <li><Link href="/contact" className="hover:text-primary" onClick={handleNavigation}>Contact</Link></li>
+            <li><Link href="/blog" className="hover:text-primary" onClick={handleNavigation}>Blog</Link></li>
           </ul>
         </nav>
 
@@ -37,13 +41,13 @@ const Header = () => {
             </DialogTrigger>
             <DialogContent className="w-full bg-background shadow-lg">
               <nav className="flex flex-col space-y-4 p-4">
-                <Link href="/" className="text-2xl font-semibold">
+                <Link href="/" className="text-2xl font-semibold" onClick={handleNavigation}>
                   Codenies Solutions
                 </Link>
-                <Link href="/services" className="hover:text-primary block">Services</Link>
-                <Link href="/about" className="hover:text-primary block">About</Link>
-                <Link href="/contact" className="hover:text-primary block">Contact</Link>
-                <Link href="/blog" className="hover:text-primary block">Blog</Link>
+                <Link href="/services" className="hover:text-primary block" onClick={handleNavigation}>Services</Link>
+                <Link href="/about" className="hover:text-primary block" onClick={handleNavigation}>About</Link>
+                <Link href="/contact" className="hover:text-primary block" onClick={handleNavigation}>Contact</Link>
+                <Link href="/blog" className="hover:text-primary block" onClick={handleNavigation}>Blog</Link>
               </nav>
             </DialogContent>
           </Dialog>
