@@ -1,22 +1,10 @@
 'use client';
 import React from 'react';
-import Image from 'next/image';
 
 const AboutPage = () => {
   return (
     <section className="py-16 bg-background">
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        {/* Image Section */}
-        <div className="md:order-last">
-          <Image
-            src="https://images.unsplash.com/photo-1518770660439-464ef52bb7cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-            alt="About Us"
-            width={700}
-            height={500}
-            className="rounded-lg shadow-md"
-          />
-        </div>
-
+      <div className="container mx-auto px-4">
         {/* Text Content Section */}
         <div>
           <h2 className="text-3xl font-semibold mb-6">About Us</h2>
