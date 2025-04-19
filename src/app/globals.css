@@ -41,6 +41,13 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --color-primary: 220 70% 50%; /* Example primary color */
+    --color-secondary: 160 60% 45%; /* Example secondary color */
+    --color-accent: 30 80% 55%; /* Example accent color */
+    --color-success: 140 60% 45%; /* Example success color */
+    --color-warning: 50 70% 50%; /* Example warning color */
+    --color-error: 0 70% 50%; /* Example error color */
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -92,5 +99,3 @@ body {
     font-weight: 700;
   }
 }
-
-
