@@ -40,7 +40,7 @@ const Header = () => {
               </Button>
             </DialogTrigger>
             <DialogContent className="w-full bg-background shadow-lg">
-              <DialogTitle>Menu</DialogTitle>
+              <DialogTitle></DialogTitle>
               <nav className="flex flex-col space-y-4 p-4">
                 <Link href="/" className="text-2xl font-semibold" onClick={handleNavigation}>
                   Codenies Solutions
