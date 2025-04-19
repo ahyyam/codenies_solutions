@@ -6,28 +6,28 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <section className="relative py-24 bg-background overflow-hidden">
+    <section className="relative py-24 bg-background overflow-hidden fade-in">
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-70">
+        className="absolute inset-0 bg-cover bg-center opacity-30">
         <Image
-          src="https://picsum.photos/1920/1080"
+          src="https://images.unsplash.com/photo-1519389950473-47a0f98a54a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Hero Image"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           className="opacity-30"
         />
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <h1
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6">
-          Crafting Digital Solutions for Tomorrow
+          className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 text-primary">
+          Innovate. Transform. Succeed.
         </h1>
         <p
           className="text-lg text-center text-muted-foreground mb-8">
-          We transform ideas into innovative software solutions.
+          Crafting bespoke software solutions that drive your business forward.
         </p>
         <div className="text-center">
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="scale-on-hover">
             <Link href="/contact">Get Started</Link>
           </Button>
         </div>
