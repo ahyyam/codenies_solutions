@@ -8,31 +8,31 @@ const Services = () => {
       id: "web-mobile",
       title: "Web & Mobile App Development",
       description: "Custom web and mobile applications tailored to your needs.",
-      image: 'https://ai-generated.art/wp-content/uploads/2023/05/Mobile-app-development-on-a-laptop-AI-generated.jpg',
+      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dGVjaG5vbG9neXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
     },
     {
       id: "custom-software",
       title: "Custom Software Solutions",
       description: "Bespoke software designed to solve complex business challenges.",
-      image: 'https://ai-generated.art/wp-content/uploads/2023/05/Custom-Software-Development-AI-Generated.jpg',
+      image: 'https://images.unsplash.com/photo-1518770660439-464c4c52ef31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dGVjaG5vbG9neXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
     },
     {
       id: "ecommerce",
       title: "E-commerce Development",
       description: "Robust e-commerce platforms for seamless online retail experiences.",
-      image: 'https://ai-generated.art/wp-content/uploads/2023/05/E-commerce-website-on-a-laptop-AI-generated.jpg',
+      image: 'https://images.unsplash.com/photo-1505740420928-3e0456750d47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGVjb21tZXJjZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
     },
     {
       id: "ai-automation",
       title: "AI & Automation Tools",
       description: "Intelligent automation solutions to streamline your workflows.",
-      image: 'https://ai-generated.art/wp-content/uploads/2023/05/AI-automation-tools-on-a-laptop-AI-generated.jpg',
+      image: 'https://images.unsplash.com/photo-1542831323-533a4f0eb57e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGF1dG9tYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
     },
     {
       id: "ui-ux",
       title: "UI/UX Design",
       description: "Engaging user interfaces that drive user satisfaction.",
-      image: 'https://ai-generated.art/wp-content/uploads/2023/05/UI-UX-design-on-a-laptop-AI-generated.jpg',
+      image: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8VVUlMkZVeHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
     },
   ];
 
@@ -60,8 +60,8 @@ const Services = () => {
           ))}
         </div>
       </div>
-    </section>
-  );
-};
-
-export default Services;
+     </section>
+   );
+ };
+ 
+ export default Services;
