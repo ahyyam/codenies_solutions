@@ -7,35 +7,35 @@ const ServicesPage = () => {
       title: 'Web & Mobile App Development',
       description:
         'We offer comprehensive web and mobile app development services, creating custom solutions tailored to your specific business needs. Our expertise spans across various platforms and technologies, ensuring a seamless user experience and optimal performance.',
-      image: 'https://picsum.photos/id/237/600/400',
+      image: 'https://via.placeholder.com/600x400?text=web+development',
     },
     {
       id: 'custom-software',
       title: 'Custom Software Solutions',
       description:
         'Our custom software solutions are designed to address complex business challenges. We work closely with you to understand your unique requirements and develop bespoke software that streamlines your operations and drives efficiency.',
-      image: 'https://picsum.photos/id/238/600/400',
+      image: 'https://via.placeholder.com/600x400?text=software',
     },
     {
       id: 'ecommerce',
       title: 'E-commerce Development',
       description:
         'We build robust and scalable e-commerce platforms that deliver seamless online retail experiences. From storefront design to payment gateway integration, we provide end-to-end e-commerce solutions that maximize your online sales potential.',
-      image: 'https://picsum.photos/id/239/600/400',
+      image: 'https://via.placeholder.com/600x400?text=ecommerce',
     },
     {
       id: 'ai-automation',
       title: 'AI & Automation Tools',
       description:
         'Leverage the power of artificial intelligence and automation to streamline your workflows and reduce manual effort. Our AI and automation tools are designed to improve efficiency, reduce costs, and drive innovation within your organization.',
-      image: 'https://picsum.photos/id/240/600/400',
+      image: 'https://via.placeholder.com/600x400?text=ai',
     },
     {
       id: 'ui-ux',
       title: 'UI/UX Design',
       description:
         'We create engaging and intuitive user interfaces that drive user satisfaction and enhance brand loyalty. Our UI/UX design services focus on creating seamless user experiences that align with your business goals and user needs.',
-      image: 'https://picsum.photos/id/241/600/400',
+      image: 'https://via.placeholder.com/600x400?text=design',
     },
   ];
 
