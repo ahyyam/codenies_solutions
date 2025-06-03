@@ -9,31 +9,31 @@ const Services = () => {
       id: "web-mobile",
       title: "Web & Mobile App Development",
       description: "Custom web and mobile applications tailored to your needs.",
-      image: 'https://images.unsplash.com/photo-1555057250-a67c6986614a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+ image: '/src/pics/service_mobile_web_dev_600x400.png',
     },
     {
       id: "custom-software",
       title: "Custom Software Solutions",
       description: "Bespoke software designed to solve complex business challenges.",
-      image: 'https://images.unsplash.com/photo-1542831323-533a4f0eb57e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+ image: '/src/pics/service_custom_software_600x400.png',
     },
     {
       id: "ecommerce",
       title: "E-commerce Development",
       description: "Robust e-commerce platforms for seamless online retail experiences.",
-      image: 'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+ image: '/src/pics/Ecom.png',
     },
     {
       id: "ai-automation",
       title: "AI & Automation Tools",
       description: "Intelligent automation solutions to streamline your workflows.",
-      image: 'https://images.unsplash.com/photo-1587820043529-b79c1f525a49?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+ image: '/src/pics/Ai .png',
     },
     {
       id: "ui-ux",
       title: "UI/UX Design",
       description: "Engaging user interfaces that drive user satisfaction.",
-      image: 'https://images.unsplash.com/photo-1517694712202-14f924a81a18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+ image: '/src/pics/service_uiux_600x400.png',
     },
   ];
 

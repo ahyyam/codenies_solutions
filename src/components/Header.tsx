@@ -42,9 +42,6 @@ const Header = () => {
             <DialogContent className="w-full bg-background shadow-lg">
               <DialogTitle></DialogTitle>
               <nav className="flex flex-col space-y-4 p-4">
-                <Link href="/" className="text-2xl font-semibold hover:text-primary transition-colors duration-200" onClick={handleNavigation}>
-                  Codenies Solutions
-                </Link>
                 <Link href="/services" className="hover:text-primary transition-colors duration-200 block" onClick={handleNavigation}>Services</Link>
                 <Link href="/about" className="hover:text-primary transition-colors duration-200 block" onClick={handleNavigation}>About</Link>
                 <Link href="/contact" className="hover:text-primary transition-colors duration-200 block" onClick={handleNavigation}>Contact</Link>
