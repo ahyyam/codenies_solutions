@@ -2,9 +2,16 @@
 'use client';
 
 import Link from 'next/link';
-import {Instagram, Facebook} from 'lucide-react';
+import { Instagram, Facebook } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 const Footer = () => {
+  const [currentYear, setCurrentYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="bg-secondary py-6 text-center text-secondary-foreground">
       <div className="container mx-auto px-4 flex flex-col items-center">
@@ -17,7 +24,7 @@ const Footer = () => {
           </Link>
         </div>
         <p className="text-sm">
-          © {new Date().getFullYear()} Codenies Solutions. All rights reserved.
+          {currentYear ? `© ${currentYear} Codenies Solutions. All rights reserved.` : '© Codenies Solutions. All rights reserved.'}
         </p>
       </div>
     </footer>
