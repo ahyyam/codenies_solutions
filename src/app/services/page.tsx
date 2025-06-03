@@ -7,28 +7,28 @@ const ServicesPage = () => {
       title: 'Web & Mobile App Development',
       description:
         'We offer comprehensive web and mobile app development services, creating custom solutions tailored to your specific business needs. Our expertise spans across various platforms and technologies, ensuring a seamless user experience and optimal performance.',
-      image: 'pics/service_mobile_web_dev_600x400.png',
+      image: '/pics/service_mobile_web_dev_600x400.png',
     },
     {
       id: 'custom-software',
       title: 'Custom Software Solutions',
       description:
         'Our custom software solutions are designed to address complex business challenges. We work closely with you to understand your unique requirements and develop bespoke software that streamlines your operations and drives efficiency.',
-      image: 'pics/service_custom_software_600x400.png',
+      image: '/pics/service_custom_software_600x400.png',
     },
     {
       id: 'ecommerce',
       title: 'E-commerce Development',
       description:
         'We build robust and scalable e-commerce platforms that deliver seamless online retail experiences. From storefront design to payment gateway integration, we provide end-to-end e-commerce solutions that maximize your online sales potential.',
-      image: 'pics/Ecom.png',
+      image: '/pics/Ecom.png',
     },
     {
       id: 'ai-automation',
       title: 'AI & Automation Tools',
       description:
         'Leverage the power of artificial intelligence and automation to streamline your workflows and reduce manual effort. Our AI and automation tools are designed to improve efficiency, reduce costs, and drive innovation within your organization.',
-      image: 'pics/Ai .png',
+      image: '/pics/Ai .png',
     },
     {
       id: 'ui-ux',

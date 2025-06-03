@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -8,10 +9,10 @@ const Footer = () => {
     <footer className="bg-secondary py-6 text-center text-secondary-foreground">
       <div className="container mx-auto px-4 flex flex-col items-center">
         <div className="flex space-x-4 mb-4">
-          <Link href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+          <Link href="https://www.instagram.com/codenies_solutions/" target="_blank" rel="noopener noreferrer">
             <Instagram className="h-6 w-6 hover:text-primary"/>
           </Link>
-          <Link href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+          <Link href="https://www.facebook.com/share/1LNgesBeTc/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
             <Facebook className="h-6 w-6 hover:text-primary"/>
           </Link>
         </div>
