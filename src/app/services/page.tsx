@@ -7,21 +7,21 @@ const ServicesPage = () => {
       title: 'Web & Mobile App Development',
       description:
         'We offer comprehensive web and mobile app development services, creating custom solutions tailored to your specific business needs. Our expertise spans across various platforms and technologies, ensuring a seamless user experience and optimal performance.',
-      image: 'https://via.placeholder.com/600x400?text=web+development',
+      image: 'pics/service_mobile_web_dev_600x400.png',
     },
     {
       id: 'custom-software',
       title: 'Custom Software Solutions',
       description:
         'Our custom software solutions are designed to address complex business challenges. We work closely with you to understand your unique requirements and develop bespoke software that streamlines your operations and drives efficiency.',
-      image: 'https://via.placeholder.com/600x400?text=software',
+      image: 'pics/service_custom_software_600x400.png',
     },
     {
       id: 'ecommerce',
       title: 'E-commerce Development',
       description:
         'We build robust and scalable e-commerce platforms that deliver seamless online retail experiences. From storefront design to payment gateway integration, we provide end-to-end e-commerce solutions that maximize your online sales potential.',
-      image: 'https://via.placeholder.com/600x400?text=ecommerce',
+      image: 'pics/Ecom.png',
     },
     {
       id: 'ai-automation',
@@ -35,7 +35,7 @@ const ServicesPage = () => {
       title: 'UI/UX Design',
       description:
         'We create engaging and intuitive user interfaces that drive user satisfaction and enhance brand loyalty. Our UI/UX design services focus on creating seamless user experiences that align with your business goals and user needs.',
-      image: 'https://via.placeholder.com/600x400?text=design',
+      image: '/pics/service_uiux_600x400.png',
     },
   ];
 
