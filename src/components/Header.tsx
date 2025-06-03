@@ -3,7 +3,7 @@
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {useState} from "react";
-import {Dialog, DialogContent, DialogTrigger, DialogTitle} from "@/components/ui/dialog";
+import {Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription} from "@/components/ui/dialog";
 import {Menu} from "lucide-react";
 
 const Header = () => {
@@ -41,6 +41,7 @@ const Header = () => {
             </DialogTrigger>
             <DialogContent className="w-full bg-background shadow-lg">
               <DialogTitle></DialogTitle>
+              <DialogDescription>This is the navigation menu.</DialogDescription>
               <nav className="flex flex-col space-y-4 p-4">
                 <Link href="/services" className="hover:text-primary transition-colors duration-200 block" onClick={handleNavigation}>Services</Link>
                 <Link href="/about" className="hover:text-primary transition-colors duration-200 block" onClick={handleNavigation}>About</Link>
