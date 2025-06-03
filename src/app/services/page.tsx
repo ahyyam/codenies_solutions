@@ -28,7 +28,7 @@ const ServicesPage = () => {
       title: 'AI & Automation Tools',
       description:
         'Leverage the power of artificial intelligence and automation to streamline your workflows and reduce manual effort. Our AI and automation tools are designed to improve efficiency, reduce costs, and drive innovation within your organization.',
-      image: 'https://via.placeholder.com/600x400?text=ai',
+      image: 'pics/Ai .png',
     },
     {
       id: 'ui-ux',
