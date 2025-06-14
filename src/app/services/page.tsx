@@ -14,7 +14,7 @@ const ServicesPage = () => {
       title: 'Custom Software Solutions',
       description:
         'Our custom software solutions are designed to address complex business challenges. We work closely with you to understand your unique requirements and develop bespoke software that streamlines your operations and drives efficiency.',
-      image: '/pics/service_custom_software_600x400.png',
+      image: "/pics/service_custom_software_600x400.png",
     },
     {
       id: 'ecommerce',
