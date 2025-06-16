@@ -1,4 +1,3 @@
-
 import type {Metadata} from 'next';
 import {Geist, Geist_Mono} from 'next/font/google';
 import './globals.css';
@@ -35,6 +34,11 @@ const merriweather = Merriweather({
 export const metadata: Metadata = {
   title: 'Codenies Solutions',
   description: 'Software Agency',
+  icons: [
+    { rel: 'icon', url: '/favicon.ico' },
+    { rel: 'icon', url: '/favicon.png' },
+    { rel: 'apple-touch-icon', url: '/favicon.png' },
+  ],
 };
 
 export default function RootLayout({
@@ -44,6 +48,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${merriweather.variable} antialiased`}>
         <Header/>
         {children}
