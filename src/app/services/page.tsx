@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 const ServicesPage = () => {
   const services = [
     {
@@ -14,7 +16,7 @@ const ServicesPage = () => {
       title: 'Custom Software Solutions',
       description:
         'Our custom software solutions are designed to address complex business challenges. We work closely with you to understand your unique requirements and develop bespoke software that streamlines your operations and drives efficiency.',
-      image: "/pics/service_custom_software_600x400.png",
+      image: '/pics/service_custom_software_600x400.png',
     },
     {
       id: 'ecommerce',
@@ -28,7 +30,7 @@ const ServicesPage = () => {
       title: 'AI & Automation Tools',
       description:
         'Leverage the power of artificial intelligence and automation to streamline your workflows and reduce manual effort. Our AI and automation tools are designed to improve efficiency, reduce costs, and drive innovation within your organization.',
-      image: '/pics/Ai .png',
+      image: '/pics/Ai.png',
     },
     {
       id: 'ui-ux',
@@ -48,9 +50,11 @@ const ServicesPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map(service => (
             <div key={service.id} className="p-6 rounded-lg shadow-md bg-card">
-              <img
+              <Image
                 src={service.image}
                 alt={service.title}
+                width={600}
+                height={400}
                 className="w-full h-48 object-cover mb-4 rounded-md"
               />
               <h3 className="text-xl font-semibold mb-4">{service.title}</h3>

@@ -9,31 +9,31 @@ const Services = () => {
       id: "web-mobile",
       title: "Web & Mobile App Development",
       description: "Custom web and mobile applications tailored to your needs.",
- image: '/src/pics/service_mobile_web_dev_600x400.png',
+      image: '/pics/service_mobile_web_dev_600x400.png',
     },
     {
       id: "custom-software",
       title: "Custom Software Solutions",
       description: "Bespoke software designed to solve complex business challenges.",
- image: '/src/pics/service_custom_software_600x400.png',
+      image: '/pics/service_custom_software_600x400.png',
     },
     {
       id: "ecommerce",
       title: "E-commerce Development",
       description: "Robust e-commerce platforms for seamless online retail experiences.",
- image: '/src/pics/Ecom.png',
+      image: '/pics/Ecom.png',
     },
     {
       id: "ai-automation",
       title: "AI & Automation Tools",
       description: "Intelligent automation solutions to streamline your workflows.",
- image: '/src/pics/Ai .png',
+      image: '/pics/Ai.png',
     },
     {
       id: "ui-ux",
       title: "UI/UX Design",
       description: "Engaging user interfaces that drive user satisfaction.",
- image: '/src/pics/service_uiux_600x400.png',
+      image: '/pics/service_uiux_600x400.png',
     },
   ];
 
