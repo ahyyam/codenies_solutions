@@ -1,0 +1,20 @@
+{
+  "name": "Codenies Solutions - Custom Software Development Agency",
+  "short_name": "Codenies",
+  "description": "Custom software development agency specializing in web & mobile apps, e-commerce, AI automation, and UI/UX design.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "en-US",
+  "dir": "ltr"
+} 
