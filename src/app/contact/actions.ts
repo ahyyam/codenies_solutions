@@ -8,7 +8,7 @@
 
 import {Resend} from 'resend';
 import {z} from 'zod';
-import {contactFormSchema} from './page';
+import { contactFormSchema } from './schema';
 
 export async function sendContactForm(data: z.infer<typeof contactFormSchema>) {
   try {

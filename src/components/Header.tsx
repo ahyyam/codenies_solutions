@@ -39,7 +39,7 @@ const Header = () => {
 
   const navigationItems = [
     { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/portfolio", label: "Portfolio" },
     { href: "/blog", label: "Blog" },
   ];
 
@@ -79,7 +79,7 @@ const Header = () => {
               ))}
               <li>
                 <Button asChild size="sm" className="btn-primary">
-                  <Link href="/contact" onClick={handleNavigation}>
+                  <Link href="/#contact" onClick={handleNavigation}>
                     Get Started
                     <ChevronRight className="w-4 h-4 ml-1" />
                   </Link>
@@ -150,7 +150,7 @@ const Header = () => {
                 ))}
                 <li className="pt-4">
                   <Button asChild size="lg" className="w-full btn-primary text-lg py-6 touch-manipulation">
-                    <Link href="/contact" onClick={handleNavigation}>
+                    <Link href="/#contact" onClick={handleNavigation}>
                       Get Started
                       <ChevronRight className="w-5 h-5 ml-2" />
                     </Link>

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
-import Portfolio from '@/components/Portfolio';
+import ContactForm from './contact/ContactForm';
 
 export const metadata: Metadata = {
   title: 'Custom Software Development Agency | Codenies Solutions',
@@ -123,7 +123,19 @@ export default function Home() {
       />
       <Hero />
       <Services />
-      <Portfolio />
+      <section id="contact" className="section-padding bg-background">
+        <div className="container mx-auto">
+          <header className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-primary">Contact Us</h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Tell us about your project and we’ll get back to you within 24 hours.
+            </p>
+          </header>
+          <div className="max-w-4xl mx-auto card p-6 md:p-10">
+            <ContactForm />
+          </div>
+        </div>
+      </section>
     </>
   );
 }

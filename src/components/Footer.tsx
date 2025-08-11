@@ -13,23 +13,18 @@ const Footer = () => {
   }, []); // Empty dependency array ensures this runs once on mount
 
   return (
-    <footer className="bg-secondary py-6 text-center text-secondary-foreground">
-      <div className="container mx-auto px-4 flex flex-col items-center">
-        <div className="flex space-x-4 mb-4">
-          <Link href="https://www.instagram.com/codenies_solutions/" target="_blank" rel="noopener noreferrer">
-            <Instagram className="h-6 w-6 hover:text-primary"/>
+    <footer className="border-t border-border bg-background">
+      <div className="container mx-auto px-4 py-10 flex flex-col items-center gap-4">
+        <div className="flex items-center gap-3 text-muted-foreground">
+          <Link href="https://www.instagram.com/codenies_solutions/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <Instagram className="h-5 w-5 hover:text-primary transition-colors"/>
           </Link>
-          <Link href="https://www.facebook.com/share/1LNgesBeTc/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
-            <Facebook className="h-6 w-6 hover:text-primary"/>
+          <span className="w-px h-5 bg-border" aria-hidden="true" />
+          <Link href="https://www.facebook.com/share/1LNgesBeTc/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <Facebook className="h-5 w-5 hover:text-primary transition-colors"/>
           </Link>
         </div>
-        <p className="text-sm">
-          {/*
-            On server: currentYear is null. Ternary resolves to the fallback string.
-            On client (initial render): currentYear is null. Ternary resolves to the fallback string.
-            Server and Client initial renders match.
-            On client (after useEffect): currentYear is updated. Component re-renders with the year.
-          */}
+        <p className="text-xs text-muted-foreground">
           {currentYear !== null ? `© ${currentYear} Codenies Solutions. All rights reserved.` : '© Codenies Solutions. All rights reserved.'}
         </p>
       </div>

@@ -274,7 +274,7 @@ const Portfolio = () => {
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
             Let's discuss how we can help you achieve similar results for your business.
           </p>
-          <Link href="/contact">
+          <Link href="/#contact">
             <button className="btn-primary text-lg px-8 py-4">
               Get Free Consultation
             </button>

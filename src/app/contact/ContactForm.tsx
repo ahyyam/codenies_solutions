@@ -19,21 +19,10 @@ import { isSpam } from "@/services/spam-protection";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 import { sendContactForm } from './actions';
+import { contactFormSchema, ContactFormValues } from './schema';
 import { Send, Loader2 } from 'lucide-react';
 
-export const contactFormSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
-  }),
-});
-
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+export { contactFormSchema };
 
 const ContactForm = () => {
   const { toast } = useToast();

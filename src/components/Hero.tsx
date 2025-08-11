@@ -44,7 +44,7 @@ const Hero = () => {
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button asChild size="lg" className="btn-primary text-lg px-8 py-4">
-                <Link href="/contact" aria-describedby="main-heading">
+                <Link href="#contact" aria-describedby="main-heading">
                   Get Free Consultation
                 </Link>
               </Button>
