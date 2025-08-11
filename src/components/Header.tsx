@@ -57,7 +57,7 @@ const Header = () => {
             className="flex items-center space-x-2 group"
             onClick={handleNavigation}
           >
-            <span className="text-xl lg:text-2xl font-bold text-primary group-hover:text-primary/80 transition-colors duration-200">
+            <span className="text-xl font-bold text-primary group-hover:text-primary/80 transition-colors duration-200">
               Codenies Solutions
             </span>
           </Link>
