@@ -2,8 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronRight, ArrowRight, Zap, Sparkles } from "lucide-react";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -58,9 +59,13 @@ const Header = () => {
             onClick={handleNavigation}
             aria-label="Codenies Solutions - Home"
           >
-            <span className="text-xl font-elegant font-bold text-primary group-hover:text-primary/80 transition-colors duration-200">
-              Codenies Solutions
-            </span>
+            <Image
+              src="/codenies_logo.png"
+              alt="Codenies Solutions"
+              width={200}
+              height={200}
+              className="h-32 w-auto group-hover:opacity-80 transition-opacity duration-200"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -112,51 +117,66 @@ const Header = () => {
 
       {/* Mobile Menu Overlay */}
       {open && (
-        <div id="mobile-menu" className="lg:hidden fixed inset-0 z-50 bg-background border-t border-border/50" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
-          <div className="flex flex-col h-full bg-background">
+        <div 
+          id="mobile-menu" 
+          className="lg:hidden fixed inset-0 z-50 bg-background/95 backdrop-blur-md" 
+          role="dialog" 
+          aria-modal="true" 
+          aria-labelledby="mobile-menu-title"
+        >
+          <div className="flex flex-col h-full bg-background/95 backdrop-blur-md">
             {/* Mobile Header */}
-            <div className="flex items-center justify-between p-4 border-b border-border/50 bg-background">
+            <div className="flex items-center justify-between p-6 border-b border-border/50 bg-background/95 backdrop-blur-md">
               <h2 id="mobile-menu-title" className="sr-only">Mobile Navigation Menu</h2>
               <Link 
                 href="/" 
-                className="flex items-center space-x-2"
+                className="flex items-center space-x-3"
                 onClick={handleNavigation}
                 aria-label="Codenies Solutions - Home"
               >
-                <span className="text-xl font-elegant font-bold text-primary">
-                  Codenies Solutions
-                </span>
+                <Image
+                  src="/codenies_logo.png"
+                  alt="Codenies Solutions"
+                  width={48}
+                  height={48}
+                  className="h-12 w-auto"
+                />
               </Link>
               <Button 
                 variant="ghost" 
                 size="icon" 
                 onClick={() => setOpen(false)}
-                className="w-10 h-10 hover:bg-primary/10 touch-manipulation"
+                className="w-12 h-12 hover:bg-primary/10 touch-manipulation rounded-full transition-all duration-200"
                 aria-label="Close mobile menu"
               >
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               </Button>
             </div>
 
             {/* Mobile Navigation */}
-            <nav className="flex-1 flex flex-col justify-center p-6 bg-background">
-              <ul className="space-y-6">
-                {navigationItems.map((item) => (
+            <nav className="flex-1 flex flex-col justify-start pt-8 px-6 bg-background/95 backdrop-blur-md">
+              <ul className="space-y-2">
+                {navigationItems.map((item, index) => (
                   <li key={item.href}>
                     <Link 
                       href={item.href} 
-                      className="block text-2xl font-elegant font-semibold text-foreground hover:text-primary transition-colors duration-200 py-3 px-2 rounded-lg hover:bg-primary/5 touch-manipulation"
+                      className="block text-xl font-semibold text-foreground hover:text-primary transition-all duration-200 py-4 px-4 rounded-xl hover:bg-primary/5 hover:bg-gradient-to-r hover:from-primary/5 hover:to-primary/10 touch-manipulation border border-transparent hover:border-primary/20"
                       onClick={handleNavigation}
+                      style={{ animationDelay: `${index * 100}ms` }}
                     >
-                      {item.label}
+                      <div className="flex items-center justify-between">
+                        <span>{item.label}</span>
+                        <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                      </div>
                     </Link>
                   </li>
                 ))}
-                <li className="pt-4">
-                  <Button asChild size="lg" className="w-full btn-primary text-lg py-6 touch-manipulation">
+                <li className="pt-6">
+                  <Button asChild size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-lg py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                     <Link href="/consultation" onClick={handleNavigation}>
+                      <Zap className="w-5 h-5 mr-2" />
                       Get Started
-                      <ChevronRight className="w-5 h-5 ml-2" />
+                      <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </Button>
                 </li>
@@ -164,10 +184,13 @@ const Header = () => {
             </nav>
 
             {/* Mobile Footer */}
-            <div className="p-6 border-t border-border/50 bg-background">
-              <div className="text-center text-sm text-muted-foreground">
-                <p className="font-cursive">Ready to transform your business?</p>
-                <p className="font-elegant font-medium text-primary mt-1">Let's build something amazing together.</p>
+            <div className="p-6 border-t border-border/50 bg-background/95 backdrop-blur-md">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Sparkles className="w-8 h-8 text-primary" />
+                </div>
+                <p className="text-foreground font-medium mb-2">Ready to transform your business?</p>
+                <p className="text-muted-foreground text-sm">Let's build something amazing together.</p>
               </div>
             </div>
           </div>

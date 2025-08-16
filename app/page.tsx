@@ -14,45 +14,7 @@ export default function Home() {
 
       <Hero />
 
-      {/* Trusted Partners Section */}
-      <section className="py-12 px-4 bg-white border-b border-gray-100" aria-labelledby="partners-heading">
-        <div className="container mx-auto">
-          <div className="text-center mb-8">
-            <h2 id="partners-heading" className="text-lg font-medium text-gray-600 mb-2">Trusted by Industry Leaders</h2>
-            <p className="text-sm text-gray-500">We partner with leading companies to deliver exceptional results</p>
-          </div>
-          <div className="flex items-center justify-center gap-8 md:gap-12 lg:gap-16 flex-wrap">
-            <div className="flex items-center justify-center">
-              <img 
-                src="/partners/apple.jpg" 
-                alt="Apple" 
-                className="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
-              />
-            </div>
-            <div className="flex items-center justify-center">
-              <img 
-                src="/partners/google.jpg" 
-                alt="Google" 
-                className="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
-              />
-            </div>
-            <div className="flex items-center justify-center">
-              <img 
-                src="/partners/shopify.png" 
-                alt="Shopify" 
-                className="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
-              />
-            </div>
-            <div className="flex items-center justify-center">
-              <img 
-                src="/partners/aws.png" 
-                alt="AWS" 
-                className="h-8 md:h-10 opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Services Section */}
       <section id="services" className="section-padding bg-gray-50" aria-labelledby="services-heading">

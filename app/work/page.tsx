@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, ExternalLink, Github, Award, Zap, Star, TrendingUp, Users, CheckCircle, Sparkles, Eye, Filter, Grid, List } from "lucide-react"
+import { ArrowRight, ExternalLink, Github, Award, Zap, Star, TrendingUp, Users, CheckCircle, Sparkles, Eye, Filter, Grid, List, Code, Shield, Zap as ZapIcon, Clock } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
@@ -85,7 +85,7 @@ const projectsData = [
     category: "Restaurant Management",
     description: "Complete restaurant management system with POS, inventory tracking, and customer analytics.",
     image: "/modern-restaurant-pos.png",
-    technologies: ["Vue.js", "Laravel", "MySQL", "Payment Integration"],
+    technologies: ["React", "Laravel", "MySQL", "Payment Integration"],
     results: ["200+ restaurants", "30% revenue increase", "50% order accuracy improvement"],
     link: "#",
     featured: false,
@@ -98,70 +98,54 @@ const projectsData = [
 // Categories for easy filtering
 const projectCategories = [
   { id: "all", name: "All Projects", count: projectsData.length },
-  { id: "saas", name: "SaaS Development", count: projectsData.filter(p => p.category.includes("SaaS")).length },
-  { id: "ecommerce", name: "E-commerce", count: projectsData.filter(p => p.category.includes("E-commerce")).length },
-  { id: "mobile", name: "Mobile Apps", count: projectsData.filter(p => p.category.includes("Mobile")).length },
-  { id: "ai", name: "AI Integration", count: projectsData.filter(p => p.category.includes("AI")).length },
-  { id: "healthcare", name: "Healthcare", count: projectsData.filter(p => p.category.includes("Healthcare")).length },
-  { id: "restaurant", name: "Restaurant", count: projectsData.filter(p => p.category.includes("Restaurant")).length },
+  { id: "SaaS Development", name: "SaaS Development", count: projectsData.filter(p => p.category === "SaaS Development").length },
+  { id: "E-commerce", name: "E-commerce", count: projectsData.filter(p => p.category === "E-commerce").length },
+  { id: "Mobile Application", name: "Mobile Application", count: projectsData.filter(p => p.category === "Mobile Application").length },
+  { id: "Healthcare SaaS", name: "Healthcare SaaS", count: projectsData.filter(p => p.category === "Healthcare SaaS").length },
+  { id: "AI Integration", name: "AI Integration", count: projectsData.filter(p => p.category === "AI Integration").length },
+  { id: "Restaurant Management", name: "Restaurant Management", count: projectsData.filter(p => p.category === "Restaurant Management").length },
 ]
 
 export default function WorkPage() {
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
-  const [searchQuery, setSearchQuery] = useState("")
 
-  // Filter projects based on category and search
+  // Filter projects based on category
   const filteredProjects = projectsData.filter(project => {
-    const matchesCategory = selectedCategory === "all" || 
-      project.category.toLowerCase().includes(selectedCategory) ||
-      project.client.toLowerCase().includes(selectedCategory)
-    
-    const matchesSearch = searchQuery === "" || 
-      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.technologies.some(tech => tech.toLowerCase().includes(searchQuery.toLowerCase()))
-    
-    return matchesCategory && matchesSearch
+    if (selectedCategory === "all") return true
+    return project.category === selectedCategory
   })
 
-  // Featured projects for hero section
-  const featuredProjects = projectsData.filter(project => project.featured)
-
   return (
-    <div className="min-h-screen bg-white">
-      {/* Skip to main content link for accessibility */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-gray-900 text-white px-4 py-2 rounded-md z-50">
-        Skip to main content
-      </a>
-
-      {/* Enhanced Hero Section */}
-      <section className="relative py-20 px-4 bg-gradient-to-br from-gray-50 via-white to-gray-50 min-h-screen flex items-center" aria-labelledby="work-hero-heading">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5"></div>
-        <div className="container mx-auto text-center max-w-5xl relative z-10">
-
+    <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <section className="pt-20 lg:pt-24 pb-12 px-4">
+        <div className="container mx-auto text-center max-w-4xl">
+          <Badge className="mb-6 bg-primary/10 text-primary">
+            <Award className="w-3 h-3 mr-2" />
+            Our Portfolio
+          </Badge>
           
-          <h1 id="work-hero-heading" className="hero-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-elegant font-bold text-gray-900 mb-6 leading-tight">
-            Transforming Ideas Into
-            <span className="hero-gradient-text block font-cursive"> Digital Success</span>
+          <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-6 leading-tight">
+            Our Work
           </h1>
           
-          <p className="hero-subtitle text-lg md:text-xl lg:text-2xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto font-cursive">
-            Explore our portfolio of successful projects across SaaS, e-commerce, mobile applications, and AI-powered
-            solutions that have driven <span className="font-semibold text-primary">real business results</span>.
+          <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto">
+            Discover how we've helped businesses transform their ideas into powerful, scalable software solutions 
+            that drive real results and measurable impact.
           </p>
 
-          {/* Enhanced CTA */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          {/* CTA */}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-8">
             <Button 
               asChild 
               size="lg" 
-              className="btn-hero-primary text-lg px-8 py-4 group hover:scale-105 transition-all duration-300"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3"
             >
               <Link href="/consultation">
-                <Zap className="w-5 h-5 mr-2" />
+                <Zap className="w-4 h-4 mr-2" />
                 Start Your Project
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </Button>
             
@@ -169,87 +153,44 @@ export default function WorkPage() {
               asChild 
               variant="outline" 
               size="lg" 
-              className="btn-secondary text-lg px-6 py-4 group hover:scale-105 transition-all duration-300 border-2 hover:bg-primary hover:text-primary-foreground"
+              className="border-border hover:border-primary text-foreground hover:text-primary px-6 py-3"
             >
-              <Link href="#projects">
-                <Eye className="w-5 h-5 mr-2" />
-                Explore Projects
+              <Link href="#portfolio">
+                <Eye className="w-4 h-4 mr-2" />
+                View Portfolio
               </Link>
             </Button>
           </div>
 
           {/* Trust Indicators */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center justify-center gap-2 group">
-              <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <CheckCircle className="w-4 h-4 text-primary" />
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                <Code className="w-4 h-4 text-primary" />
               </div>
-              <span className="group-hover:text-primary transition-colors">{projectsData.length}+ Projects Delivered</span>
+              <span>50+ Projects</span>
             </div>
-            <div className="flex items-center justify-center gap-2 group">
-              <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <TrendingUp className="w-4 h-4 text-primary" />
-              </div>
-              <span className="group-hover:text-primary transition-colors">99% Success Rate</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 group">
-              <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
                 <Star className="w-4 h-4 text-primary" />
               </div>
-              <span className="group-hover:text-primary transition-colors">Award-Winning Quality</span>
+              <span>99% Success Rate</span>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Projects Preview */}
-      <section className="py-16 px-4 bg-white" aria-labelledby="featured-heading">
-        <div className="container mx-auto">
-          <h2 id="featured-heading" className="text-3xl font-bold text-center text-gray-900 mb-12">Featured Projects</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProjects.slice(0, 3).map((project) => (
-              <div key={project.id} className="group cursor-pointer">
-                <div className="relative overflow-hidden rounded-xl bg-gray-100">
-                  <Image 
-                    src={project.image} 
-                    alt={project.title} 
-                    width={400} 
-                    height={250} 
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" 
-                  />
-                  <div className="absolute top-4 left-4">
-                    <Badge className="bg-primary text-white">{project.category}</Badge>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <h3 className="text-xl font-semibold text-gray-900 group-hover:text-primary transition-colors">{project.title}</h3>
-                  <p className="text-gray-600 text-sm mt-2 line-clamp-2">{project.description}</p>
-                </div>
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                <Shield className="w-4 h-4 text-primary" />
               </div>
-            ))}
+              <span>Enterprise Grade</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Enhanced Filter & Search Section */}
-      <section className="py-8 px-4 border-b border-gray-200 bg-white" aria-label="Project filtering and search">
+      {/* Filter & View Controls */}
+      <section className="py-8 px-4 border-b border-border">
         <div className="container mx-auto">
-          {/* Search Bar */}
-          <div className="mb-6">
-            <div className="max-w-md mx-auto relative">
-              <input
-                type="text"
-                placeholder="Search projects, technologies, or clients..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
-              />
-              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-            </div>
-          </div>
-
           {/* Category Filters */}
-          <div className="flex flex-wrap gap-3 justify-center mb-4">
+          <div className="flex flex-wrap gap-3 justify-center mb-6">
             {projectCategories.map((category) => (
               <Button
                 key={category.id}
@@ -257,30 +198,34 @@ export default function WorkPage() {
                 onClick={() => setSelectedCategory(category.id)}
                 className={
                   selectedCategory === category.id
-                    ? "bg-primary hover:bg-primary/90 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-                    : "border-gray-300 text-gray-700 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-transparent"
+                    ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                    : "border-border text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 bg-transparent"
                 }
               >
                 {category.name}
-                <span className="ml-2 text-xs bg-white/20 px-2 py-1 rounded-full">{category.count}</span>
+                <span className="ml-2 text-xs bg-primary/20 px-2 py-1 rounded-full">
+                  {category.count}
+                </span>
               </Button>
             ))}
           </div>
 
           {/* View Mode Toggle */}
           <div className="flex justify-center">
-            <div className="flex border border-gray-300 rounded-lg overflow-hidden">
+            <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
               <Button
-                variant={viewMode === "grid" ? "default" : "outline"}
+                variant={viewMode === "grid" ? "default" : "ghost"}
+                size="sm"
                 onClick={() => setViewMode("grid")}
-                className="rounded-r-none border-r-0"
+                className="h-8 px-3"
               >
                 <Grid className="w-4 h-4" />
               </Button>
               <Button
-                variant={viewMode === "list" ? "default" : "outline"}
+                variant={viewMode === "list" ? "default" : "ghost"}
+                size="sm"
                 onClick={() => setViewMode("list")}
-                className="rounded-l-none"
+                className="h-8 px-3"
               >
                 <List className="w-4 h-4" />
               </Button>
@@ -289,18 +234,28 @@ export default function WorkPage() {
         </div>
       </section>
 
-      {/* Projects Grid/List */}
-      <section id="projects" className="py-20 px-4 bg-gradient-to-br from-gray-50 to-white" aria-labelledby="projects-heading">
+      {/* Portfolio Grid */}
+      <section id="portfolio" className="py-16 px-4">
         <div className="container mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <h2 id="projects-heading" className="text-3xl font-bold text-gray-900">
-              All Projects ({filteredProjects.length})
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-foreground text-center">
+              {filteredProjects.length === 0 ? 'No Projects Found' : `Portfolio (${filteredProjects.length})`}
             </h2>
-            <p className="text-gray-600">Showing {filteredProjects.length} of {projectsData.length} projects</p>
+            {filteredProjects.length === 0 && (
+              <div className="text-center py-16">
+                <p className="text-muted-foreground text-lg mb-4">No projects found in this category.</p>
+                <Button 
+                  onClick={() => setSelectedCategory("all")}
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                >
+                  View All Projects
+                </Button>
+              </div>
+            )}
           </div>
           
           {viewMode === "grid" ? (
-            <div className="grid lg:grid-cols-2 gap-12">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => (
                 <ProjectCard key={project.id} project={project} />
               ))}
@@ -308,69 +263,25 @@ export default function WorkPage() {
           ) : (
             <div className="space-y-6">
               {filteredProjects.map((project) => (
-                <ProjectListItem key={project.id} project={project} />
+                <ProjectCardList key={project.id} project={project} />
               ))}
             </div>
           )}
-
-          {filteredProjects.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-gray-600 text-lg">No projects found matching your criteria.</p>
-              <Button 
-                onClick={() => { setSelectedCategory("all"); setSearchQuery(""); }}
-                className="mt-4"
-              >
-                Clear Filters
-              </Button>
-            </div>
-          )}
         </div>
       </section>
 
-      {/* Enhanced Stats Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900" aria-labelledby="stats-heading">
-        <div className="container mx-auto">
-          <header className="text-center mb-16">
-            <h2 id="stats-heading" className="text-4xl font-bold text-white mb-4">Our Impact in Numbers</h2>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Real results from real projects that have transformed businesses across industries.
-            </p>
-          </header>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center group">
-              <div className="text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">{projectsData.length}+</div>
-              <div className="text-gray-300">Projects Completed</div>
-            </div>
-            <div className="text-center group">
-              <div className="text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">$50M+</div>
-              <div className="text-gray-300">Revenue Generated</div>
-            </div>
-            <div className="text-center group">
-              <div className="text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">2M+</div>
-              <div className="text-gray-300">Users Served</div>
-            </div>
-            <div className="text-center group">
-              <div className="text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">99%</div>
-              <div className="text-gray-300">Client Retention</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Enhanced CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-primary to-primary/90" aria-labelledby="work-cta-heading">
+      {/* CTA Section */}
+      <section className="py-12 px-4 bg-primary text-primary-foreground">
         <div className="container mx-auto text-center">
-          <h2 id="work-cta-heading" className="text-4xl font-bold text-white mb-6">Ready to Join Our Success Stories?</h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Let's discuss your project and explore how we can help you achieve similar results. Get a free consultation
-            today.
+          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Project?</h2>
+          <p className="text-lg text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
+            Let's discuss how we can help bring your ideas to life with our expertise in software development.
           </p>
           <Link href="/consultation">
-            <Button size="lg" className="bg-white text-primary hover:bg-gray-100 px-8 py-3 text-lg group hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl">
-              <Zap className="w-5 h-5 mr-2" />
-              Start Your Project
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <Button size="lg" className="bg-background text-foreground hover:bg-background/90 px-6 py-3 text-base group hover:scale-105 transition-all duration-300">
+              <ZapIcon className="w-4 h-4 mr-2" />
+              Get Free Strategy Session
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
         </div>
@@ -379,133 +290,178 @@ export default function WorkPage() {
   )
 }
 
-// Project Card Component - Easy to customize
-function ProjectCard({ project }: { project: typeof projectsData[0] }) {
+// Grid Project Card Component
+function ProjectCard({ project }: { project: any }) {
   return (
-    <article className="border border-gray-200 hover:shadow-2xl transition-all duration-500 overflow-hidden rounded-xl bg-white group hover:scale-105">
-      <div className="relative h-64 bg-gray-100 overflow-hidden">
-        <Image src={project.image} alt={project.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
-        <div className="absolute top-4 left-4">
-          <Badge className="bg-primary text-white shadow-lg">{project.category}</Badge>
-        </div>
-        {project.featured && (
-          <div className="absolute top-4 right-4">
-            <Badge className="bg-yellow-500 text-white shadow-lg">Featured</Badge>
+    <article className="group cursor-pointer">
+      <div className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105">
+        <div className="aspect-video bg-muted overflow-hidden relative">
+          <Image
+            src={project.image}
+            alt={project.title}
+            width={400}
+            height={250}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+          {project.featured && (
+            <div className="absolute top-4 right-4">
+              <Badge className="bg-yellow-500 text-white shadow-lg">
+                Featured
+              </Badge>
+            </div>
+          )}
+          <div className="absolute top-4 left-4">
+            <Badge className="bg-primary text-primary-foreground shadow-lg">
+              {project.category}
+            </Badge>
           </div>
-        )}
-      </div>
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-2">
-          <h3 className="text-2xl text-gray-900 group-hover:text-primary transition-colors">{project.title}</h3>
         </div>
         
-        <p className="text-gray-600 text-base leading-relaxed mb-4">
-          {project.description}
-        </p>
-
-        {/* Project Meta */}
-        <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
-          <div>
-            <span className="text-gray-500">Client:</span>
-            <p className="font-medium text-gray-900">{project.client}</p>
-          </div>
-          <div>
-            <span className="text-gray-500">Duration:</span>
-            <p className="font-medium text-gray-900">{project.duration}</p>
-          </div>
-          <div>
-            <span className="text-gray-500">Team:</span>
-            <p className="font-medium text-gray-900">{project.teamSize}</p>
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <h4 className="font-semibold text-gray-900 mb-2">Technologies Used:</h4>
-          <div className="flex flex-wrap gap-2">
-            {project.technologies.map((tech, techIndex) => (
-              <Badge key={techIndex} variant="outline" className="border-gray-300 text-gray-600 hover:border-primary hover:text-primary transition-colors">
+        <div className="p-6">
+          <h3 className="text-foreground group-hover:text-primary transition-colors line-clamp-2 text-lg font-semibold mb-3">
+            {project.title}
+          </h3>
+          
+          <p className="text-muted-foreground mb-4 line-clamp-3 text-sm">
+            {project.description}
+          </p>
+          
+          {/* Technologies */}
+          <div className="flex flex-wrap gap-1 mb-4">
+            {project.technologies.slice(0, 3).map((tech: string, index: number) => (
+              <Badge key={index} variant="outline" className="text-xs border-border text-muted-foreground">
                 {tech}
               </Badge>
             ))}
           </div>
-        </div>
-
-        <div className="mb-6">
-          <h4 className="font-semibold text-gray-900 mb-2">Key Results:</h4>
-          <ul className="space-y-1">
-            {project.results.map((result, resultIndex) => (
-              <li key={resultIndex} className="text-gray-600 flex items-center">
-                <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></div>
-                {result}
-              </li>
+          
+          {/* Project Details */}
+          <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+            <div className="flex items-center">
+              <Users className="w-4 h-4 mr-1" />
+              {project.teamSize}
+            </div>
+            <div className="flex items-center">
+              <Clock className="w-4 h-4 mr-1" />
+              {project.duration}
+            </div>
+          </div>
+          
+          {/* Results */}
+          <div className="space-y-2 mb-4">
+            {project.results.slice(0, 2).map((result: string, index: number) => (
+              <div key={index} className="flex items-center gap-2 text-xs text-muted-foreground">
+                <CheckCircle className="w-3 h-3 text-green-500" />
+                <span>{result}</span>
+              </div>
             ))}
-          </ul>
-        </div>
-
-        <div className="flex gap-3">
-          <Button className="bg-primary hover:bg-primary/90 text-white flex-1 group-hover:scale-105 transition-all duration-300">
-            View Case Study
-            <ExternalLink className="ml-2 w-4 h-4" />
-          </Button>
-          <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-transparent">
-            <Github className="w-4 h-4" />
-          </Button>
+          </div>
+          
+          {/* Actions */}
+          <div className="flex gap-2">
+            <Button size="sm" variant="outline" className="flex-1 border-border text-muted-foreground hover:border-primary hover:text-primary">
+              <Eye className="w-3 h-3 mr-1" />
+              View Details
+            </Button>
+            <Button size="sm" variant="outline" className="border-border text-muted-foreground hover:border-primary hover:text-primary">
+              <ExternalLink className="w-3 h-3" />
+            </Button>
+          </div>
         </div>
       </div>
     </article>
   )
 }
 
-// Project List Item Component - Alternative view
-function ProjectListItem({ project }: { project: typeof projectsData[0] }) {
+// List Project Card Component
+function ProjectCardList({ project }: { project: any }) {
   return (
-    <article className="border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden rounded-xl bg-white group hover:scale-102">
-      <div className="flex flex-col md:flex-row">
-        <div className="relative md:w-80 h-48 md:h-auto bg-gray-100 overflow-hidden">
-          <Image src={project.image} alt={project.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
-          <div className="absolute top-4 left-4">
-            <Badge className="bg-primary text-white shadow-lg">{project.category}</Badge>
-          </div>
-        </div>
-        <div className="flex-1 p-6">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-2xl text-gray-900 group-hover:text-primary transition-colors">{project.title}</h3>
+    <article className="group cursor-pointer">
+      <div className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300">
+        <div className="flex flex-col lg:flex-row">
+          <div className="lg:w-1/3 aspect-video bg-muted overflow-hidden relative">
+            <Image
+              src={project.image}
+              alt={project.title}
+              width={400}
+              height={250}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            />
             {project.featured && (
-              <Badge className="bg-yellow-500 text-white">Featured</Badge>
+              <div className="absolute top-4 right-4">
+                <Badge className="bg-yellow-500 text-white shadow-lg">
+                  Featured
+                </Badge>
+              </div>
             )}
+            <div className="absolute top-4 left-4">
+              <Badge className="bg-primary text-primary-foreground shadow-lg">
+                {project.category}
+              </Badge>
+            </div>
           </div>
           
-          <p className="text-gray-600 text-base leading-relaxed mb-4">
-            {project.description}
-          </p>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-sm">
-            <div>
-              <span className="text-gray-500">Client:</span>
-              <p className="font-medium text-gray-900">{project.client}</p>
+          <div className="lg:w-2/3 p-6">
+            <h3 className="text-foreground group-hover:text-primary transition-colors text-xl font-semibold mb-3">
+              {project.title}
+            </h3>
+            
+            <p className="text-muted-foreground mb-4">
+              {project.description}
+            </p>
+            
+            {/* Technologies */}
+            <div className="flex flex-wrap gap-1 mb-4">
+              {project.technologies.map((tech: string, index: number) => (
+                <Badge key={index} variant="outline" className="text-xs border-border text-muted-foreground">
+                  {tech}
+                </Badge>
+              ))}
             </div>
-            <div>
-              <span className="text-gray-500">Duration:</span>
-              <p className="font-medium text-gray-900">{project.duration}</p>
+            
+            {/* Project Details & Results */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Project Details</h4>
+                <div className="space-y-1 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4" />
+                    <span>{project.teamSize}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    <span>{project.duration}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Star className="w-4 h-4" />
+                    <span>{project.client}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div>
+                <h4 className="font-semibold text-foreground mb-2">Key Results</h4>
+                <div className="space-y-1">
+                  {project.results.map((result: string, index: number) => (
+                    <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <CheckCircle className="w-3 h-3 text-green-500" />
+                      <span>{result}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div>
-              <span className="text-gray-500">Team:</span>
-              <p className="font-medium text-gray-900">{project.teamSize}</p>
+            
+            {/* Actions */}
+            <div className="flex gap-2 mt-4">
+              <Button size="sm" variant="outline" className="border-border text-muted-foreground hover:border-primary hover:text-primary">
+                <Eye className="w-3 h-3 mr-1" />
+                View Details
+              </Button>
+              <Button size="sm" variant="outline" className="border-border text-muted-foreground hover:border-primary hover:text-primary">
+                <ExternalLink className="w-3 h-3 mr-1" />
+              </Button>
             </div>
-            <div>
-              <span className="text-gray-500">Category:</span>
-              <p className="font-medium text-gray-900">{project.category}</p>
-            </div>
-          </div>
-
-          <div className="flex gap-3">
-            <Button className="bg-primary hover:bg-primary/90 text-white group-hover:scale-105 transition-all duration-300">
-              View Case Study
-              <ExternalLink className="ml-2 w-4 h-4" />
-            </Button>
-            <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-transparent">
-              <Github className="w-4 h-4" />
-            </Button>
           </div>
         </div>
       </div>
