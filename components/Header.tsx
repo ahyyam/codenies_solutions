@@ -119,78 +119,72 @@ const Header = () => {
       {open && (
         <div 
           id="mobile-menu" 
-          className="lg:hidden fixed inset-0 z-50 bg-background/95 backdrop-blur-md" 
+          className="lg:hidden fixed inset-0 z-50 bg-background w-full h-full" 
           role="dialog" 
           aria-modal="true" 
           aria-labelledby="mobile-menu-title"
         >
-          <div className="flex flex-col h-full bg-background/95 backdrop-blur-md">
-            {/* Mobile Header */}
-            <div className="flex items-center justify-between p-6 border-b border-border/50 bg-background/95 backdrop-blur-md">
-              <h2 id="mobile-menu-title" className="sr-only">Mobile Navigation Menu</h2>
+          {/* Simple Clean Background */}
+          <div className="absolute inset-0 bg-background w-full h-full"></div>
+          
+          <div className="flex flex-col min-h-screen w-full relative">
+            {/* Mobile Header - Clean and Simple */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-background">
               <Link 
                 href="/" 
-                className="flex items-center space-x-3"
+                className="flex items-center"
                 onClick={handleNavigation}
                 aria-label="Codenies Solutions - Home"
               >
                 <Image
                   src="/codenies_logo.png"
                   alt="Codenies Solutions"
-                  width={48}
-                  height={48}
-                  className="h-12 w-auto"
+                  width={200}
+                  height={200}
+                  className="h-32 w-auto"
                 />
               </Link>
               <Button 
                 variant="ghost" 
                 size="icon" 
                 onClick={() => setOpen(false)}
-                className="w-12 h-12 hover:bg-primary/10 touch-manipulation rounded-full transition-all duration-200"
+                className="w-10 h-10 hover:bg-muted rounded-lg transition-colors"
                 aria-label="Close mobile menu"
               >
-                <X className="h-6 w-6" />
+                <X className="h-5 w-5" />
               </Button>
             </div>
 
-            {/* Mobile Navigation */}
-            <nav className="flex-1 flex flex-col justify-start pt-8 px-6 bg-background/95 backdrop-blur-md">
-              <ul className="space-y-2">
-                {navigationItems.map((item, index) => (
+            {/* Mobile Navigation - Clean and Simple */}
+            <nav className="flex-1 px-6 py-8 bg-background">
+              <ul className="space-y-3">
+                {navigationItems.map((item) => (
                   <li key={item.href}>
                     <Link 
                       href={item.href} 
-                      className="block text-xl font-semibold text-foreground hover:text-primary transition-all duration-200 py-4 px-4 rounded-xl hover:bg-primary/5 hover:bg-gradient-to-r hover:from-primary/5 hover:to-primary/10 touch-manipulation border border-transparent hover:border-primary/20"
+                      className="block text-lg font-medium text-foreground hover:text-primary py-3 px-4 rounded-lg hover:bg-primary/20 transition-colors bg-background"
                       onClick={handleNavigation}
-                      style={{ animationDelay: `${index * 100}ms` }}
                     >
-                      <div className="flex items-center justify-between">
-                        <span>{item.label}</span>
-                        <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                      </div>
+                      {item.label}
                     </Link>
                   </li>
                 ))}
-                <li className="pt-6">
-                  <Button asChild size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-lg py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                    <Link href="/consultation" onClick={handleNavigation}>
-                      <Zap className="w-5 h-5 mr-2" />
-                      Get Started
-                      <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
-                </li>
               </ul>
+              
+              {/* CTA Button - Simple and Clean */}
+              <div className="mt-8">
+                <Button asChild className="w-full bg-primary hover:bg-primary text-primary-foreground py-3 rounded-lg">
+                  <Link href="/consultation" onClick={handleNavigation}>
+                    Get Started
+                  </Link>
+                </Button>
+              </div>
             </nav>
 
-            {/* Mobile Footer */}
-            <div className="p-6 border-t border-border/50 bg-background/95 backdrop-blur-md">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Sparkles className="w-8 h-8 text-primary" />
-                </div>
-                <p className="text-foreground font-medium mb-2">Ready to transform your business?</p>
-                <p className="text-muted-foreground text-sm">Let's build something amazing together.</p>
+            {/* Simple Footer */}
+            <div className="px-6 py-6 border-t border-border bg-background">
+              <div className="text-center text-sm text-muted-foreground">
+                <p>Trusted by innovative companies worldwide</p>
               </div>
             </div>
           </div>
