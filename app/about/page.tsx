@@ -311,7 +311,7 @@ const AboutPage = () => {
               asChild
               variant="outline" 
               size="lg" 
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary px-6 py-3"
+              className="border-primary-foreground/30 bg-primary-foreground text-primary hover:bg-primary-foreground/90 px-6 py-3"
             >
               <Link href="/work">
                 <Eye className="w-4 h-4 mr-2" />
