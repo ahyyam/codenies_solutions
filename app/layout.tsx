@@ -7,8 +7,8 @@ import Footer from "@/components/Footer"
 
 export const metadata: Metadata = {
   title: {
-    default: "Codenies Solutions - Software Development Agency",
-    template: "%s | Codenies Solutions"
+    default: "codenies - Software Development Agency",
+    template: "%s | codenies"
   },
   description: "Expert software development agency specializing in SaaS, e-commerce, mobile apps, UI/UX design, and AI integration. Transform your business with cutting-edge technology solutions.",
   keywords: [
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     "digital transformation",
     "business software solutions"
   ],
-  authors: [{ name: "Codenies Solutions" }],
-  creator: "Codenies Solutions",
-  publisher: "Codenies Solutions",
+  authors: [{ name: "codenies" }],
+  creator: "codenies",
+  publisher: "codenies",
   formatDetection: {
     email: false,
     address: false,
@@ -39,23 +39,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
           url: 'https://codenis.com',
-    title: 'Codenies Solutions - Software Development Agency',
+    title: 'codenies - Software Development Agency',
     description: 'Expert software development agency specializing in SaaS, e-commerce, mobile apps, UI/UX design, and AI integration.',
-    siteName: 'Codenies Solutions',
+    siteName: 'codenies',
     images: [
       {
-        url: '/pics/hero_image_1920x480.png',
+        url: '/hero_image_1920x480.png',
         width: 1920,
         height: 480,
-        alt: 'Codenies Solutions - Software Development Agency',
+        alt: 'codenies - Software Development Agency',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Codenies Solutions - Software Development Agency',
+    title: 'codenies - Software Development Agency',
     description: 'Expert software development agency specializing in SaaS, e-commerce, mobile apps, UI/UX design, and AI integration.',
-    images: ['/pics/hero_image_1920x480.png'],
+    images: ['/hero_image_1920x480.png'],
   },
   robots: {
     index: true,
@@ -79,32 +79,26 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${GeistSans.variable}`}>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#111827" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="format-detection" content="telephone=no" />
+        <link href="https://api.fontshare.com/v2/css?f[]=touvlo@400,500,700&display=swap" rel="stylesheet" />
         {/* Preload fonts for consistent cross-browser rendering */}
         <link rel="preload" href="https://fonts.gstatic.com/s/dancingscript/v24/If2cXTr6YS-zW4S1c83p8W6F7ACWkH7qygSq.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="https://fonts.gstatic.com/s/playfairdisplay/v30/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDX8X_w.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <style>{`
-html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-poppins: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  --font-merriweather: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-}
-        `}</style>
+        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "Codenies Solutions",
+              "name": "codenies",
                       "url": "https://codenis.com",
-        "logo": "https://codenis.com/placeholder-logo.svg",
+        "logo": "https://codenis.com/codenies_logo.png",
               "description": "Expert software development agency specializing in SaaS, e-commerce, mobile apps, UI/UX design, and AI integration.",
               "foundingDate": "2024",
               "address": {
@@ -120,7 +114,7 @@ html {
               "sameAs": [
                 "https://www.linkedin.com/company/codenies-solutions/",
                 "https://www.facebook.com/share/1LNgesBeTc/?mibextid=wwXIfr",
-                "https://www.instagram.com/codenies_solutions/"
+                "https://www.instagram.com/codeniess/"
               ],
               "serviceArea": {
                 "@type": "GeoCircle",
@@ -181,7 +175,7 @@ html {
           }}
         />
       </head>
-      <body className={`${GeistSans.variable}`} suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true}>
         <Header />
         <main id="main-content" role="main">
           {children}
