@@ -3,12 +3,12 @@ import Link from 'next/link';
 import { ArrowLeft, Shield, Eye, Lock, Database, Bell, Users, FileText } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - Codenies Solutions',
-  description: 'Privacy policy and data protection practices for Codenies Solutions services and website.',
+  title: 'Privacy Policy - codenies',
+  description: 'Privacy policy and data protection practices for codenies services and website.',
   keywords: ['privacy policy', 'data protection', 'GDPR', 'codenies solutions'],
   openGraph: {
-    title: 'Privacy Policy - Codenies Solutions',
-    description: 'Privacy policy and data protection practices for Codenies Solutions services and website.',
+    title: 'Privacy Policy - codenies',
+    description: 'Privacy policy and data protection practices for codenies services and website.',
     type: 'website',
   },
 };

@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'SaaS Development Services - Codenies Solutions',
+  title: 'SaaS Development Services - codenies',
   description: 'Professional SaaS development services. We build scalable, secure, and high-performance software-as-a-service platforms.',
   keywords: ['SaaS development', 'software as a service', 'cloud software development'],
 };

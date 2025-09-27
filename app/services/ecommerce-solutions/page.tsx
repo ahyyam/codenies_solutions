@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'E-commerce Solutions - Codenies Solutions',
+  title: 'E-commerce Solutions - codenies',
   description: 'Custom e-commerce development services. We build online stores and marketplaces that drive sales and enhance customer experience.',
   keywords: ['e-commerce development', 'online store', 'marketplace', 'shopping cart', 'payment integration'],
 };

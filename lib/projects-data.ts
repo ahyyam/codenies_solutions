@@ -14,92 +14,7 @@ export interface Project {
   teamSize: string;
 }
 
-export const projectsData: Project[] = [
-  {
-    id: 1,
-    title: "CloudSync SaaS Platform",
-    category: "SaaS Development",
-    description: "A comprehensive cloud storage and collaboration platform serving 10,000+ users with real-time sync and AI-powered file organization.",
-    image: "/modern-saas-dashboard.png",
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "AWS", "AI Integration"],
-    results: ["300% increase in user productivity", "99.9% uptime", "50% reduction in storage costs"],
-    link: "#",
-    featured: true,
-    client: "TechCorp Inc.",
-    duration: "6 months",
-    teamSize: "8 developers"
-  },
-  {
-    id: 2,
-    title: "EcoMart E-commerce",
-    category: "E-commerce",
-    description: "Sustainable products marketplace with advanced filtering, AI recommendations, and integrated payment processing.",
-    image: "/modern-ecommerce-green.png",
-    technologies: ["React", "Node.js", "Stripe", "MongoDB", "Machine Learning"],
-    results: ["$2M+ in sales", "40% conversion rate", "25,000+ active users"],
-    link: "#",
-    featured: true,
-    client: "EcoMart",
-    duration: "4 months",
-    teamSize: "6 developers"
-  },
-  {
-    id: 3,
-    title: "FitTracker Mobile App",
-    category: "Mobile Application",
-    description: "Cross-platform fitness tracking app with social features, workout plans, and nutrition tracking.",
-    image: "/placeholder-vnct0.png",
-    technologies: ["React Native", "Firebase", "AI Analytics", "HealthKit"],
-    results: ["100K+ downloads", "4.8 App Store rating", "80% user retention"],
-    link: "#",
-    featured: false,
-    client: "FitTech Solutions",
-    duration: "5 months",
-    teamSize: "5 developers"
-  },
-  {
-    id: 4,
-    title: "MedConnect Telemedicine",
-    category: "Healthcare SaaS",
-    description: "HIPAA-compliant telemedicine platform connecting patients with healthcare providers through secure video calls.",
-    image: "/placeholder-qvoz2.png",
-    technologies: ["Next.js", "WebRTC", "PostgreSQL", "HIPAA Compliance"],
-    results: ["50,000+ consultations", "95% patient satisfaction", "60% cost reduction"],
-    link: "#",
-    featured: true,
-    client: "HealthConnect",
-    duration: "8 months",
-    teamSize: "10 developers"
-  },
-  {
-    id: 5,
-    title: "AI Content Studio",
-    category: "AI Integration",
-    description: "Content creation platform powered by AI for generating marketing copy, images, and social media posts.",
-    image: "/ai-content-dashboard.png",
-    technologies: ["Python", "OpenAI API", "React", "Redis", "Docker"],
-    results: ["10x faster content creation", "500+ businesses served", "90% time savings"],
-    link: "#",
-    featured: false,
-    client: "ContentAI",
-    duration: "3 months",
-    teamSize: "4 developers"
-  },
-  {
-    id: 6,
-    title: "RestaurantOS",
-    category: "Restaurant Management",
-    description: "Complete restaurant management system with POS, inventory tracking, and customer analytics.",
-    image: "/modern-restaurant-pos.png",
-    technologies: ["Vue.js", "Laravel", "MySQL", "Payment Integration"],
-    results: ["200+ restaurants", "30% revenue increase", "50% order accuracy improvement"],
-    link: "#",
-    featured: false,
-    client: "RestaurantTech",
-    duration: "7 months",
-    teamSize: "7 developers"
-  },
-]
+export const projectsData: Project[] = []
 
 // Categories for easy filtering
 export const projectCategories = [
@@ -114,12 +29,19 @@ export const projectCategories = [
 
 // Helper function to add new projects
 export function addProject(project: Omit<Project, 'id'>): Project {
-  const newProject: Project = {
-    ...project,
-    id: Math.max(...projectsData.map(p => p.id)) + 1
-  }
+  const nextId = projectsData.length === 0 ? 1 : Math.max(...projectsData.map(p => p.id)) + 1
+  const newProject: Project = { ...project, id: nextId }
   projectsData.push(newProject)
   return newProject
+}
+
+export function removeProject(id: number): boolean {
+  const index = projectsData.findIndex(p => p.id === id)
+  if (index !== -1) {
+    projectsData.splice(index, 1)
+    return true
+  }
+  return false
 }
 
 // Helper function to get projects by category

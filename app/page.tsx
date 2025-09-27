@@ -174,7 +174,7 @@ export default function Home() {
         <div className="container-mobile">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
-              <h2 id="about-heading" className="heading-mobile text-gray-900 mb-4 sm:mb-6">Why Choose Codenies Solutions?</h2>
+              <h2 id="about-heading" className="heading-mobile text-gray-900 mb-4 sm:mb-6">Why Choose codenies?</h2>
               <p className="text-mobile text-gray-600 mb-4 sm:mb-6 leading-relaxed">
                 We're not just developers – we're your strategic technology partners. Our team combines technical
                 expertise with business acumen to deliver solutions that drive real results.
@@ -244,7 +244,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-gray-700 italic mb-4">
-                "Codenies Solutions transformed our business with a custom SaaS platform. The team's expertise and dedication exceeded our expectations."
+                "codenies transformed our business with a custom SaaS platform. The team's expertise and dedication exceeded our expectations."
               </p>
               <div className="flex text-gray-400">
                 {[...Array(5)].map((_, i) => (
@@ -265,7 +265,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-gray-700 italic mb-4">
-                "Our e-commerce platform built by Codenies has increased our sales by 300%. The user experience is exceptional."
+                "Our e-commerce platform built by codenies has increased our sales by 300%. The user experience is exceptional."
               </p>
               <div className="flex text-gray-400">
                 {[...Array(5)].map((_, i) => (
@@ -286,7 +286,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-gray-700 italic mb-4">
-                "The AI integration work Codenies did for us has revolutionized our patient care system. Highly recommended!"
+                "The AI integration work codenies did for us has revolutionized our patient care system. Highly recommended!"
               </p>
               <div className="flex text-gray-400">
                 {[...Array(5)].map((_, i) => (

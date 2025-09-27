@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'AI Integration - Codenies Solutions',
+  title: 'AI Integration - codenies',
   description: 'Cutting-edge artificial intelligence solutions to automate processes and enhance functionality with modern AI technologies.',
   keywords: ['AI integration', 'artificial intelligence', 'machine learning', 'automation', 'AI development'],
 };

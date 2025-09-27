@@ -272,8 +272,8 @@ export default function ConsultationPage() {
                   hello@codenis.com
               </a>{" "}
               or call{" "}
-              <a href="tel:+15551234567" className="text-gray-900 font-medium hover:underline">
-                +1 (555) 123-4567
+              <a href="tel:+201287800800" className="text-gray-900 font-medium hover:underline">
+                +201287800800
               </a>
             </p>
             <p className="text-sm text-gray-500">

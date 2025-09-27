@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Globe, ShoppingCart, Code, Smartphone, Palette, Brain, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Our Services - Codenies Solutions',
+  title: 'Our Services - codenies',
   description: 'Comprehensive software development services including SaaS development, e-commerce solutions, website development, mobile apps, UI/UX design, and AI integration.',
   keywords: [
     'software development services',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     'AI integration'
   ],
   openGraph: {
-    title: 'Our Services - Codenies Solutions',
+    title: 'Our Services - codenies',
     description: 'Comprehensive software development services for modern businesses.',
     type: 'website',
           url: 'https://codenis.com/services',

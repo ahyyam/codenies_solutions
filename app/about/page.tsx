@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, Users, CheckCircle, TrendingUp, Zap, Shield, Star, Sparkles, Target, Eye, Heart, Clock, Code, Globe, Rocket } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: 'About Codenies Solutions',
-  description: 'Learn about Codenies Solutions, a leading software development agency. We specialize in custom software, web & mobile development, e-commerce, AI automation, and UI/UX design. Discover our mission, vision, and commitment to excellence.',
+  title: 'About codenies',
+  description: 'Learn about codenies, a leading software development agency. We specialize in custom software, web & mobile development, e-commerce, AI automation, and UI/UX design. Discover our mission, vision, and commitment to excellence.',
   keywords: [
     'about codenies solutions',
     'software development agency',
@@ -21,15 +21,15 @@ export const metadata: Metadata = {
     'business software solutions'
   ],
   openGraph: {
-    title: 'About Codenies Solutions - Software Development Agency',
-    description: 'Learn about Codenies Solutions, a leading software development agency specializing in custom software, web & mobile development, e-commerce, AI automation, and UI/UX design.',
+    title: 'About codenies - Software Development Agency',
+    description: 'Learn about codenies, a leading software development agency specializing in custom software, web & mobile development, e-commerce, AI automation, and UI/UX design.',
     type: 'website',
     url: 'https://codenis.com/about',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About Codenies Solutions - Software Development Agency',
-    description: 'Learn about Codenies Solutions, a leading software development agency specializing in custom software, web & mobile development, e-commerce, AI automation, and UI/UX design.',
+    title: 'About codenies - Software Development Agency',
+    description: 'Learn about codenies, a leading software development agency specializing in custom software, web & mobile development, e-commerce, AI automation, and UI/UX design.',
   },
 };
 
@@ -42,11 +42,11 @@ const AboutPage = () => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "AboutPage",
-            "name": "About Codenies Solutions",
-            "description": "Learn about Codenies Solutions, a leading software development agency specializing in custom software, web & mobile development, e-commerce, AI automation, and UI/UX design.",
+            "name": "About codenies",
+            "description": "Learn about codenies, a leading software development agency specializing in custom software, web & mobile development, e-commerce, AI automation, and UI/UX design.",
             "mainEntity": {
               "@type": "Organization",
-              "name": "Codenies Solutions",
+              "name": "codenies",
               "description": "Custom software development agency specializing in web & mobile apps, e-commerce, AI automation, and UI/UX design.",
               "foundingDate": "2020",
               "numberOfEmployees": "10-50",
@@ -140,7 +140,7 @@ const AboutPage = () => {
                 Who We Are
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Codenies Solutions is a software agency dedicated to crafting innovative digital solutions. 
+                codenies is a software agency dedicated to crafting innovative digital solutions. 
                 We specialize in web and mobile app development, custom software solutions, e-commerce development, 
                 AI automation, and UI/UX design. Our team combines technical expertise with creative problem-solving 
                 to deliver solutions that drive real business value.

@@ -23,7 +23,7 @@
 
 /* Global font consistency across all devices */
 * {
-  font-family: inherit;
+  font-family: 'Touvlo', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

@@ -3,12 +3,12 @@ import Link from 'next/link';
 import { ArrowLeft, FileText, Shield, Users, CreditCard, AlertTriangle } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service - Codenies Solutions',
-  description: 'Terms and conditions governing the use of Codenies Solutions services and website.',
+  title: 'Terms of Service - codenies',
+  description: 'Terms and conditions governing the use of codenies services and website.',
   keywords: ['terms of service', 'legal', 'conditions', 'codenies solutions'],
   openGraph: {
-    title: 'Terms of Service - Codenies Solutions',
-    description: 'Terms and conditions governing the use of Codenies Solutions services and website.',
+    title: 'Terms of Service - codenies',
+    description: 'Terms and conditions governing the use of codenies services and website.',
     type: 'website',
   },
 };

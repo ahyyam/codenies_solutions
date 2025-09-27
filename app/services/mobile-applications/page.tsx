@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Mobile Applications - Codenies Solutions',
+  title: 'Mobile Applications - codenies',
   description: 'Native and cross-platform mobile apps that engage users across iOS and Android devices with modern design and functionality.',
   keywords: ['mobile app development', 'iOS development', 'Android development', 'cross-platform apps', 'mobile applications'],
 };

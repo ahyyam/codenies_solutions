@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'UI/UX Design - Codenies Solutions',
+  title: 'UI/UX Design - codenies',
   description: 'Intuitive and beautiful interfaces that prioritize user experience and business goals with modern design principles.',
   keywords: ['UI design', 'UX design', 'user interface', 'user experience', 'web design', 'mobile design'],
 };

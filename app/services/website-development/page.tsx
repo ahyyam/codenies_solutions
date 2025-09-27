@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Website Development - Codenies Solutions',
+  title: 'Website Development - codenies',
   description: 'High-performance websites that convert visitors into customers with optimal user experience and modern design.',
   keywords: ['website development', 'web design', 'responsive design', 'custom websites', 'web applications'],
 };

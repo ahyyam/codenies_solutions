@@ -51,20 +51,20 @@ const Header = () => {
         : 'bg-background/80 backdrop-blur-sm'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-32 lg:h-20">
           {/* Logo */}
           <Link 
             href="/" 
             className="flex items-center space-x-2 group"
             onClick={handleNavigation}
-            aria-label="Codenies Solutions - Home"
+            aria-label="codenies - Home"
           >
             <Image
-              src="/codenies_logo.png"
-              alt="Codenies Solutions"
+              src="/logo/web.png"
+              alt="codenies"
               width={200}
               height={200}
-              className="h-32 w-auto group-hover:opacity-80 transition-opacity duration-200"
+              className="h-[128px] lg:h-[96px] my-0 lg:-my-2 w-auto group-hover:opacity-80 transition-opacity duration-200"
             />
           </Link>
 
@@ -100,15 +100,15 @@ const Header = () => {
               variant="ghost" 
               size="icon" 
               onClick={() => setOpen(!open)}
-              className="relative w-10 h-10 hover:bg-primary/10 transition-colors duration-200 touch-manipulation focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="relative w-12 h-12 hover:bg-primary/10 transition-colors duration-200 touch-manipulation focus:ring-2 focus:ring-primary focus:ring-offset-2"
               aria-label="Toggle mobile menu"
               aria-expanded={open}
               aria-controls="mobile-menu"
             >
               {open ? (
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-6 w-6" />
               )}
             </Button>
           </div>
@@ -129,29 +129,29 @@ const Header = () => {
           
           <div className="flex flex-col min-h-screen w-full relative">
             {/* Mobile Header - Clean and Simple */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-background">
+            <div className="flex items-center justify-between px-6 py-7 border-b border-border bg-background">
               <Link 
                 href="/" 
                 className="flex items-center"
                 onClick={handleNavigation}
-                aria-label="Codenies Solutions - Home"
+                aria-label="codenies - Home"
               >
                 <Image
-                  src="/codenies_logo.png"
-                  alt="Codenies Solutions"
+                  src="/logo/web.png"
+                  alt="codenies"
                   width={200}
                   height={200}
-                  className="h-32 w-auto"
+                  className="h-[128px] lg:h-[96px] my-0 lg:-my-2 w-auto"
                 />
               </Link>
               <Button 
                 variant="ghost" 
                 size="icon" 
                 onClick={() => setOpen(false)}
-                className="w-10 h-10 hover:bg-muted rounded-lg transition-colors"
+                className="w-12 h-12 hover:bg-muted rounded-lg transition-colors"
                 aria-label="Close mobile menu"
               >
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               </Button>
             </div>
 

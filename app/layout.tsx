@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     siteName: 'codenies',
     images: [
       {
-        url: '/hero_image_1920x480.png',
+        url: '/pics/hero_image_1920x480.png',
         width: 1920,
         height: 480,
         alt: 'codenies - Software Development Agency',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'codenies - Software Development Agency',
     description: 'Expert software development agency specializing in SaaS, e-commerce, mobile apps, UI/UX design, and AI integration.',
-    images: ['/hero_image_1920x480.png'],
+    images: ['/pics/hero_image_1920x480.png'],
   },
   robots: {
     index: true,
@@ -71,6 +71,18 @@ export const metadata: Metadata = {
   verification: {
     google: 'your-google-verification-code',
   },
+  icons: {
+    icon: [
+      { url: '/logo/Fav.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo/Fav.png', sizes: '16x16', type: 'image/png' },
+    ],
+    shortcut: [
+      { url: '/logo/Fav.png', sizes: 'any', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/logo/Fav.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -82,6 +94,7 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <head>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/logo/Fav.png" type="image/png" />
         <meta name="theme-color" content="#111827" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="format-detection" content="telephone=no" />
@@ -98,7 +111,7 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "codenies",
                       "url": "https://codenis.com",
-        "logo": "https://codenis.com/codenies_logo.png",
+        "logo": "https://codenis.com/logo/web.png",
               "description": "Expert software development agency specializing in SaaS, e-commerce, mobile apps, UI/UX design, and AI integration.",
               "foundingDate": "2024",
               "address": {
@@ -177,7 +190,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning={true}>
         <Header />
-        <main id="main-content" role="main">
+        <main id="main-content" role="main" className="pt-32 lg:pt-20">
           {children}
         </main>
         <Footer />
