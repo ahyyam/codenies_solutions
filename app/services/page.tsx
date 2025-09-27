@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Our Services - codenies',
     description: 'Comprehensive software development services for modern businesses.',
     type: 'website',
-          url: 'https://codenis.com/services',
+          url: 'https://codenies.com/services',
   },
 };
 

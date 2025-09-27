@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: 'About codenies - Software Development Agency',
     description: 'Learn about codenies, a leading software development agency specializing in custom software, web & mobile development, e-commerce, AI automation, and UI/UX design.',
     type: 'website',
-    url: 'https://codenis.com/about',
+    url: 'https://codenies.com/about',
   },
   twitter: {
     card: 'summary_large_image',

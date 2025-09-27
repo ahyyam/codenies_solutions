@@ -201,7 +201,7 @@ const PrivacyPolicyPage = () => {
                 </p>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-gray-700">
-                    <strong>Email:</strong> privacy@codenis.com<br />
+                    <strong>Email:</strong> privacy@codenies.com<br />
                     <strong>Address:</strong> Codenies Solutions<br />
                     <strong>Last Updated:</strong> {new Date().toLocaleDateString()}
                   </p>

@@ -268,8 +268,8 @@ export default function ConsultationPage() {
           <div className="mt-12 text-center">
             <p className="text-gray-600 mb-4">
               Questions? Email us at{" "}
-                              <a href="mailto:hello@codenis.com" className="text-gray-900 font-medium hover:underline">
-                  hello@codenis.com
+                              <a href="mailto:hello@codenies.com" className="text-gray-900 font-medium hover:underline">
+                  hello@codenies.com
               </a>{" "}
               or call{" "}
               <a href="tel:+201287800800" className="text-gray-900 font-medium hover:underline">

@@ -31,14 +31,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://codenis.com'),
+  metadataBase: new URL('https://codenies.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-          url: 'https://codenis.com',
+          url: 'https://codenies.com',
     title: 'codenies - Software Development Agency',
     description: 'Expert software development agency specializing in SaaS, e-commerce, mobile apps, UI/UX design, and AI integration.',
     siteName: 'codenies',
@@ -110,8 +110,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "codenies",
-                      "url": "https://codenis.com",
-        "logo": "https://codenis.com/logo/web.png",
+                      "url": "https://codenies.com",
+        "logo": "https://codenies.com/logo/web.png",
               "description": "Expert software development agency specializing in SaaS, e-commerce, mobile apps, UI/UX design, and AI integration.",
               "foundingDate": "2024",
               "address": {
@@ -121,7 +121,7 @@ export default function RootLayout({
               "contactPoint": {
                 "@type": "ContactPoint",
                 "contactType": "customer service",
-                "email": "hello@codenis.com",
+                "email": "hello@codenies.com",
                 "availableLanguage": "English"
               },
               "sameAs": [
