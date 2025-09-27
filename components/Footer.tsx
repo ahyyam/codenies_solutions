@@ -71,7 +71,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-muted-foreground text-sm">
                 <Mail className="h-4 w-4 text-primary" />
-                <span>hello@codenies.com</span>
+                <a href="mailto:hello@codenies.com" className="hover:text-primary transition-colors">hello@codenies.com</a>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground text-sm">
                 <Phone className="h-4 w-4 text-primary" />

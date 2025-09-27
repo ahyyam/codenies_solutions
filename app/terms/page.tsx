@@ -162,7 +162,7 @@ const TermsOfServicePage = () => {
                 </p>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-gray-700">
-                    <strong>Email:</strong> legal@codenies.com<br />
+                    <strong>Email:</strong> hello@codenies.com<br />
                     <strong>Address:</strong> Codenies Solutions<br />
                     <strong>Last Updated:</strong> {new Date().toLocaleDateString()}
                   </p>
