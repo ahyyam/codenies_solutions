@@ -33,7 +33,7 @@ const nextConfig = {
         },
         {
           key: 'X-Frame-Options',
-          value: 'DENY',
+          value: 'SAMEORIGIN',
         },
         {
           key: 'X-XSS-Protection',
@@ -42,6 +42,10 @@ const nextConfig = {
         {
           key: 'Referrer-Policy',
           value: 'origin-when-cross-origin',
+        },
+        {
+          key: 'Content-Security-Policy',
+          value: "frame-ancestors 'self' https://*.facebook.com https://*.twitter.com https://*.linkedin.com https://*.whatsapp.com https://*.telegram.org",
         },
       ],
     },
