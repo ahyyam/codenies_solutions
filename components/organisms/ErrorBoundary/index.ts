@@ -1,0 +1,1 @@
+export { ErrorBoundary, useErrorBoundary, type ErrorBoundaryProps, type ErrorBoundaryState } from './ErrorBoundary';

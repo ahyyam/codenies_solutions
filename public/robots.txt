@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://codenies.com/sitemap.xml
-
-# Crawl-delay
-Crawl-delay: 1
-

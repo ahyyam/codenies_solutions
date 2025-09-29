@@ -1,59 +1,133 @@
 'use client';
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Award, Zap, Star, Code, Shield, Zap as ZapIcon } from "lucide-react"
+import { ArrowRight, Award, Zap, Star, Code, Shield } from "lucide-react"
 import Link from "next/link"
-import { projectsData as defaultProjects } from "@/lib/projects-data"
+import { ProjectGrid } from "@/components/projects/ProjectGrid"
+import { ProjectFilter } from "@/components/projects/ProjectFilter"
+import { ProjectModal } from "@/components/projects/ProjectModal"
+import { Project } from "@/lib/types/project"
+import { ProjectStatus } from "@/lib/types/common"
+import { initializeSampleProjects } from "@/lib/data/sample-projects"
+import { 
+  extractCategoriesFromProjects, 
+  extractTechnologiesFromProjects,
+  filterProjects,
+  sortProjects,
+  ProjectFilterCriteria,
+  ProjectSortOption
+} from "@/lib/utils/project-utils"
 
 export default function WorkPage() {
-  const [projects, setProjects] = useState(defaultProjects)
-  const [previewLoaded, setPreviewLoaded] = useState(false)
-  const [previewBlocked, setPreviewBlocked] = useState(false)
-  const blockTimerRef = useRef<number | null>(null)
-  const [reloadKey, setReloadKey] = useState(0)
+  const [allProjects, setAllProjects] = useState<Project[]>([])
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([])
+  const [loading, setLoading] = useState(true)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  
+  // Filter states
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([])
+  const [selectedStatus, setSelectedStatus] = useState<ProjectStatus[]>([])
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
+  const [sortBy, setSortBy] = useState<ProjectSortOption>('featured')
+
   useEffect(() => {
+    // Initialize sample data if needed
+    initializeSampleProjects()
+    
+    // Load projects from localStorage
     try {
       const stored = typeof window !== 'undefined' ? localStorage.getItem('projects') : null
       if (stored) {
-        const parsed = JSON.parse(stored)
-        if (Array.isArray(parsed)) setProjects(parsed)
+        const parsed = JSON.parse(stored).map((p: any) => {
+          // Ensure all required fields exist with defaults
+          const project = {
+            ...p,
+            createdAt: p.createdAt ? new Date(p.createdAt) : new Date(),
+            updatedAt: p.updatedAt ? new Date(p.updatedAt) : new Date(),
+            timeline: {
+              duration: '',
+              phases: [],
+              ...p.timeline,
+              startDate: p.timeline?.startDate ? new Date(p.timeline.startDate) : new Date(),
+              endDate: p.timeline?.endDate ? new Date(p.timeline.endDate) : undefined
+            },
+            // Ensure other required fields exist
+            images: p.images || [],
+            technologies: p.technologies || [],
+            features: p.features || [],
+            challenges: p.challenges || [],
+            results: p.results || [],
+            team: p.team || [],
+            links: p.links || {},
+            seo: p.seo || { title: p.title, description: p.description, keywords: [] },
+            settings: p.settings || { showClient: true, showTeam: true, showTimeline: true, showResults: true, allowInquiries: true }
+          };
+          return project;
+        })
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setAllProjects(parsed)
+          setFilteredProjects(parsed)
+        } else {
+          // If no valid projects found, try to reload sample projects
+          const sampleStored = localStorage.getItem('projects')
+          if (sampleStored) {
+            const sampleParsed = JSON.parse(sampleStored)
+            if (Array.isArray(sampleParsed) && sampleParsed.length > 0) {
+              setAllProjects(sampleParsed)
+              setFilteredProjects(sampleParsed)
+            }
+          }
+        }
       }
-    } catch {}
+    } catch (error) {
+      console.error('Error loading projects:', error)
+    } finally {
+      setLoading(false)
+    }
   }, [])
 
-  const projectForPreview = projects.find(p => p.link && p.link !== '#')
-  const previewUrl = projectForPreview
-    ? (projectForPreview.link.startsWith('http') ? projectForPreview.link : `https://${projectForPreview.link}`)
-    : ''
-
-  // When preview URL changes, set up a timer to detect embedding blocks
+  // Apply filters whenever filter criteria change
   useEffect(() => {
-    // reset states for new URL
-    setPreviewLoaded(false)
-    setPreviewBlocked(false)
-
-    // clear any previous timer
-    if (blockTimerRef.current) {
-      window.clearTimeout(blockTimerRef.current)
-      blockTimerRef.current = null
+    const criteria: ProjectFilterCriteria = {
+      searchQuery: searchQuery.trim() || undefined,
+      categories: selectedCategories.length > 0 ? selectedCategories : undefined,
+      technologies: selectedTechnologies.length > 0 ? selectedTechnologies : undefined,
+      status: selectedStatus.length > 0 ? selectedStatus : undefined
     }
 
-    if (!previewUrl) return
+    let filtered = filterProjects(allProjects, criteria)
+    filtered = sortProjects(filtered, sortBy)
+    setFilteredProjects(filtered)
+  }, [allProjects, searchQuery, selectedCategories, selectedTechnologies, selectedStatus, sortBy])
 
-    // If the iframe doesn't load within timeout, assume blocked
-    blockTimerRef.current = window.setTimeout(() => {
-      setPreviewBlocked(true)
-    }, 3500)
+  const handleProjectSelect = (project: Project) => {
+    setSelectedProject(project)
+    setIsModalOpen(true)
+  }
 
-    return () => {
-      if (blockTimerRef.current) {
-        window.clearTimeout(blockTimerRef.current)
-        blockTimerRef.current = null
-      }
-    }
-  }, [previewUrl, reloadKey])
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedProject(null)
+  }
+
+  const handleClearAllFilters = () => {
+    setSearchQuery('')
+    setSelectedCategories([])
+    setSelectedTechnologies([])
+    setSelectedStatus([])
+  }
+
+  // Extract filter options from all projects
+  const categories = extractCategoriesFromProjects(allProjects)
+  const technologies = extractTechnologiesFromProjects(allProjects)
+
+  const featuredProjects = allProjects.filter(p => p.featured)
+  const projectForPreview = featuredProjects.length > 0 ? featuredProjects[0] : allProjects[0]
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -111,69 +185,99 @@ export default function WorkPage() {
         </div>
       </section>
 
-      {/* Live Preview (first available project link) */}
-      {projectForPreview && (
-        <section className="py-10 px-4">
-          <div className="container mx-auto max-w-5xl">
-            <h2 className="text-2xl font-bold text-foreground mb-3">Live Preview</h2>
-            <p className="text-sm text-muted-foreground mb-4">{projectForPreview.title}</p>
-          <div className="aspect-video bg-muted rounded overflow-hidden border border-border relative">
-            {!previewBlocked ? (
-              <>
-                {!previewLoaded && (
-                  <div className="absolute inset-0 bg-muted animate-pulse" />
-                )}
-                <iframe
-                  key={reloadKey}
-                  src={previewUrl}
-                  title={`Preview of ${projectForPreview.title}`}
-                  className={`w-full h-full ${previewLoaded ? '' : 'hidden'}`}
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                  allowFullScreen
-                  onLoad={() => {
-                    setPreviewLoaded(true)
-                    setPreviewBlocked(false)
-                    if (blockTimerRef.current) {
-                      window.clearTimeout(blockTimerRef.current)
-                      blockTimerRef.current = null
-                    }
-                  }}
-                />
-              </>
-            ) : (
-              <img
-                src={projectForPreview.image || "/modern-saas-dashboard.png"}
-                alt={`${projectForPreview.title} preview`}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            )}
+      {/* Projects Section */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Our Portfolio</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Explore our recent projects and see how we've helped businesses achieve their goals through innovative technology solutions.
+            </p>
           </div>
-          {previewBlocked && (
-            <div className="mt-3 text-sm flex flex-wrap items-center gap-2">
-              <span className="text-muted-foreground">Preview unavailable due to site embedding restrictions.</span>
-              <a href={previewUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Open in new tab</a>
-              <button
-                type="button"
-                onClick={() => {
-                  setPreviewLoaded(false)
-                  setPreviewBlocked(false)
-                  if (blockTimerRef.current) {
-                    window.clearTimeout(blockTimerRef.current)
-                    blockTimerRef.current = null
-                  }
-                  setReloadKey(k => k + 1)
-                }}
-                className="text-muted-foreground hover:text-foreground underline"
-              >
-                Retry preview
-              </button>
+
+          {/* Project Filter */}
+          <ProjectFilter
+            categories={categories}
+            technologies={technologies}
+            selectedCategories={selectedCategories}
+            selectedTechnologies={selectedTechnologies}
+            selectedStatus={selectedStatus}
+            searchQuery={searchQuery}
+            viewMode={viewMode}
+            onCategoryChange={setSelectedCategories}
+            onTechnologyChange={setSelectedTechnologies}
+            onStatusChange={setSelectedStatus}
+            onSearchChange={setSearchQuery}
+            onViewModeChange={setViewMode}
+            onClearAll={handleClearAllFilters}
+            className="mb-8"
+          />
+
+          {/* Results Summary */}
+          {!loading && (
+            <div className="flex items-center justify-between mb-6">
+              <div className="text-sm text-muted-foreground">
+                Showing {filteredProjects.length} of {allProjects.length} projects
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">Sort by:</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as ProjectSortOption)}
+                  className="text-sm border border-border rounded px-2 py-1 bg-background text-foreground"
+                >
+                  <option value="featured">Featured First</option>
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                  <option value="title">Title A-Z</option>
+                  <option value="status">Status</option>
+                </select>
+              </div>
             </div>
           )}
-          </div>
-        </section>
-      )}
+
+          {/* Projects Grid */}
+          <ProjectGrid 
+            projects={filteredProjects}
+            onProjectSelect={handleProjectSelect}
+            loading={loading}
+            className="mb-12"
+          />
+
+          {/* Empty State */}
+          {filteredProjects.length === 0 && !loading && allProjects.length > 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground mb-6">
+                No projects match your current filters. Try adjusting your search criteria.
+              </p>
+              <Button onClick={handleClearAllFilters}>
+                Clear All Filters
+              </Button>
+            </div>
+          )}
+
+          {allProjects.length === 0 && !loading && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground mb-6">
+                Our portfolio is currently being updated. Contact us to learn more about our recent work.
+              </p>
+              <Button asChild>
+                <Link href="/consultation">
+                  <Zap className="w-4 h-4 mr-2" />
+                  Get in Touch
+                </Link>
+              </Button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Project Modal */}
+      <ProjectModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
 
       {/* CTA Section */}
       <section className="py-12 px-4 bg-primary text-primary-foreground">
@@ -184,7 +288,7 @@ export default function WorkPage() {
           </p>
           <Link href="/consultation">
             <Button size="lg" className="bg-background text-foreground hover:bg-background/90 px-6 py-3 text-base group hover:scale-105 transition-all duration-300">
-              <ZapIcon className="w-4 h-4 mr-2" />
+              <Zap className="w-4 h-4 mr-2" />
               Get Free Strategy Session
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>

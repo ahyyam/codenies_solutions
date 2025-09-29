@@ -1,17 +1,18 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, Play, CheckCircle, Users, Clock, Star, TrendingUp, Zap, Shield, Code, Sparkles } from "lucide-react";
+import { ThumbnailImage } from "@/components/common/OptimizedImage";
 
 const Hero = () => {
 
-  const stats = [
-    { number: "500+", label: "Happy Clients", icon: Users, color: "from-blue-500 to-blue-600" },
-    { number: "150+", label: "Projects Delivered", icon: CheckCircle, color: "from-green-500 to-green-600" },
-    { number: "99%", label: "Success Rate", icon: TrendingUp, color: "from-purple-500 to-purple-600" }
+  const highlights = [
+    { title: "Expert Team", description: "Skilled professionals", icon: Users, color: "from-blue-500 to-blue-600" },
+    { title: "Quality Focus", description: "Excellence driven", icon: CheckCircle, color: "from-green-500 to-green-600" },
+    { title: "Business Growth", description: "Results oriented", icon: TrendingUp, color: "from-purple-500 to-purple-600" }
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center bg-background overflow-hidden pt-0" role="banner" aria-label="Hero section">
+    <section className="relative min-h-screen flex items-center bg-background overflow-hidden pt-24 lg:pt-20" role="banner" aria-label="Hero section">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.1)_1px,transparent_0)] bg-[length:24px_24px]"></div>
@@ -43,9 +44,9 @@ const Hero = () => {
                 
                 {/* Subtitle */}
                 <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-xl">
-                  We build <span className="font-semibold text-primary">custom software solutions</span> that drive 
-                  <span className="font-semibold text-primary"> real business results</span>. 
-                  From AI-powered automation to scalable SaaS platforms.
+                  We build <span className="font-semibold text-primary">custom software solutions</span> that 
+                  <span className="font-semibold text-primary">increase revenue, reduce costs, and accelerate growth</span>. 
+                  From AI automation to scalable SaaS platforms that deliver measurable ROI.
                 </p>
               </div>
               
@@ -79,15 +80,15 @@ const Hero = () => {
               {/* Trust Indicators */}
               <div className="pt-4 border-t border-border">
                 <div className="grid grid-cols-3 gap-4">
-                  {stats.map((stat, index) => {
-                    const IconComponent = stat.icon;
+                  {highlights.map((highlight, index) => {
+                    const IconComponent = highlight.icon;
                     return (
                       <div key={index} className="text-center">
-                        <div className={`w-10 h-10 bg-gradient-to-br ${stat.color} rounded-lg flex items-center justify-center mx-auto mb-2`}>
+                        <div className={`w-10 h-10 bg-gradient-to-br ${highlight.color} rounded-lg flex items-center justify-center mx-auto mb-2`}>
                           <IconComponent className="w-5 h-5 text-white" />
                         </div>
-                        <div className="font-bold text-lg text-foreground mb-1">{stat.number}</div>
-                        <div className="text-xs text-muted-foreground">{stat.label}</div>
+                        <div className="font-bold text-sm text-foreground mb-1">{highlight.title}</div>
+                        <div className="text-xs text-muted-foreground">{highlight.description}</div>
                       </div>
                     );
                   })}
@@ -151,30 +152,38 @@ const Hero = () => {
             </div>
             <div className="flex flex-wrap justify-center items-center gap-8">
               <div className="flex items-center justify-center p-2">
-                <img 
-                  src="/partners/apple.png?v=2" 
+                <ThumbnailImage 
+                  src="/partners/apple.png" 
                   alt="Apple" 
+                  width={80}
+                  height={48}
                   className="h-10 md:h-12 opacity-80 hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
               <div className="flex items-center justify-center p-2">
-                <img 
-                  src="/partners/google.png?v=2" 
+                <ThumbnailImage 
+                  src="/partners/google.png" 
                   alt="Google" 
+                  width={80}
+                  height={48}
                   className="h-10 md:h-12 opacity-80 hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
               <div className="flex items-center justify-center p-2">
-                <img 
-                  src="/partners/shopify.png?v=2" 
+                <ThumbnailImage 
+                  src="/partners/shopify.png" 
                   alt="Shopify" 
+                  width={80}
+                  height={48}
                   className="h-10 md:h-12 opacity-80 hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
               <div className="flex items-center justify-center p-2">
-                <img 
-                  src="/partners/aws.png?v=2" 
+                <ThumbnailImage 
+                  src="/partners/aws.png" 
                   alt="AWS" 
+                  width={80}
+                  height={48}
                   className="h-10 md:h-12 opacity-80 hover:opacity-100 transition-opacity duration-300"
                 />
               </div>

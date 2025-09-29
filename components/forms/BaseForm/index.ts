@@ -1,0 +1,1 @@
+export { BaseForm, type BaseFormProps } from './BaseForm';

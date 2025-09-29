@@ -75,9 +75,9 @@ const AboutPage = () => {
           </h1>
           
           <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto">
-            We are a passionate team of software developers, designers, and strategists 
-            dedicated to <span className="font-semibold text-primary">transforming businesses</span> through 
-            <span className="font-semibold text-primary"> innovative technology solutions</span>.
+            We are strategic technology partners dedicated to 
+            <span className="font-semibold text-primary">driving measurable business growth</span> through 
+            <span className="font-semibold text-primary">innovative solutions that deliver real ROI</span>.
           </p>
 
           {/* CTA */}
@@ -140,10 +140,10 @@ const AboutPage = () => {
                 Who We Are
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                codenies is a software agency dedicated to crafting innovative digital solutions. 
-                We specialize in web and mobile app development, custom software solutions, e-commerce development, 
-                AI automation, and UI/UX design. Our team combines technical expertise with creative problem-solving 
-                to deliver solutions that drive real business value.
+                codenies is a strategic technology partner focused on delivering measurable business results. 
+                We specialize in solutions that increase revenue, reduce operational costs, and provide competitive advantage. 
+                Our team combines deep technical expertise with business acumen to deliver technology investments 
+                that generate substantial ROI and accelerate your growth.
               </p>
             </div>
             <div className="relative">
@@ -169,44 +169,56 @@ const AboutPage = () => {
               <Target className="w-10 h-10 mx-auto mb-3 text-primary" />
               <h3 className="text-xl font-bold mb-3 text-foreground">Our Mission</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                To transform ideas into reality through technology, providing exceptional software solutions 
-                that drive business growth and exceed client expectations.
+                To be the strategic technology partner that accelerates business growth through innovative solutions 
+                that deliver measurable ROI and sustainable competitive advantage.
               </p>
             </div>
             <div className="text-center p-6 bg-card rounded-xl shadow-sm border border-border hover:shadow-md transition-all duration-300">
               <Eye className="w-10 h-10 mx-auto mb-3 text-primary" />
               <h3 className="text-xl font-bold mb-3 text-foreground">Our Vision</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                To be a leading software agency recognized for innovation, quality, and client satisfaction, 
-                shaping the future of digital solutions worldwide.
+                To be recognized as the premier technology partner that consistently delivers breakthrough business results, 
+                helping companies achieve market leadership through strategic technology investments.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Statistics Section */}
+      {/* Our Approach Section */}
       <section className="py-12 px-4 bg-card">
         <div className="container mx-auto">
           <h2 className="text-3xl lg:text-4xl font-bold text-center mb-8 text-foreground">
-            Our Impact in Numbers
+            Our Approach to Success
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">50+</div>
-              <div className="text-muted-foreground text-sm font-medium">Projects Delivered</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="text-center p-4">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <Code className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="font-semibold text-foreground mb-2">Technical Excellence</h3>
+              <p className="text-muted-foreground text-sm">Cutting-edge technologies and best practices</p>
             </div>
-            <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">25+</div>
-              <div className="text-muted-foreground text-sm font-medium">Happy Clients</div>
+            <div className="text-center p-4">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <Users className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="font-semibold text-foreground mb-2">Client Partnership</h3>
+              <p className="text-muted-foreground text-sm">Collaborative approach to every project</p>
             </div>
-            <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">3+</div>
-              <div className="text-muted-foreground text-sm font-medium">Years Experience</div>
+            <div className="text-center p-4">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <Rocket className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="font-semibold text-foreground mb-2">Innovation Focus</h3>
+              <p className="text-muted-foreground text-sm">Forward-thinking solutions for modern challenges</p>
             </div>
-            <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">99%</div>
-              <div className="text-muted-foreground text-sm font-medium">Client Satisfaction</div>
+            <div className="text-center p-4">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <Globe className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="font-semibold text-foreground mb-2">Global Impact</h3>
+              <p className="text-muted-foreground text-sm">Solutions that scale across markets</p>
             </div>
           </div>
         </div>

@@ -91,8 +91,8 @@ const ServicesPage = () => {
               Our Services
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8 font-cursive">
-              From concept to deployment, we deliver comprehensive digital solutions tailored to your business needs. 
-              Explore our range of services designed to transform your ideas into reality.
+              Strategic technology solutions that drive revenue growth, reduce operational costs, and deliver competitive advantage. 
+              Explore services designed to accelerate your business success and maximize ROI.
             </p>
             <Link 
               href="/consultation" 
@@ -147,7 +147,7 @@ const ServicesPage = () => {
               </div>
               <h3 className="text-xl font-bold mb-3 text-gray-900">Expert Team</h3>
               <p className="text-gray-600">
-                Seasoned developers and designers with proven track records in delivering successful projects.
+                Business-focused experts who understand how technology drives revenue growth and operational efficiency.
               </p>
             </div>
             <div className="text-center p-6">
@@ -156,7 +156,7 @@ const ServicesPage = () => {
               </div>
               <h3 className="text-xl font-bold mb-3 text-gray-900">Modern Technologies</h3>
               <p className="text-gray-600">
-                Latest frameworks and tools for optimal performance, security, and scalability.
+                Cutting-edge technologies that provide competitive advantage and reduce long-term operational costs.
               </p>
             </div>
             <div className="text-center p-6">
@@ -165,7 +165,7 @@ const ServicesPage = () => {
               </div>
               <h3 className="text-xl font-bold mb-3 text-gray-900">Quality Assurance</h3>
               <p className="text-gray-600">
-                Rigorous testing and quality standards to ensure your project meets the highest expectations.
+                Quality standards that ensure long-term business value and minimize maintenance costs.
               </p>
             </div>
           </div>
@@ -179,7 +179,7 @@ const ServicesPage = () => {
             Ready to Start Your Project?
           </h2>
           <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-            Let's discuss your requirements and create a solution that drives your business forward.
+            Discover how our strategic technology solutions can increase your revenue, reduce costs, and accelerate growth.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/consultation" className="btn-primary bg-white text-gray-800 hover:bg-gray-100">
