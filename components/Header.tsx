@@ -114,9 +114,9 @@ const Header = () => {
             <Image
               src="/logo/web.png"
               alt="codenies"
-              width={200}
-              height={200}
-              className="h-20 lg:h-18 w-auto group-hover:opacity-80 transition-opacity duration-200 font-bold"
+              width={180}
+              height={180}
+              className="h-16 lg:h-14 w-auto group-hover:opacity-80 transition-opacity duration-200 font-bold"
               style={{ filter: 'contrast(1.3) saturate(1.2) brightness(1.1)' }}
             />
           </Link>
@@ -128,7 +128,7 @@ const Header = () => {
                 <li key={item.href}>
                   <Link 
                     href={item.href} 
-                    className="relative text-foreground/80 hover:text-primary transition-colors duration-200 font-elegant font-medium group"
+                    className="relative text-foreground/80 hover:text-primary transition-colors duration-200 font-elegant font-medium leading-normal group"
                     onClick={handleNavigation}
                   >
                     {item.label}
@@ -214,9 +214,9 @@ const Header = () => {
                 <Image
                   src="/logo/web.png"
                   alt="codenies"
-                  width={200}
-                  height={200}
-                  className="h-20 lg:h-18 w-auto"
+                  width={180}
+                  height={180}
+                  className="h-16 lg:h-14 w-auto"
                   style={{ filter: 'contrast(1.3) saturate(1.2) brightness(1.1)' }}
                 />
               </Link>
