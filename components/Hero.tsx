@@ -12,7 +12,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center bg-background overflow-hidden pt-24 lg:pt-20" role="banner" aria-label="Hero section">
+    <section className="relative min-h-[80vh] flex items-center bg-background overflow-hidden pt-12 lg:pt-10" role="banner" aria-label="Hero section">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.1)_1px,transparent_0)] bg-[length:24px_24px]"></div>

@@ -104,7 +104,7 @@ export default function RootLayout({
       <body suppressHydrationWarning={true}>
         <PerformanceMonitor />
         <Header />
-        <main id="main-content" role="main" className="pt-32 lg:pt-20">
+        <main id="main-content" role="main" className="pt-20 lg:pt-16">
           {children}
         </main>
         <Footer />

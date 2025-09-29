@@ -103,7 +103,7 @@ const Header = () => {
         : 'bg-background/80 backdrop-blur-sm'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20 lg:h-18">
+        <div className="flex items-center justify-between h-14 lg:h-12">
           {/* Logo */}
           <Link 
             href="/" 
@@ -114,9 +114,9 @@ const Header = () => {
             <Image
               src="/logo/web.png"
               alt="codenies"
-              width={180}
-              height={180}
-              className="h-16 lg:h-14 w-auto group-hover:opacity-80 transition-opacity duration-200 font-bold"
+              width={160}
+              height={160}
+              className="h-14 lg:h-12 w-auto group-hover:opacity-80 transition-opacity duration-200 font-bold"
               style={{ filter: 'contrast(1.3) saturate(1.2) brightness(1.1)' }}
             />
           </Link>
@@ -214,9 +214,9 @@ const Header = () => {
                 <Image
                   src="/logo/web.png"
                   alt="codenies"
-                  width={180}
-                  height={180}
-                  className="h-16 lg:h-14 w-auto"
+                  width={160}
+                  height={160}
+                  className="h-14 lg:h-12 w-auto"
                   style={{ filter: 'contrast(1.3) saturate(1.2) brightness(1.1)' }}
                 />
               </Link>
