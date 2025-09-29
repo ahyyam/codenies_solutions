@@ -114,9 +114,9 @@ const Header = () => {
             <Image
               src="/logo/web.png"
               alt="codenies"
-              width={240}
-              height={240}
-              className="h-24 lg:h-22 w-auto group-hover:opacity-80 transition-opacity duration-200 font-bold"
+              width={200}
+              height={200}
+              className="h-20 lg:h-18 w-auto group-hover:opacity-80 transition-opacity duration-200 font-bold"
               style={{ filter: 'contrast(1.3) saturate(1.2) brightness(1.1)' }}
             />
           </Link>
@@ -214,9 +214,9 @@ const Header = () => {
                 <Image
                   src="/logo/web.png"
                   alt="codenies"
-                  width={240}
-                  height={240}
-                  className="h-24 lg:h-22 w-auto"
+                  width={200}
+                  height={200}
+                  className="h-20 lg:h-18 w-auto"
                   style={{ filter: 'contrast(1.3) saturate(1.2) brightness(1.1)' }}
                 />
               </Link>
