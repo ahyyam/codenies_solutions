@@ -19,24 +19,27 @@ export function ProjectGrid({
 }: ProjectGridProps) {
   const [columns, setColumns] = useState(3);
 
-  // Responsive column calculation
+  // Responsive column calculation with server-safe guard
   useEffect(() => {
     const updateColumns = () => {
+      if (typeof window === 'undefined') return;
       const width = window.innerWidth;
       if (width < 640) {
-        setColumns(1); // Mobile: 1 column
+        setColumns(1);
       } else if (width < 1024) {
-        setColumns(2); // Tablet: 2 columns
+        setColumns(2);
       } else if (width < 1536) {
-        setColumns(3); // Desktop: 3 columns
+        setColumns(3);
       } else {
-        setColumns(4); // Large desktop: 4 columns
+        setColumns(4);
       }
     };
 
     updateColumns();
-    window.addEventListener('resize', updateColumns);
-    return () => window.removeEventListener('resize', updateColumns);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', updateColumns);
+      return () => window.removeEventListener('resize', updateColumns);
+    }
   }, []);
 
   // Distribute projects across columns for masonry layout

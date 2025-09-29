@@ -1,5 +1,5 @@
 // Project management hook for admin interface
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { Project, CreateProjectInput, UpdateProjectInput } from '../types/project';
 import { ProjectManagementState } from '../types/admin';
 import { useLocalStorage } from './useLocalStorage';
@@ -7,6 +7,7 @@ import { useSearch } from './useSearch';
 import { usePagination } from './usePagination';
 import { ContentValidator } from '../utils/validation';
 import { AppErrorHandler } from '../utils/error-handling';
+import { initializeSampleProjects } from '@/lib/data/sample-projects';
 
 const STORAGE_KEY = 'projects';
 
@@ -15,6 +16,26 @@ export function useProjectManagement() {
   const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Seed sample projects once when storage is empty, so admin sees existing projects
+  useEffect(() => {
+    try {
+      const stored = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
+      const hasProjects = stored && Array.isArray(JSON.parse(stored)) && JSON.parse(stored).length > 0;
+      if (!hasProjects) {
+        initializeSampleProjects();
+        const seeded = localStorage.getItem(STORAGE_KEY);
+        if (seeded) {
+          const parsed = JSON.parse(seeded);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setProjects(parsed);
+          }
+        }
+      }
+    } catch (e) {
+      // ignore seeding errors
+    }
+  }, [setProjects]);
 
   // Search and filter functionality
   const {
