@@ -119,33 +119,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-primary" aria-labelledby="cta-heading">
-        <div className="container-responsive text-center">
-          <h2 id="cta-heading" className="heading-mobile text-heading mb-3 sm:mb-4">
+      {/* Mobile-Optimized CTA Section */}
+      <section className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] py-12 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
             Ready to start your project?
           </h2>
-          <p className="body-large text-body mb-5 sm:mb-6 max-w-2xl mx-auto">
+          <p className="text-white/90 mb-6 text-base sm:text-lg max-w-2xl mx-auto">
             Free strategy session. Roadmap, estimate, and next steps in 24 hours.
           </p>
-          <div className="flex items-center justify-center gap-4 text-sm text-muted mb-6">
-            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-primary/70" /> Senior team</div>
-            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-primary/70" /> Transparent pricing</div>
-            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-primary/70" /> 24h response</div>
+          
+          {/* Mobile-friendly indicators */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 text-white/80 text-sm">
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-white/70"></div>
+              <span>Senior team</span>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-white/70"></div>
+              <span>Transparent pricing</span>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-white/70"></div>
+              <span>24h response</span>
+            </div>
           </div>
-          <Button 
-            asChild
-            size="sm" 
-            className="bg-[var(--color-primary)] text-white hover:bg-[var(--color-secondary)] px-3 py-1.5 text-xs shadow-sm hover:shadow-md transition-all duration-300 rounded-md whitespace-nowrap"
+          
+          {/* Mobile-optimized button */}
+          <Link 
+            href="/consultation"
+            className="inline-flex items-center justify-center px-6 py-3 bg-white text-[var(--color-primary)] font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-all duration-200 text-sm sm:text-base"
           >
-            <Link href="/consultation">
-              Start a project
-              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-            </Link>
-          </Button>
+            Start a project
+            <ArrowRight className="ml-2 w-4 h-4" />
+          </Link>
         </div>
       </section>
-
 
     </div>
   )

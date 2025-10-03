@@ -82,17 +82,26 @@ const Hero = () => {
                   </Link>
                 </Button>
                 
-                <Button 
-                  asChild 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full sm:w-auto border border-primary/20 hover:border-primary text-foreground hover:text-primary px-4 py-2.5 text-sm font-medium rounded-md hero-button-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary whitespace-nowrap min-w-fit"
+                <a 
+                  href="/services"
+                  style={{ 
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '10px 16px',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    borderRadius: '6px',
+                    backgroundColor: '#333333',
+                    border: '2px solid #ffffff',
+                    color: '#ffffff',
+                    textDecoration: 'none',
+                    transition: 'all 0.2s'
+                  }}
                 >
-                  <Link href="/work">
-                    <Play className="w-5 h-5 mr-2" aria-hidden="true" />
-                    See our work
-                  </Link>
-                </Button>
+                  <Play className="w-4 h-4 mr-2" />
+                  View our services
+                </a>
               </div>
               
               {/* Screen reader description for CTA */}

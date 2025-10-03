@@ -4,7 +4,7 @@ import { redirect } from "next/navigation"
 import nodemailer from "nodemailer"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle, Clock, Users, Zap } from "lucide-react"
-import { GradientText } from "@/components/common"
+import { GradientText, GradientButton } from "@/components/common"
 
 export const metadata: Metadata = {
   title: "Free Consultation - codenies",
@@ -95,7 +95,7 @@ export default function ConsultationPage({ searchParams }: { searchParams?: { se
         Skip to main content
       </a>
       <div className="container-mobile section-padding pt-20">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Hero Section */}
           <div className="text-center mb-12">
             <GradientText 
@@ -123,9 +123,9 @@ export default function ConsultationPage({ searchParams }: { searchParams?: { se
             </div>
           )}
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
             {/* Benefits */}
-            <div className="lg:col-span-1 space-y-6">
+            <div className="space-y-6">
               <Card className="border-border hover:shadow-lg transition-all duration-300 bg-card">
                 <CardHeader>
                   <CardTitle className="text-lg text-foreground">What you'll get</CardTitle>
@@ -189,7 +189,7 @@ export default function ConsultationPage({ searchParams }: { searchParams?: { se
             </div>
 
             {/* Form */}
-            <div className="lg:col-span-2">
+            <div>
               <Card className="border-border bg-card">
                 <CardHeader>
                   <CardTitle className="text-foreground">Tell Us About Your Project</CardTitle>

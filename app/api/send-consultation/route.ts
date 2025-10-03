@@ -29,7 +29,7 @@ export async function POST(req: Request) {
       },
     })
 
-    const toAddress = process.env.CONSULTATION_TO || "hello@codenies.com"
+    const toAddress = process.env.CONSULTATION_TO || "codenies.solutions@gmail.com"
 
     const html = `
       <h1>New Consultation Request</h1>

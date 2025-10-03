@@ -298,41 +298,34 @@ const AboutPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-gradient">
+      <section className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] py-16">
         <div className="container-responsive text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-white">
             Ready to Build Something Amazing?
           </h2>
-          <p className="text-lg text-primary-foreground/90 mb-6 max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             Let's discuss your project and explore how we can help you achieve your digital goals.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button 
-              asChild
-              size="lg" 
-              variant="secondary"
-              className="px-6 py-3"
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              href="/consultation"
+              className="inline-flex items-center justify-center px-6 py-3 bg-white text-[var(--color-primary)] font-medium rounded-md hover:bg-gray-100 transition-colors"
             >
-              <Link href="/consultation">
-                <Zap className="w-4 h-4 mr-2" />
-                Start a project
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            </Button>
-            <Button 
-              asChild
-              variant="outline" 
-              size="lg" 
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 px-6 py-3"
+              <Zap className="w-4 h-4 mr-2" />
+              Start a project
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Link>
+            <Link 
+              href="/work"
+              className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-medium rounded-md hover:bg-white hover:text-[var(--color-primary)] transition-colors"
             >
-              <Link href="/work">
-                <Eye className="w-4 h-4 mr-2" />
-                View Our Portfolio
-              </Link>
-            </Button>
+              <Eye className="w-4 h-4 mr-2" />
+              View Our Portfolio
+            </Link>
           </div>
         </div>
       </section>
+
     </>
   );
 };
