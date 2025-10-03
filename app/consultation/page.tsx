@@ -2,11 +2,9 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import nodemailer from "nodemailer"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowLeft, Code, CheckCircle, Clock, Users, Zap } from "lucide-react"
-import Link from "next/link"
-import { GradientText, GradientCard, GradientButton, GradientHighlight } from "@/components/common"
+import { CheckCircle, Clock, Users, Zap } from "lucide-react"
+import { GradientText } from "@/components/common"
 
 export const metadata: Metadata = {
   title: "Free Consultation - codenies",

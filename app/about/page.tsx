@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Award, Users, CheckCircle, TrendingUp, Zap, Shield, Star, Sparkles, Target, Eye, Heart, Clock, Code, Globe, Rocket } from "lucide-react";
+import { ArrowRight, Users, Zap, Shield, Star, Sparkles, Target, Eye, Heart, Clock, Code, Globe, Rocket } from "lucide-react";
 
 export const metadata: Metadata = {
   title: 'About codenies',

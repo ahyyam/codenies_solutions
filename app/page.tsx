@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, Code, Smartphone, Palette, Brain, ShoppingCart, Globe, Star } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Hero from "@/components/Hero"
-import { GradientText, GradientCard, GradientButton, GradientDivider, GradientHighlight } from "@/components/common"
+import { GradientText, GradientCard, GradientDivider, GradientHighlight } from "@/components/common"
 
 export default function Home() {
   return (
@@ -78,85 +77,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="section-primary" aria-labelledby="testimonials-heading">
-        <div className="container-responsive">
-          <header className="text-center mb-12 sm:mb-16">
-            <GradientText variant="innovation" as="h2" className="heading-mobile mb-4">
-              What Our Clients Say
-            </GradientText>
-            <p className="body-large text-body max-w-2xl mx-auto">
-              Don't just take our word for it. Here's what our clients have to say about working with us.
-            </p>
-            <GradientDivider variant="innovation" className="max-w-24 mx-auto mt-6" />
-          </header>
-          
-          <div className="card-grid">
-            {/* Testimonial 1 */}
-            <div className="card group">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gradient-innovation rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
-                  J
-                </div>
-                <div>
-                  <h4 className="subheading text-heading">John Smith</h4>
-                  <p className="caption text-muted">CEO, TechStart Inc.</p>
-                </div>
-              </div>
-              <p className="body-large text-body italic mb-4">
-                "codenies built our SaaS platform that generated $2M in recurring revenue within the first year. Their business-focused approach delivered exceptional ROI."
-              </p>
-              <div className="flex text-accent">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-              </div>
-            </div>
-
-            {/* Testimonial 2 */}
-            <div className="card group">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gradient-innovation rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
-                  S
-                </div>
-                <div>
-                  <h4 className="subheading text-heading">Sarah Johnson</h4>
-                  <p className="caption text-muted">Founder, EcoMart</p>
-                </div>
-              </div>
-              <p className="body-large text-body italic mb-4">
-                "The e-commerce platform codenies built increased our online sales by 300% and reduced cart abandonment by 40%. Outstanding business impact."
-              </p>
-              <div className="flex text-accent">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-              </div>
-            </div>
-
-            {/* Testimonial 3 */}
-            <div className="card group">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gradient-innovation rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
-                  M
-                </div>
-                <div>
-                  <h4 className="subheading text-heading">Mike Chen</h4>
-                  <p className="caption text-muted">CTO, HealthTech</p>
-                </div>
-              </div>
-              <p className="body-large text-body italic mb-4">
-                "codenies' AI integration reduced our operational costs by 50% and improved patient care efficiency. The ROI was immediate and substantial."
-              </p>
-              <div className="flex text-accent">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Technologies Section */}
       <section className="section-primary" aria-labelledby="tech-heading">

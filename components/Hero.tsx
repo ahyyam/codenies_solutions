@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight, Play, CheckCircle, Users, Star, TrendingUp, Zap, Sparkles } from "lucide-react";
 import { ThumbnailImage } from "@/components/common/OptimizedImage";
 import { GradientText } from "@/components/common";
-import styles from "./Hero.module.css";
 
 const Hero = () => {
 
@@ -43,7 +42,7 @@ const Hero = () => {
             <div className="hero-animate-title mb-8">
               <h1 
                 id="main-heading" 
-                className={`hero-headline mb-6 ${styles.headline}`}
+                className="hero-headline mb-6"
               >
                 <span className="block text-foreground mb-2">We design, build, and scale</span>
                 <GradientText 
@@ -51,7 +50,7 @@ const Hero = () => {
                   hero 
                   animated 
                   as="span" 
-                  className={`block font-bold ${styles.headlineGradient}`}
+                  className="block font-bold"
                 >
                   revenue‑generating software
                 </GradientText>
@@ -62,7 +61,7 @@ const Hero = () => {
             {/* Subtitle with Animation and Improved Typography */}
             <div className="hero-animate-subtitle mb-10">
               <p 
-                className={`text-muted-foreground leading-relaxed max-w-3xl mx-auto ${styles.subtitle}`}
+                className="text-muted-foreground leading-relaxed max-w-3xl mx-auto"
               >
                 Senior engineers and designers delivering SaaS, AI, mobile, and web products that increase revenue, reduce costs, and accelerate time‑to‑market.
               </p>
