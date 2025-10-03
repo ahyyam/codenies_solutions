@@ -1,12 +1,14 @@
 {
-  "name": "my-v0-project",
+  "name": "codenies-solutions",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "build:check": "next build && next lint",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-label": "latest",
@@ -26,8 +28,10 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.9",
     "@types/node": "^22",
+    "@types/nodemailer": "^7.0.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
     "eslint": "9.33.0",
     "eslint-config-next": "15.4.6",
     "postcss": "^8.5",

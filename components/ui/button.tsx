@@ -5,21 +5,21 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-semibold transition-all duration-300 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none touch-manipulation btn-touch no-tap-highlight focus-mobile",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl font-semibold relative overflow-hidden transition-all duration-300 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none touch-manipulation btn-touch no-tap-highlight focus-mobile group",
   {
     variants: {
       variant: {
         primary:
-          "bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] shadow-[0_4px_14px_0_rgba(90,0,210,0.2)] hover:bg-gradient-to-r hover:from-[var(--color-accent)] hover:to-[var(--color-secondary)] hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(90,0,210,0.3)] focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] focus-visible:outline-offset-2 active:translate-y-0 active:shadow-[0_4px_14px_0_rgba(90,0,210,0.2)]",
+          "bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white shadow-lg shadow-[var(--color-primary)]/25 border border-[var(--color-primary)]/20 hover:from-[var(--color-accent)] hover:to-[var(--color-secondary)] hover:shadow-xl hover:shadow-[var(--color-primary)]/40 hover:scale-105 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] focus-visible:outline-offset-2 active:scale-95 active:shadow-lg active:shadow-[var(--color-primary)]/30 before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/20 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700",
         secondary:
-          "bg-transparent text-[var(--color-button-secondary-text)] border-2 border-[var(--color-button-secondary-border)] hover:bg-[var(--color-primary)] hover:text-[var(--color-background)] hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(90,0,210,0.2)] focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] focus-visible:outline-offset-2 active:translate-y-0",
+          "bg-gradient-to-r from-transparent to-transparent text-[var(--color-primary)] border-2 border-[var(--color-primary)] shadow-lg shadow-[var(--color-primary)]/10 hover:bg-gradient-to-r hover:from-[var(--color-primary)] hover:to-[var(--color-accent)] hover:text-white hover:shadow-xl hover:shadow-[var(--color-primary)]/25 hover:scale-105 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-[var(--color-accent)] focus-visible:outline-offset-2 active:scale-95",
         destructive:
-          "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg shadow-red-500/25 hover:from-red-500 hover:to-red-600 hover:shadow-xl hover:shadow-red-500/40 hover:scale-105 hover:-translate-y-1 focus-visible:ring-red-500/20 active:scale-95",
         outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "bg-white/80 backdrop-blur-sm text-gray-700 border-2 border-gray-200 shadow-lg shadow-gray-500/10 hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300 hover:shadow-xl hover:shadow-gray-500/20 hover:scale-105 hover:-translate-y-1 active:scale-95 dark:bg-gray-800/80 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-transparent text-gray-600 hover:bg-gray-100 hover:text-gray-900 hover:scale-105 hover:-translate-y-0.5 active:scale-95 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200",
+        link: "text-[var(--color-primary)] underline-offset-4 hover:underline hover:text-[var(--color-accent)] transition-colors",
       },
       size: {
         default: "min-h-[42px] px-6 py-3 text-[15px]",

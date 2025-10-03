@@ -2,7 +2,7 @@
 export { default as GlobalSEO } from './GlobalSEO';
 export { default as OptimizedImage, HeroImage, ThumbnailImage, BlogImage, ProjectImage } from './OptimizedImage';
 export { default as LazySection, LazyBlogSection, LazyProjectSection, LazyImageGallery } from './LazySection';
-export { default as PerformanceMonitor, usePerformanceMeasure, withPerformanceMonitoring } from './PerformanceMonitor';
+export { default as PerformanceMonitor } from './PerformanceMonitor';
 
 // Gradient components
 export { 

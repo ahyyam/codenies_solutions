@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
-import Link from "next/link"
+// import { Button } from "@/components/ui/button"
+// import { ArrowRight } from "lucide-react"
+// import Link from "next/link"
 import Hero from "@/components/Hero"
+import CTA from "@/components/common/CTA"
 import { GradientText, GradientCard, GradientDivider, GradientHighlight } from "@/components/common"
 
 export default function Home() {
@@ -119,42 +120,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile-Optimized CTA Section */}
-      <section className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] py-12 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
-            Ready to start your project?
-          </h2>
-          <p className="text-white/90 mb-6 text-base sm:text-lg max-w-2xl mx-auto">
-            Free strategy session. Roadmap, estimate, and next steps in 24 hours.
-          </p>
-          
-          {/* Mobile-friendly indicators */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 text-white/80 text-sm">
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-white/70"></div>
-              <span>Senior team</span>
-            </div>
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-white/70"></div>
-              <span>Transparent pricing</span>
-            </div>
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-white/70"></div>
-              <span>24h response</span>
-            </div>
-          </div>
-          
-          {/* Mobile-optimized button */}
-          <Link 
-            href="/consultation"
-            className="inline-flex items-center justify-center px-6 py-3 bg-white text-[var(--color-primary)] font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-all duration-200 text-sm sm:text-base"
-          >
-            Start a project
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </Link>
-        </div>
-      </section>
+      <CTA 
+        variant="gradient"
+        title="Ready to start your project?"
+        subtitle="Free strategy session. Roadmap, estimate, and next steps in 24 hours."
+        primaryText="Start a project"
+        secondaryText="View our work"
+        benefits={["Senior team", "Transparent pricing", "24h response"]}
+      />
 
     </div>
   )

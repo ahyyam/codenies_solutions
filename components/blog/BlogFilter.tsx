@@ -87,7 +87,7 @@ export function BlogFilter({
             return (
               <Button
                 key={category.id}
-                variant={isSelected ? "default" : "outline"}
+                  variant="outline"
                 size="sm"
                 onClick={() => handleCategoryToggle(category.id)}
                 className={`transition-all duration-200 ${
@@ -136,7 +136,7 @@ export function BlogFilter({
             return (
               <Badge
                 key={tag.id}
-                variant={isSelected ? "default" : "outline"}
+                  variant="outline"
                 className={`cursor-pointer transition-all duration-200 ${
                   isSelected
                     ? "bg-primary hover:bg-primary/90 text-primary-foreground"

@@ -42,7 +42,6 @@ export function BlogCard({ post, variant = 'default', showStats = true }: BlogCa
               alt={post.featuredImage?.alt || post.title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               lazy={variant !== 'featured'}
               priority={variant === 'featured'}
             />

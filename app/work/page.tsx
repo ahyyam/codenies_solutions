@@ -41,23 +41,22 @@ export default function WorkPage() {
       />
       <section className="section-primary">
         <div className="container-responsive">
-
           {projects.length === 0 ? (
             <div className="border border-dashed border-border rounded-lg p-10 text-center bg-card">
               <p className="text-sm text-muted-foreground">No projects to show yet. Please check back soon.</p>
             </div>
           ) : (
-            <div className="card-grid">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project) => (
                 <Link
                   key={project.id}
                   href={project.links?.caseStudy ?? project.links?.live ?? project.links?.github ?? "#"}
                   target={project.links?.live ? "_blank" : undefined}
                   rel={project.links?.live ? "noopener noreferrer" : undefined}
-                  className="project-card group block"
+                  className="group block bg-white rounded-xl p-6 shadow-lg hover:shadow-xl border border-gray-100 hover:border-primary/20 transition-all duration-300 hover:-translate-y-1"
                   aria-label={`View ${project.title}`}
                 >
-                  <div className="project-card-content">
+                  <div className="h-full flex flex-col">
                     <div className="mb-3">
                       <span className="inline-block caption uppercase tracking-wider text-accent bg-accent/10 border border-accent/20 rounded-full px-3 py-1">
                         {project.category?.name}

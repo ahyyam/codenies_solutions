@@ -21,8 +21,8 @@ const AIIntegrationPage = () => {
       />
 
       {/* What We Offer Section */}
-      <section className="section-padding bg-background">
-        <div className="container-mobile">
+      <section className="section-primary">
+        <div className="container-responsive">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
               <h2 className="heading-large text-heading mb-6">
@@ -86,29 +86,6 @@ const AIIntegrationPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-gradient-tech relative overflow-hidden section-py-lg">
-        <div className="absolute inset-0 bg-gradient-radial-tech opacity-30" aria-hidden="true" />
-        <div className="container-mobile text-center relative z-10">
-          <h2 className="heading-large text-white mb-6">
-            Ready to Integrate AI?
-          </h2>
-          <p className="body-large text-white/90 mb-8 max-w-2xl mx-auto">
-            Let's leverage artificial intelligence to transform your business operations.
-          </p>
-          <div className="flex items-center justify-center gap-4 text-sm text-white/90 mb-6">
-            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> Smart automation</div>
-            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> Data insights</div>
-            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> Future-ready</div>
-          </div>
-          <Link 
-            href="/consultation" 
-            className="btn-primary bg-white text-foreground hover:bg-gray-100 px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-          >
-            Start Your Project
-          </Link>
-        </div>
-      </section>
     </>
   );
 };

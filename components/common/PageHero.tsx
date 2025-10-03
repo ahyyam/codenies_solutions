@@ -23,8 +23,8 @@ export default function PageHero({
   secondaryLabel,
 }: PageHeroProps) {
   return (
-    <section className="section-padding bg-background" aria-labelledby="page-hero-heading">
-      <div className="container-mobile text-center max-w-4xl">
+    <section className="bg-background pt-20 lg:pt-16 pb-12" aria-labelledby="page-hero-heading">
+      <div className="container-responsive text-center max-w-4xl">
         <Badge className="mb-6 bg-primary/10 text-primary hover:bg-primary/20">
           <Star className="w-3 h-3 mr-2" />
           {eyebrow}

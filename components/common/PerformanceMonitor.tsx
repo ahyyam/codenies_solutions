@@ -1,172 +1,190 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { reportWebVitals, performanceMonitor } from '@/lib/utils/performance';
-import { getAllWebVitals } from '@/lib/utils/web-vitals';
-import { initializeDesignSystemPerformanceMonitoring } from '@/lib/utils/design-system-performance';
+import { useEffect } from 'react';
 
-interface PerformanceMonitorProps {
-  enableWebVitals?: boolean;
-  enableCustomMetrics?: boolean;
-  enableDesignSystemMonitoring?: boolean;
-  logToConsole?: boolean;
+interface WebVitalsData {
+  lcp?: number;
+  fid?: number;
+  cls?: number;
+  fcp?: number;
+  ttfb?: number;
 }
 
-export function PerformanceMonitor({
-  enableWebVitals = true,
-  enableCustomMetrics = true,
-  enableDesignSystemMonitoring = true,
-  logToConsole = process.env.NODE_ENV === 'development'
-}: PerformanceMonitorProps) {
+export default function PerformanceMonitor() {
   useEffect(() => {
-    // Only run in browser environment
-    if (typeof window === 'undefined') return;
-    
-    if (!enableWebVitals && !enableCustomMetrics && !enableDesignSystemMonitoring) return;
+    // Skip performance monitoring in development
+    if (process.env.NODE_ENV !== 'production') return;
 
-    // Initialize design system performance monitoring
-    let designSystemMonitor: any = null;
-    if (enableDesignSystemMonitoring) {
-      try {
-        designSystemMonitor = initializeDesignSystemPerformanceMonitoring();
-        if (logToConsole) {
-          console.log('Design system performance monitoring initialized');
-        }
-      } catch (error) {
-        console.warn('Design system performance monitoring error:', error);
-      }
-    }
+    // Core Web Vitals measurement
+    function measureWebVitals() {
+      const vitals: WebVitalsData = {};
 
-    // Enhanced performance monitoring with design system metrics
-    if (enableCustomMetrics) {
+      // Largest Contentful Paint (LCP)
       try {
-        // Track critical CSS loading
-        performance.mark('critical-css-loaded');
-        
-        const startTime = performance.now();
-        
-        const handleLoad = () => {
-          const loadTime = performance.now() - startTime;
-          performance.mark('all-css-loaded');
-          
-          if (logToConsole) {
-            console.log(`Page load time: ${loadTime.toFixed(2)}ms`);
+        new PerformanceObserver((list) => {
+          const entries = list.getEntries();
+          const lastEntry = entries[entries.length - 1];
+          if (lastEntry) {
+            vitals.lcp = lastEntry.startTime;
+            performance.mark('lcp', { startTime: lastEntry.startTime });
+            
+            // Log for debugging
+            if (vitals.lcp > 2500) {
+              console.warn(`LCP is ${vitals.lcp}ms - consider optimization`);
+            }
           }
-
-          // Track font loading
-          if ('fonts' in document) {
-            document.fonts.ready.then(() => {
-              performance.mark('fonts-loaded');
-              if (logToConsole) {
-                console.log('All fonts loaded');
-              }
-            });
-          }
-        };
-
-        if (document.readyState === 'complete') {
-          handleLoad();
-        } else {
-          window.addEventListener('load', handleLoad, { once: true });
-        }
-      } catch (error) {
-        console.warn('Performance monitoring error:', error);
+        }).observe({ entryTypes: ['largest-contentful-paint'] });
+      } catch (e) {
+        console.debug('LCP measurement not supported');
       }
-    }
 
-    // Enhanced Web Vitals monitoring
-    if (enableWebVitals) {
+      // First Input Delay (FID)
       try {
-        if ('PerformanceObserver' in window) {
-          // LCP Observer
-          const lcpObserver = new PerformanceObserver((list) => {
-            for (const entry of list.getEntries()) {
-              if (logToConsole) {
-                console.log(`LCP: ${entry.startTime.toFixed(2)}ms`);
-              }
+        new PerformanceObserver((list) => {
+          const firstInput = list.getEntries()[0];
+          if (firstInput) {
+            const fid = (firstInput as any).processingStart - firstInput.startTime;
+            vitals.fid = fid;
+            performance.mark('fid', { startTime: fid });
+            
+            if (fid > 100) {
+              console.warn(`FID is ${fid}ms - consider optimization`);
             }
-          });
-          lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+          }
+        }).observe({ entryTypes: ['first-input'] });
+      } catch (e) {
+        console.debug('FID measurement not supported');
+      }
 
-          // FID Observer
-          const fidObserver = new PerformanceObserver((list) => {
-            for (const entry of list.getEntries()) {
-              const fid = (entry as any).processingStart - entry.startTime;
-              if (logToConsole) {
-                console.log(`FID: ${fid.toFixed(2)}ms`);
-              }
+      // Cumulative Layout Shift (CLS)
+      try {
+        let clsValue = 0;
+        new PerformanceObserver((list) => {
+          for (const entry of list.getEntries()) {
+            if (!(entry as any).hadRecentInput && (entry as any).value) {
+              clsValue += (entry as any).value;
             }
-          });
-          fidObserver.observe({ type: 'first-input', buffered: true });
-
-          // CLS Observer
-          let clsValue = 0;
-          const clsObserver = new PerformanceObserver((list) => {
-            for (const entry of list.getEntries()) {
-              if (!(entry as any).hadRecentInput) {
-                clsValue += (entry as any).value;
-              }
-            }
-            if (logToConsole) {
-              console.log(`CLS: ${clsValue.toFixed(4)}`);
-            }
-          });
-          clsObserver.observe({ type: 'layout-shift', buffered: true });
+          }
+          vitals.cls = clsValue;
+          performance.mark('cls', { startTime: clsValue });
           
-          return () => {
-            lcpObserver.disconnect();
-            fidObserver.disconnect();
-            clsObserver.disconnect();
-            if (designSystemMonitor) {
-              designSystemMonitor.cleanup();
+          if (clsValue > 0.1) {
+            console.warn(`CLS is ${clsValue} - consider reducing layout shifts`);
+          }
+        }).observe({ entryTypes: ['layout-shift'] });
+      } catch (e) {
+        console.debug('CLS measurement not supported');
+      }
+
+      // First Contentful Paint (FCP)
+      try {
+        new PerformanceObserver((list) => {
+          const entries = list.getEntries();
+          const firstEntry = entries[0];
+          if (firstEntry) {
+            vitals.fcp = firstEntry.startTime;
+            performance.mark('fcp', { startTime: firstEntry.startTime });
+            
+            if (vitals.fcp > 1800) {
+              console.warn(`FCP is ${vitals.fcp}ms - consider optimization`);
             }
-          };
+          }
+        }).observe({ entryTypes: ['paint'] });
+      } catch (e) {
+        console.debug('FCP measurement not supported');
+      }
+
+      // Time to First Byte (TTFB)
+      try {
+        const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+        if (navigationEntry) {
+          vitals.ttfb = navigationEntry.responseStart - navigationEntry.requestStart;
+          performance.mark('ttfb', { startTime: vitals.ttfb });
+          
+          if (vitals.ttfb > 600) {
+            console.warn(`TTFB is ${vitals.ttfb}ms - consider server optimization`);
+          }
         }
-      } catch (error) {
-        console.warn('Web Vitals monitoring error:', error);
+      } catch (e) {
+        console.debug('TTFB measurement error');
+      }
+
+      // Send metrics after a delay to ensure all measurements are collected
+      setTimeout(() => {
+        console.log('Core Web Vitals:', vitals);
+        
+        // Send to analytics if configured
+        if (typeof window !== 'undefined' && window.gtag) {
+          Object.entries(vitals).forEach(([metric, value]) => {
+            if (value !== undefined) {
+              window.gtag('event', metric, {
+                value: Math.round(value),
+                custom_map: { metric_name: metric },
+              });
+            }
+          });
+        }
+      }, 3000);
+    }
+
+    // Font loading optimization monitoring
+    let fontLoadStartTime: number;
+    
+    function monitorFontLoading() {
+      if ('fonts' in document) {
+        fontLoadStartTime = performance.now();
+        
+        document.fonts.ready.then(() => {
+          const fontLoadTime = performance.now() - fontLoadStartTime;
+          performance.mark('fonts-loaded', { startTime: fontLoadTime });
+          
+          // Remove loading class
+          document.body.classList.remove('font-loading');
+          
+          if (fontLoadTime > 500) {
+            console.warn(`Font loading took ${fontLoadTime}ms - consider optimization`);
+          }
+        });
+      } else {
+        // Fallback for browsers that don't support font loading API
+        setTimeout(() => {
+          document.body.classList.remove('font-loading');
+        }, 3000);
       }
     }
 
+    // Resource loading monitor
+    function monitorResourceLoading() {
+      const observer = new PerformanceObserver((list) => {
+        list.getEntries().forEach((entry) => {
+          if (entry.duration > 1000) {
+            console.warn(`Slow resource: ${entry.name} took ${entry.duration}ms`);
+          }
+        });
+      });
+      
+      observer.observe({ entryTypes: ['resource'] });
+      
+      return () => observer.disconnect();
+    }
+
+    // Start monitoring
+    measureWebVitals();
+    monitorFontLoading();
+    const cleanup = monitorResourceLoading();
+
+    // Cleanup on unmount
     return () => {
-      if (designSystemMonitor) {
-        designSystemMonitor.cleanup();
-      }
+      cleanup();
     };
-  }, [enableWebVitals, enableCustomMetrics, enableDesignSystemMonitoring, logToConsole]);
+  }, []);
 
-  // This component doesn't render anything
-  return null;
+  return null; // This component doesn't render anything
 }
 
-// Hook for measuring component performance
-export function usePerformanceMeasure(name: string, dependencies: any[] = []) {
-  useEffect(() => {
-    performanceMonitor.startMeasure(name);
-    
-    return () => {
-      const duration = performanceMonitor.endMeasure(name);
-      if (process.env.NODE_ENV === 'development' && duration) {
-        console.log(`${name} render time: ${duration.toFixed(2)}ms`);
-      }
-    };
-  }, dependencies);
+// Type declarations for gtag
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
 }
-
-// Component wrapper for performance measurement
-export function withPerformanceMonitoring<P extends object>(
-  Component: React.ComponentType<P>,
-  name?: string
-) {
-  const WrappedComponent = (props: P) => {
-    const componentName = name || Component.displayName || Component.name || 'Component';
-    usePerformanceMeasure(componentName);
-    
-    return <Component {...props} />;
-  };
-
-  WrappedComponent.displayName = `withPerformanceMonitoring(${Component.displayName || Component.name})`;
-  
-  return WrappedComponent;
-}
-
-export default PerformanceMonitor;

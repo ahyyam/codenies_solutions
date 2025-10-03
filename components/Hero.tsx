@@ -14,7 +14,7 @@ const Hero = () => {
 
   return (
     <section 
-      className="relative min-h-[85vh] flex items-center bg-background overflow-hidden gradient-overlay-innovation" 
+      className="relative min-h-[85vh] flex items-center bg-background overflow-hidden gradient-overlay-innovation pt-20 lg:pt-16" 
       role="banner" 
       aria-label="Hero section showcasing Codenies software development services"
     >
@@ -72,36 +72,29 @@ const Hero = () => {
               <div className="flex flex-col sm:flex-row gap-2.5 justify-center items-center">
                 <Button 
                   asChild 
-                  className="w-full sm:w-auto bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] hover:from-[var(--color-secondary)] hover:to-[var(--color-accent)] text-white px-4 py-2.5 text-sm font-medium rounded-md shadow-sm hover:shadow-md hero-button-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white whitespace-nowrap min-w-fit"
+                  variant="primary"
+                  size="default"
+                  className="w-full sm:w-auto hero-button-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white whitespace-nowrap min-w-fit px-8 py-4 text-base font-bold"
                   aria-describedby="cta-description"
                 >
                   <Link href="/consultation">
-                    <Zap className="w-4 h-4 mr-2" aria-hidden="true" />
+                    <Zap className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" aria-hidden="true" />
                     Start a project
-                    <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
                   </Link>
                 </Button>
                 
-                <a 
-                  href="/services"
-                  style={{ 
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '10px 16px',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    borderRadius: '6px',
-                    backgroundColor: '#333333',
-                    border: '2px solid #ffffff',
-                    color: '#ffffff',
-                    textDecoration: 'none',
-                    transition: 'all 0.2s'
-                  }}
+                <Button 
+                  asChild 
+                  variant="secondary"
+                  size="default"
+                  className="w-full sm:w-auto whitespace-nowrap min-w-fit px-8 py-4 text-base font-bold"
                 >
-                  <Play className="w-4 h-4 mr-2" />
-                  View our services
-                </a>
+                  <Link href="/services">
+                    <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
+                    View our services
+                  </Link>
+                </Button>
               </div>
               
               {/* Screen reader description for CTA */}

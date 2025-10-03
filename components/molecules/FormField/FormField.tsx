@@ -1,8 +1,8 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { Input, InputProps } from '@/components/atoms/Input';
-import { Textarea, TextareaProps } from '@/components/atoms/Textarea';
-import { Label } from '@/components/atoms/Label';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 
 export interface FormFieldProps {
   label?: string;
@@ -11,8 +11,8 @@ export interface FormFieldProps {
   helperText?: string;
   className?: string;
   type?: 'input' | 'textarea';
-  inputProps?: Omit<InputProps, 'label' | 'error' | 'helperText'>;
-  textareaProps?: Omit<TextareaProps, 'label' | 'error' | 'helperText'>;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  textareaProps?: React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 }
 
 const FormField: React.FC<FormFieldProps> = ({

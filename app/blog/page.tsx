@@ -22,8 +22,8 @@ export default function BlogPage() {
         title="Minimal, practical software lessons"
         subtitle="Focused guidance on building modern software, product, and teams."
       />
-      <section className="section-padding">
-        <div className="container-mobile">
+      <section className="section-primary">
+        <div className="container-responsive">
           <div className="max-w-3xl mx-auto mb-8">
             <input
               type="search"

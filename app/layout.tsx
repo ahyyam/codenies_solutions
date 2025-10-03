@@ -109,15 +109,16 @@ export default function RootLayout({
         <GlobalSEO />
         
         
-        {/* Optimized font loading with preload hints and fallbacks */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link rel="preconnect" href="https://api.fontshare.com" />
+        {/* Optimized font loading */}
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
         
-        {/* Primary font stylesheet */}
+        {/* Critical font preloads */}
         <link 
-          href="https://api.fontshare.com/v2/css?f[]=touvlo@400,500,700&display=swap" 
-          rel="stylesheet" 
+          rel="preload" 
+          href="https://api.fontshare.com/fonts/touvlo/fonts/touvlo-400.woff2" 
+          as="font" 
+          type="font/woff2" 
+          crossOrigin="anonymous" 
         />
         
         {/* Preload critical fonts */}
@@ -129,38 +130,156 @@ export default function RootLayout({
           crossOrigin="anonymous" 
         />
         
-        {/* Fallback font system */}
+        {/* Font optimization and Web Vitals monitoring */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            /* Font fallback system */
-            @font-face {
-              font-family: 'Geist Sans Fallback';
-              src: local('system-ui'), local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Roboto');
+            /* System font stack for immediate text rendering */
+            html {
+              font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            }
+            
+            /* Optimize font loading */
+            .font-loading {
+              font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
               font-display: swap;
             }
             
-            /* Ensure text remains visible during font load */
-            .font-loading {
-              font-family: 'Geist Sans Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* Improve layout stability */
+            body {
+              font-synthesis: none;
+              text-rendering: optimizeLegibility;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+            }
+            
+            /* Prevent layout shift during font load */
+            * {
+              font-display: swap;
             }
           `
         }} />
         
-        {/* Performance monitoring script */}
+        {/* Schema.org structured data for better SEO */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Codenies",
+            "description": "Leading tech innovation agency specializing in cutting-edge software development, AI integration, and modern digital solutions.",
+            "url": "https://codenies.com",
+            "logo": "https://codenies.com/logo/web.png",
+            "foundingDate": "2024",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "US"
+            },
+            "sameAs": [
+              "https://linkedin.com/company/codenies",
+              "https://github.com/codenies"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "Business inquiries",
+              "url": "https://codenies.com/consultation"
+            },
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Software Development Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Software Development",
+                    "description": "Custom software solutions and modern web development"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI Integration",
+                    "description": "Artificial intelligence solutions and machine learning integration"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "UI/UX Design",
+                    "description": "Modern user interface and user experience design"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Mobile App Development",
+                    "description": "Native and cross-platform mobile applications"
+                  }
+                }
+              ]
+            }
+          })
+        }} />
+        
+        {/* Core Web Vitals Monitoring */}
         <script dangerouslySetInnerHTML={{
           __html: `
-            // Track font loading performance
+            // Core Web Vitals measurement
+            function measureWebVitals() {
+              // Largest Contentful Paint
+              try {
+                new PerformanceObserver((list) => {
+                  const entries = list.getEntries();
+                  const lastEntry = entries[entries.length - 1];
+                  if (lastEntry) {
+                    performance.mark('lcp', lastEntry.startTime);
+                  }
+                }).observe({entryTypes: ['largest-contentful-paint']});
+              } catch (e) {}
+
+              // First Input Delay
+              try {
+                new PerformanceObserver((list) => {
+                  const firstInput = list.getEntries()[0];
+                  if (firstInput) {
+                    const fid = firstInput.processingStart - firstInput.startTime;
+                    performance.mark('fid', fid);
+                  }
+                }).observe({entryTypes: ['first-input']});
+              } catch (e) {}
+
+              // Cumulative Layout Shift
+              try {
+                let clsValue = 0;
+                new PerformanceObserver((list) => {
+                  for (const entry of list.getEntries()) {
+                    if (!entry.hadRecentInput && entry.value) {
+                      clsValue += entry.value;
+                    }
+                  }
+                  performance.mark('cls', clsValue);
+                }).observe({entryTypes: ['layout-shift']});
+              } catch (e) {}
+            }
+            
+            // Font loading optimization
             if ('fonts' in document) {
               document.fonts.ready.then(() => {
                 performance.mark('fonts-loaded');
                 document.body.classList.remove('font-loading');
               });
+            } else {
+              setTimeout(() => document.body.classList.remove('font-loading'), 3000);
             }
             
-            // Fallback for older browsers
-            setTimeout(() => {
-              document.body.classList.remove('font-loading');
-            }, 3000);
+            // Start measuring when DOM is ready
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', measureWebVitals);
+            } else {
+              measureWebVitals();
+            }
           `
         }} />
       </head>

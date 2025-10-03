@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronRight, ArrowRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 type LogoProps = {
   linkClassName?: string;
@@ -15,16 +15,17 @@ type LogoProps = {
 const Logo = ({ linkClassName, imageClassName, onClick }: LogoProps) => (
   <Link 
     href="/" 
-    className={linkClassName ?? "flex items-center space-x-2 group"}
+    className={linkClassName || "flex items-center"}
     onClick={onClick}
-    aria-label="codenies - Home"
+    aria-label="codenies Home"
   >
     <Image
       src="/logo/web.png"
       alt="codenies"
       width={160}
       height={160}
-      className={`h-12 lg:h-10 w-auto ${imageClassName ?? ""}`}
+      priority
+      className={`h-10 w-auto ${imageClassName || ""}`}
     />
   </Link>
 );
@@ -44,48 +45,54 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Prevent body scroll when mobile menu is open, handle keyboard + touch, and manage focus
+  // Prevent body scroll when mobile menu is open and handle ESC key
   useEffect(() => {
     if (!open) {
       document.body.style.overflow = 'unset';
-      return () => {
-        document.body.style.overflow = 'unset';
-      };
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+      return;
     }
 
     document.body.style.overflow = 'hidden';
 
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Escape') {
+        setOpen(false);
+      }
     };
 
-    let startX = 0;
-    let startY = 0;
-    const handleTouchStart = (e: TouchEvent) => {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-    };
-    const handleTouchEnd = (e: TouchEvent) => {
-      if (!startX || !startY) return;
-      const endX = e.changedTouches[0].clientX;
-      const endY = e.changedTouches[0].clientY;
-      const diffX = startX - endX;
-      const diffY = startY - endY;
-      if (Math.abs(diffX) > Math.abs(diffY) && diffX < -50 && startX < 50) setOpen(false);
-    };
+    // Handle tab navigation within mobile menu
+    const handleTabKey = (e: KeyboardEvent) => {
+      if (e.key === 'Tab') {
+        const focusableElements = document.querySelectorAll(
+          'nav[aria-label="Mobile navigation"] button, nav[aria-label="Mobile navigation"] a, nav[aria-label="Mobile navigation"] input'
+        );
+        
+        const firstElement = focusableElements[0] as HTMLElement;
+        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
 
-    // Focus the first navigation item when menu opens
-    const firstNavItem = document.querySelector('#mobile-menu a');
-    if (firstNavItem instanceof HTMLElement) setTimeout(() => firstNavItem.focus(), 100);
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement?.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement?.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    };
 
     document.addEventListener('keydown', handleEscape);
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-    document.addEventListener('touchend', handleTouchEnd, { passive: true });
+    document.addEventListener('keydown', handleTabKey);
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('keydown', handleTabKey);
       document.body.style.overflow = 'unset';
     };
   }, [open]);
@@ -121,110 +128,101 @@ const Header = () => {
                 <li key={item.href}>
                   <Link 
                     href={item.href} 
-                    className="relative text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors duration-200 font-medium leading-normal group"
+                    className="relative text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors duration-200 font-medium"
                     onClick={handleNavigation}
                   >
                     {item.label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--color-accent)] transition-all duration-200 group-hover:w-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--color-accent)] transition-all duration-200 hover:w-full"></span>
                   </Link>
                 </li>
               ))}
               <li>
-                <Button asChild size="sm" className="bg-[var(--color-primary)] hover:bg-[var(--gradient-hover)] text-white shadow-sm hover:shadow-md transition-all duration-300 group px-3 py-1.5 text-xs rounded-md whitespace-nowrap">
-                  <Link href="/consultation" onClick={handleNavigation} aria-label="Start a project">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="min-h-[32px] px-3 py-1.5 text-sm rounded-lg"
+                >
+                  <Link href="/consultation" onClick={handleNavigation}>
                     Start a project
-                    <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
               </li>
             </ul>
           </nav>
 
-          {/* Mobile Navigation Button */}
+          {/* Mobile Menu Button */}
           <div className="lg:hidden">
-              <Button 
+            <Button 
               variant="ghost" 
               size="icon" 
               onClick={() => setOpen(!open)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  setOpen(!open);
-                }
-              }}
-              className="relative touch-target hover:bg-[var(--color-accent)]/10 transition-colors duration-300 no-tap-highlight focus-mobile"
               aria-label={open ? "Close mobile menu" : "Open mobile menu"}
               aria-expanded={open}
               aria-controls="mobile-menu"
-              aria-haspopup="true"
+              className="relative z-50"
             >
-              {open ? (
-                <X className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              )}
+              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div 
-        className={`lg:hidden fixed inset-0 z-50 transition-all duration-300 ease-out ${
-          open 
-            ? 'opacity-100 visible' 
-            : 'opacity-0 invisible'
+      {/* Mobile Menu */}
+      <nav 
+        className={`fixed inset-0 z-50 lg:hidden transition-all duration-300 ${
+          open ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            setOpen(false);
-          }
-        }}
+        aria-label="Mobile navigation"
       >
-        {/* Backdrop */}
-            <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
+        {/* Solid Background */}
+        <div 
+          className={`absolute inset-0 bg-white dark:bg-gray-900 ${
+            open ? 'opacity-100' : 'opacity-0'
+          } transition-opacity duration-300`}
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+        />
         
-        {/* Slide-in Menu */}
+        {/* Menu Panel */}
         <div 
           id="mobile-menu"
-          className={`absolute right-0 top-0 h-full w-full max-w-sm bg-background shadow-2xl transform transition-all duration-300 ease-out ${
+          className={`absolute right-0 top-0 h-full w-full max-w-xs bg-white dark:bg-gray-900 shadow-2xl transform transition-transform duration-300 ease-in-out ${
             open ? 'translate-x-0' : 'translate-x-full'
           }`}
-          role="dialog" 
-          aria-modal="true" 
-          aria-labelledby="mobile-menu-title"
           onClick={(e) => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-menu-title"
         >
-          <div className="flex flex-col h-full w-full relative">
-            {/* Mobile Header - Clean and Simple */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-background">
+          <div className="flex flex-col h-full">
+            {/* Header with Logo and Close Button */}
+            <div className="flex items-center justify-between px-6 py-4 bg-white dark:bg-gray-900 border-b border-gray-300 dark:border-gray-600">
               <Logo 
                 onClick={handleNavigation}
-                linkClassName="flex items-center touch-target no-tap-highlight"
-                imageClassName=""
+                linkClassName="flex items-center"
+                imageClassName="h-8 w-8"
               />
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <button
                 onClick={() => setOpen(false)}
-                className="touch-target hover:bg-[var(--color-accent)]/10 rounded-lg transition-colors duration-300 no-tap-highlight focus-mobile"
                 aria-label="Close mobile menu"
+                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               >
-                <X className="h-6 w-6" />
-              </Button>
+                <X className="h-6 w-6 text-gray-600 dark:text-gray-400" />
+              </button>
             </div>
 
-            {/* Mobile Navigation - Clean and Simple */}
-            <nav className="flex-1 px-6 py-8 bg-background" role="navigation" aria-label="Mobile navigation">
+            {/* Navigation Links */}
+            <div className="flex-1 px-6 pt-8 pb-6 bg-white dark:bg-gray-900">
+              <h2 id="mobile-menu-title" className="sr-only">Mobile Navigation</h2>
               <ul className="space-y-2" role="list">
                 {navigationItems.map((item, index) => (
                   <li key={item.href} role="listitem">
                     <Link 
                       href={item.href} 
-                      className="nav-touch text-lg font-medium text-[var(--color-text-primary)] hover:text-[var(--color-accent)] rounded-lg hover:bg-[var(--color-accent)]/10 transition-all duration-300 bg-background focus-mobile"
+                      className="block px-4 py-3 text-lg font-medium text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                       onClick={handleNavigation}
-                      tabIndex={open ? 0 : -1}
-                      aria-describedby={`nav-item-${index}`}
+                      aria-describedby={index === 0 ? undefined : undefined}
                     >
                       {item.label}
                     </Link>
@@ -232,34 +230,39 @@ const Header = () => {
                 ))}
               </ul>
               
-              {/* CTA Button - Simple and Clean */}
-              <div className="mt-8">
+              {/* Start Project Section */}
+              <div className="mt-6 px-4 py-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl border border-purple-200 dark:border-purple-800">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  Start Your Project
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                  We'll provide expert guidance, technical roadmap, and realistic estimates for your project within 24 hours.
+                </p>
                 <Button 
                   asChild 
-                  className="w-full bg-[var(--color-primary)] hover:bg-[var(--gradient-hover)] text-white py-2 rounded-md no-tap-highlight focus-mobile transition-all duration-300 whitespace-nowrap"
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
                 >
                   <Link 
                     href="/consultation" 
                     onClick={handleNavigation}
-                    tabIndex={open ? 0 : -1}
-                    aria-label="Get started with consultation"
                   >
-                    Get Started
-                    <ArrowRight className="w-4 h-4 ml-2" />
+                    Start a project
                   </Link>
                 </Button>
-              </div>
-            </nav>
-
-            {/* Simple Footer */}
-            <div className="px-6 py-6 border-t border-border bg-background">
-              <div className="text-center text-sm text-muted-foreground">
-                <p>Trusted by innovative companies worldwide</p>
+                <div className="flex items-center justify-center mt-3 text-xs text-gray-500 dark:text-gray-400">
+                  <div className="flex items-center">
+                    <svg className="w-4 h-4 mr-1 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                    </svg>
+                    Expert Guidance
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </nav>
     </header>
   );
 };

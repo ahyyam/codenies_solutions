@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import Link from 'next/link';
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Zap, Shield, Star, Sparkles, Target, Eye, Heart, Clock, Code, Globe, Rocket } from "lucide-react";
+import PageHero from '@/components/common/PageHero';
+import CTA from '@/components/common/CTA';
+import { ArrowRight, Users, Zap, Star, Sparkles, Eye, Heart, Code, Globe, Rocket, Target } from "lucide-react";
 
 export const metadata: Metadata = {
   title: 'About codenies',
@@ -59,77 +59,15 @@ const AboutPage = () => {
         }}
       />
       
-      {/* Hero Section */}
-      <section className="section-primary" aria-labelledby="about-hero-heading">
-        <div className="container-responsive text-center max-w-4xl">
-          <Badge className="mb-6 bg-primary/10 text-primary hover:bg-primary/20">
-            <Star className="w-3 h-3 mr-2" />
-            Leading Software Development Agency
-          </Badge>
-          
-          <h1 id="about-hero-heading" className="heading-display text-heading mb-6 leading-tight">
-            Building the Future,{' '}
-            <span className="text-primary block">
-              One Line at a Time
-            </span>
-          </h1>
-          
-          <p className="body-large text-body mb-8 leading-relaxed max-w-2xl mx-auto">
-            We are strategic technology partners dedicated to 
-            <span className="text-emphasis">driving measurable business growth</span> through 
-            <span className="text-emphasis">innovative solutions that deliver real ROI</span>.
-          </p>
-
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-8">
-            <Button 
-              asChild 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3"
-            >
-              <Link href="/consultation">
-                <Zap className="w-4 h-4 mr-2" />
-                Start a project
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            </Button>
-            
-            <Button 
-              asChild 
-              variant="outline" 
-              size="lg" 
-              className="border-border hover:border-primary text-foreground hover:text-primary px-6 py-3"
-            >
-              <Link href="/work">
-                <Eye className="w-4 h-4 mr-2" />
-                View Our Portfolio
-              </Link>
-            </Button>
-          </div>
-
-          {/* Trust Indicators */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center">
-                <Shield className="w-3 h-3 text-primary" />
-              </div>
-              <span>100% Satisfaction Guarantee</span>
-            </div>
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center">
-                <Clock className="w-3 h-3 text-primary" />
-              </div>
-              <span>24/7 Expert Support</span>
-            </div>
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center">
-                <Star className="w-3 h-3 text-primary" />
-              </div>
-              <span>Award-Winning Quality</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Leading Software Development Agency"
+        title="Building the Future, One Line at a Time"
+        subtitle="We are strategic technology partners dedicated to driving measurable business growth through innovative solutions that deliver real ROI."
+        ctaHref="/consultation"
+        ctaLabel="Start a project"
+        secondaryHref="/work"
+        secondaryLabel="View our work"
+      />
 
       {/* Company Overview Section */}
       <section className="section-subtle">
@@ -230,7 +168,7 @@ const AboutPage = () => {
           <h2 className="text-3xl lg:text-4xl font-bold text-center mb-8 text-foreground">
             Our Core Values
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-6 bg-card rounded-xl border border-border hover:shadow-md transition-all duration-300">
               <Sparkles className="w-10 h-10 mx-auto mb-3 text-primary" />
               <h3 className="text-lg font-bold mb-3 text-foreground">Innovation</h3>
@@ -262,9 +200,9 @@ const AboutPage = () => {
           <h2 className="text-3xl lg:text-4xl font-bold text-center mb-8 text-foreground">
             Meet Our Team
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center p-5 bg-background rounded-xl border border-border hover:shadow-md transition-all duration-300">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3 text-primary-foreground text-lg font-bold">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center p-6 bg-background rounded-xl border border-border hover:shadow-md transition-all duration-300">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground text-lg font-bold">
                 AE
               </div>
               <h3 className="text-lg font-semibold mb-2 text-foreground">Ahyam Emad</h3>
@@ -273,8 +211,8 @@ const AboutPage = () => {
                 Experienced project manager ensuring smooth delivery and client satisfaction.
               </p>
             </div>
-            <div className="text-center p-5 bg-background rounded-xl border border-border hover:shadow-md transition-all duration-300">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3 text-primary-foreground text-lg font-bold">
+            <div className="text-center p-6 bg-background rounded-xl border border-border hover:shadow-md transition-all duration-300">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground text-lg font-bold">
                 SA
               </div>
               <h3 className="text-lg font-semibold mb-2 text-foreground">Sara Ahmed</h3>
@@ -283,8 +221,8 @@ const AboutPage = () => {
                 Full-stack developer with expertise in React, Node.js, and cloud architecture.
               </p>
             </div>
-            <div className="text-center p-5 bg-background rounded-xl border border-border hover:shadow-md transition-all duration-300">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3 text-primary-foreground text-lg font-bold">
+            <div className="text-center p-6 bg-background rounded-xl border border-border hover:shadow-md transition-all duration-300">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground text-lg font-bold">
                 JH
               </div>
               <h3 className="text-lg font-semibold mb-2 text-foreground">Jana Hazem</h3>
@@ -297,34 +235,14 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] py-16">
-        <div className="container-responsive text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-white">
-            Ready to Build Something Amazing?
-          </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Let's discuss your project and explore how we can help you achieve your digital goals.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/consultation"
-              className="inline-flex items-center justify-center px-6 py-3 bg-white text-[var(--color-primary)] font-medium rounded-md hover:bg-gray-100 transition-colors"
-            >
-              <Zap className="w-4 h-4 mr-2" />
-              Start a project
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
-            <Link 
-              href="/work"
-              className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-medium rounded-md hover:bg-white hover:text-[var(--color-primary)] transition-colors"
-            >
-              <Eye className="w-4 h-4 mr-2" />
-              View Our Portfolio
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CTA 
+        variant="gradient"
+        title="Ready to Build Something Amazing?"
+        subtitle="Let's discuss your project and explore how we can help you achieve your digital goals."
+        primaryText="Start a project"
+        secondaryText="View Our Portfolio"
+        benefits={["100% Satisfaction Guarantee", "24/7 Expert Support", "Award-Winning Quality"]}
+      />
 
     </>
   );

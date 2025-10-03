@@ -1,6 +1,6 @@
 import React, { FormHTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/atoms/Button';
+import { Button } from '@/components/ui/button';
 
 export interface BaseFormProps extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void | Promise<void>;
@@ -56,7 +56,6 @@ const BaseForm: React.FC<BaseFormProps> = ({
           )}
           <Button
             type="submit"
-            loading={loading}
             disabled={loading}
           >
             {submitText}

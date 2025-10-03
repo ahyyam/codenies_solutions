@@ -5,17 +5,26 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     
-    const title = searchParams.get('title') || 'Codenies - Tech Innovation';
-    const subtitle = searchParams.get('subtitle') || '';
+    const title = (searchParams.get('title') || 'Codenies - Tech Innovation').slice(0, 100);
+    const subtitle = (searchParams.get('subtitle') || '').slice(0, 200);
     const type = searchParams.get('type') || 'default';
-    const width = parseInt(searchParams.get('width') || '1200');
-    const height = parseInt(searchParams.get('height') || '630');
+    const width = Math.min(Math.max(parseInt(searchParams.get('width') || '1200'), 400), 2048);
+    const height = Math.min(Math.max(parseInt(searchParams.get('height') || '630'), 200), 2048);
+
+    // Validate type parameter
+    const validTypes = ['default' as const, 'blog' as const, 'service' as const, 'project' as const];
+    const validatedType = validTypes.includes(type as any) ? type as 'default' | 'blog' | 'service' | 'project' : 'default';
+    
+    // Validate dimensions
+    if (isNaN(width) || isNaN(height)) {
+      return new NextResponse('Invalid dimensions', { status: 400 });
+    }
 
     // Generate SVG
     const svg = generateOGImageSVG({
       title,
       subtitle,
-      type: type as 'default' | 'blog' | 'service' | 'project',
+      type: validatedType,
       width,
       height
     });

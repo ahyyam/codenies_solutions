@@ -511,42 +511,83 @@ export function generateRobotsTxt(siteUrl: string): string {
   const robotsTxt = `User-agent: *
 Allow: /
 
-# Sitemaps - Main sitemap and sitemap index
+# Sitemaps - SEO optimized
 Sitemap: ${siteUrl}/sitemap.xml
 Sitemap: ${siteUrl}/sitemap-index.xml
 
-# Individual sitemaps for better organization
+# Individual category sitemaps for better indexing
 Sitemap: ${siteUrl}/sitemap-static.xml
 Sitemap: ${siteUrl}/sitemap-blog.xml
 Sitemap: ${siteUrl}/sitemap-projects.xml
 
-# Crawl-delay for respectful crawling
+# Google-specific optimization
+User-agent: Googlebot
+Allow: /
 Crawl-delay: 1
 
-# Disallow admin and private areas
+# Bing-specific optimization  
+User-agent: bingbot
+Allow: /
+Crawl-delay: 1
+
+# All other crawlers
+User-agent: *
+Crawl-delay: 2
+
+# Block admin and API areas completely
 Disallow: /admin/
 Disallow: /api/
 Disallow: /_next/
+Disallow: /.next/
 Disallow: /private/
 Disallow: /.well-known/
 
-# Allow important directories
+# Block internal Next.js files
+Disallow: /_vercel
+Disallow: /.vercel/
+Disallow: /404
+Disallow: /500
+
+# Allow critical pages and directories
 Allow: /blog/
 Allow: /work/
 Allow: /services/
 Allow: /about/
 Allow: /consultation/
+Allow: /privacy/
+Allow: /terms/
 
-# Block specific file types that shouldn't be crawled
+# Optimize crawling of important service pages
+Allow: /services/website-development
+Allow: /services/ui-ux-design
+Allow: /services/ai-integration
+Allow: /services/mobile-applications
+Allow: /services/saas-development
+Allow: /services/ecommerce-solutions
+
+# Block non-content file types
 Disallow: /*.json$
 Disallow: /*.log$
 Disallow: /*.env$
 Disallow: /*.config$
+Disallow: /*.md$
+Disallow: /*.txt$
+Disallow: /*.xml$
+Disallow: /*.css$
+Disallow: /*.js$
+Disallow: /*.map$
 
-# Allow XML sitemaps and text files that are public
+# Explicitly allow important static assets
+Allow: /images/
+Allow: /logo/
+Allow: /public/
+
+# Allow XML sitemaps and essential files
 Allow: /sitemap*.xml$
 Allow: /robots.txt$
 Allow: /manifest.json$
+Allow: /favicon.ico$
+Allow: /apple-touch-icon.*
 `;
 
   return robotsTxt;
