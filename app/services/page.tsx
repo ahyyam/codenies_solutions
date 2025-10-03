@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 import { Globe, ShoppingCart, Code, Smartphone, Palette, Brain, ArrowRight } from 'lucide-react';
+import PageHero from '@/components/common/PageHero';
+import { generateBreadcrumbStructuredData } from '@/lib/utils/seo';
 
 export const metadata: Metadata = {
   title: 'Our Services - codenies',
@@ -83,51 +86,48 @@ const ServicesPage = () => {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden min-h-screen flex items-center pt-20">
-        <div className="container-mobile section-padding relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-elegant font-bold mb-6 text-white leading-tight">
-              Our Services
-            </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8 font-cursive">
-              Strategic technology solutions that drive revenue growth, reduce operational costs, and deliver competitive advantage. 
-              Explore services designed to accelerate your business success and maximize ROI.
-            </p>
-            <Link 
-              href="/consultation" 
-              className="btn-primary bg-white text-gray-900 hover:bg-gray-100 text-lg px-8 py-4"
-            >
-              Get Free Consultation
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Breadcrumb JSON-LD */}
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbStructuredData([
+            { name: 'Home', url: '/' },
+            { name: 'Services', url: '/services' }
+          ])) }}
+        />
+      </Head>
+      <PageHero
+        eyebrow="Leading Software Development Agency"
+        title="Services engineered for business outcomes"
+        subtitle="Strategy, design, and engineering to launch and scale SaaS, AI, mobile, and web products."
+        ctaHref="/consultation"
+        ctaLabel="Start a project"
+        secondaryHref="/work"
+        secondaryLabel="View our work"
+      />
 
       {/* Services Grid */}
-      <section className="section-padding bg-white">
-        <div className="container-mobile">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="section-primary">
+        <div className="container-responsive">
+          <div className="card-grid">
             {services.map((service, index) => (
-              <div key={index} className="card-mobile hover:shadow-lg transition-smooth group flex flex-col h-full">
-                <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+              <div key={index} className="service-card group">
+                <div className="service-card-icon">
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-gray-900 group-hover:text-gray-700 transition-colors">
+                <h3 className="subheading text-heading mb-4">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 mb-6 leading-relaxed flex-grow">
+                <p className="body-large text-body mb-6 flex-grow">
                   {service.description}
                 </p>
-                <div className="mt-auto">
-                  <Link 
-                    href={service.href}
-                    className={`inline-flex items-center text-sm font-medium ${service.textColor} ${service.hoverColor} transition-colors`}
-                  >
-                    Learn More
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
+                <Link 
+                  href={service.href}
+                  className="text-primary font-medium hover:text-accent transition-colors inline-flex items-center mt-auto"
+                >
+                  Learn More
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
             ))}
           </div>
@@ -135,9 +135,9 @@ const ServicesPage = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-mobile">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-16 text-gray-900">
+      <section className="section-subtle">
+        <div className="container-responsive">
+          <h2 className="heading-large text-heading text-center mb-16">
             Why Choose Our Services?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -145,8 +145,8 @@ const ServicesPage = () => {
               <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-gray-700">✓</span>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Expert Team</h3>
-              <p className="text-gray-600">
+              <h3 className="subheading text-heading mb-3">Expert Team</h3>
+              <p className="body-large text-body">
                 Business-focused experts who understand how technology drives revenue growth and operational efficiency.
               </p>
             </div>
@@ -154,8 +154,8 @@ const ServicesPage = () => {
               <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-gray-700">✓</span>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Modern Technologies</h3>
-              <p className="text-gray-600">
+              <h3 className="subheading text-heading mb-3">Modern Technologies</h3>
+              <p className="body-large text-body">
                 Cutting-edge technologies that provide competitive advantage and reduce long-term operational costs.
               </p>
             </div>
@@ -163,8 +163,8 @@ const ServicesPage = () => {
               <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-gray-700">✓</span>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Quality Assurance</h3>
-              <p className="text-gray-600">
+              <h3 className="subheading text-heading mb-3">Quality Assurance</h3>
+              <p className="body-large text-body">
                 Quality standards that ensure long-term business value and minimize maintenance costs.
               </p>
             </div>
@@ -173,12 +173,12 @@ const ServicesPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-gray-700 to-gray-800 text-white">
-        <div className="container-mobile text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+      <section className="section-contrast">
+        <div className="container-responsive text-center">
+          <h2 className="heading-large text-white mb-6">
             Ready to Start Your Project?
           </h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+          <p className="body-large text-white/90 mb-8 max-w-2xl mx-auto">
             Discover how our strategic technology solutions can increase your revenue, reduce costs, and accelerate growth.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

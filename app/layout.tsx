@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { GeistSans } from "geist/font/sans"
 import "./globals.css"
 import Header from "@/components/Header"
@@ -9,25 +9,29 @@ import PerformanceMonitor from "@/components/common/PerformanceMonitor"
 
 export const metadata: Metadata = {
   title: {
-    default: "codenies - Software Development Agency",
-    template: "%s | codenies"
+    default: "Codenies - Tech Innovation & Modern Software Development",
+    template: "%s | Codenies"
   },
-  description: "Expert software development agency specializing in SaaS, e-commerce, mobile apps, UI/UX design, and AI integration. Transform your business with cutting-edge technology solutions.",
+  description: "Leading tech innovation agency specializing in cutting-edge software development, AI integration, and modern digital solutions. Transform your business with our expertise in SaaS, mobile apps, and advanced UI/UX design.",
   keywords: [
+    "tech innovation",
     "software development agency",
-    "custom software development",
-    "web development",
-    "mobile app development",
-    "SaaS development",
-    "e-commerce solutions",
-    "UI/UX design",
     "AI integration",
+    "modern web development",
+    "UI/UX design",
+    "SaaS development",
+    "mobile app development",
     "digital transformation",
-    "business software solutions"
+    "custom software solutions",
+    "business technology consulting",
+    "innovation consulting",
+    "tech expertise",
+    "cutting-edge technology",
+    "modern design systems"
   ],
-  authors: [{ name: "codenies" }],
-  creator: "codenies",
-  publisher: "codenies",
+  authors: [{ name: "Codenies" }],
+  creator: "Codenies",
+  publisher: "Codenies",
   formatDetection: {
     email: false,
     address: false,
@@ -40,24 +44,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-          url: 'https://codenies.com',
-    title: 'codenies - Software Development Agency',
-    description: 'Expert software development agency specializing in SaaS, e-commerce, mobile apps, UI/UX design, and AI integration.',
-    siteName: 'codenies',
+    url: 'https://codenies.com',
+    title: 'Codenies - Tech Innovation & Modern Software Development',
+    description: 'Leading tech innovation agency specializing in cutting-edge software development, AI integration, and modern digital solutions. Expert UI/UX design and business technology consulting.',
+    siteName: 'Codenies',
     images: [
       {
-        url: '/pics/hero_image_1920x480.png',
+        url: '/hero_image_1920x480.png',
         width: 1920,
         height: 480,
-        alt: 'codenies - Software Development Agency',
+        alt: 'Codenies - Tech Innovation & Modern Software Development Agency',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'codenies - Software Development Agency',
-    description: 'Expert software development agency specializing in SaaS, e-commerce, mobile apps, UI/UX design, and AI integration.',
-    images: ['/pics/hero_image_1920x480.png'],
+    title: 'Codenies - Tech Innovation & Modern Software Development',
+    description: 'Leading tech innovation agency specializing in cutting-edge software development, AI integration, and modern digital solutions.',
+    images: ['/hero_image_1920x480.png'],
   },
   robots: {
     index: true,
@@ -87,6 +91,13 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -96,12 +107,64 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <head>
         <GlobalSEO />
-        <link href="https://api.fontshare.com/v2/css?f[]=touvlo@400,500,700&display=swap" rel="stylesheet" />
-        {/* Preload fonts for consistent cross-browser rendering */}
-        <link rel="preload" href="https://fonts.gstatic.com/s/dancingscript/v24/If2cXTr6YS-zW4S1c83p8W6F7ACWkH7qygSq.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="https://fonts.gstatic.com/s/playfairdisplay/v30/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDX8X_w.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        
+        
+        {/* Optimized font loading with preload hints and fallbacks */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        
+        {/* Primary font stylesheet */}
+        <link 
+          href="https://api.fontshare.com/v2/css?f[]=touvlo@400,500,700&display=swap" 
+          rel="stylesheet" 
+        />
+        
+        {/* Preload critical fonts */}
+        <link 
+          rel="preload" 
+          href="https://fonts.gstatic.com/s/geist/v1/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa0ZL7W0Q5n-wU.woff2" 
+          as="font" 
+          type="font/woff2" 
+          crossOrigin="anonymous" 
+        />
+        
+        {/* Fallback font system */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* Font fallback system */
+            @font-face {
+              font-family: 'Geist Sans Fallback';
+              src: local('system-ui'), local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Roboto');
+              font-display: swap;
+            }
+            
+            /* Ensure text remains visible during font load */
+            .font-loading {
+              font-family: 'Geist Sans Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            }
+          `
+        }} />
+        
+        {/* Performance monitoring script */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            // Track font loading performance
+            if ('fonts' in document) {
+              document.fonts.ready.then(() => {
+                performance.mark('fonts-loaded');
+                document.body.classList.remove('font-loading');
+              });
+            }
+            
+            // Fallback for older browsers
+            setTimeout(() => {
+              document.body.classList.remove('font-loading');
+            }, 3000);
+          `
+        }} />
       </head>
-      <body suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true} className="font-loading">
         <PerformanceMonitor />
         <Header />
         <main id="main-content" role="main" className="pt-20 lg:pt-16">

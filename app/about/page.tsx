@@ -60,24 +60,24 @@ const AboutPage = () => {
       />
       
       {/* Hero Section */}
-      <section className="relative pt-16 lg:pt-20 pb-12 px-4 bg-background" aria-labelledby="about-hero-heading">
-        <div className="container mx-auto text-center max-w-4xl">
+      <section className="section-primary" aria-labelledby="about-hero-heading">
+        <div className="container-responsive text-center max-w-4xl">
           <Badge className="mb-6 bg-primary/10 text-primary hover:bg-primary/20">
             <Star className="w-3 h-3 mr-2" />
             Leading Software Development Agency
           </Badge>
           
-          <h1 id="about-hero-heading" className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-6 leading-tight">
+          <h1 id="about-hero-heading" className="heading-display text-heading mb-6 leading-tight">
             Building the Future,{' '}
             <span className="text-primary block">
               One Line at a Time
             </span>
           </h1>
           
-          <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto">
+          <p className="body-large text-body mb-8 leading-relaxed max-w-2xl mx-auto">
             We are strategic technology partners dedicated to 
-            <span className="font-semibold text-primary">driving measurable business growth</span> through 
-            <span className="font-semibold text-primary">innovative solutions that deliver real ROI</span>.
+            <span className="text-emphasis">driving measurable business growth</span> through 
+            <span className="text-emphasis">innovative solutions that deliver real ROI</span>.
           </p>
 
           {/* CTA */}
@@ -89,7 +89,7 @@ const AboutPage = () => {
             >
               <Link href="/consultation">
                 <Zap className="w-4 h-4 mr-2" />
-                Get Free Strategy Session
+                Start a project
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </Button>
@@ -132,14 +132,14 @@ const AboutPage = () => {
       </section>
 
       {/* Company Overview Section */}
-      <section className="py-12 px-4 bg-card">
-        <div className="container mx-auto">
+      <section className="section-subtle">
+        <div className="container-responsive">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
+              <h2 className="heading-large text-heading">
                 Who We Are
               </h2>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="body-large text-body leading-relaxed">
                 codenies is a strategic technology partner focused on delivering measurable business results. 
                 We specialize in solutions that increase revenue, reduce operational costs, and provide competitive advantage. 
                 Our team combines deep technical expertise with business acumen to deliver technology investments 
@@ -150,8 +150,8 @@ const AboutPage = () => {
               <div className="bg-primary rounded-xl p-6 text-primary-foreground shadow-lg">
                 <div className="text-center">
                   <Target className="w-10 h-10 mx-auto mb-3 text-primary-foreground/90" />
-                  <h3 className="text-xl font-bold mb-3">Technology Excellence</h3>
-                  <p className="text-primary-foreground/90 text-sm">
+                  <h3 className="subheading text-white mb-3">Technology Excellence</h3>
+                  <p className="body-large text-white/90">
                     We leverage the latest technologies to create scalable, secure, and high-performance solutions.
                   </p>
                 </div>
@@ -162,21 +162,21 @@ const AboutPage = () => {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="py-12 px-4 bg-background">
-        <div className="container mx-auto">
+      <section className="section-primary">
+        <div className="container-responsive">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="text-center p-6 bg-card rounded-xl shadow-sm border border-border hover:shadow-md transition-all duration-300">
               <Target className="w-10 h-10 mx-auto mb-3 text-primary" />
-              <h3 className="text-xl font-bold mb-3 text-foreground">Our Mission</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <h3 className="subheading text-heading mb-3">Our Mission</h3>
+              <p className="body-large text-body leading-relaxed">
                 To be the strategic technology partner that accelerates business growth through innovative solutions 
                 that deliver measurable ROI and sustainable competitive advantage.
               </p>
             </div>
             <div className="text-center p-6 bg-card rounded-xl shadow-sm border border-border hover:shadow-md transition-all duration-300">
               <Eye className="w-10 h-10 mx-auto mb-3 text-primary" />
-              <h3 className="text-xl font-bold mb-3 text-foreground">Our Vision</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <h3 className="subheading text-heading mb-3">Our Vision</h3>
+              <p className="body-large text-body leading-relaxed">
                 To be recognized as the premier technology partner that consistently delivers breakthrough business results, 
                 helping companies achieve market leadership through strategic technology investments.
               </p>
@@ -186,9 +186,9 @@ const AboutPage = () => {
       </section>
 
       {/* Our Approach Section */}
-      <section className="py-12 px-4 bg-card">
-        <div className="container mx-auto">
-          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-8 text-foreground">
+      <section className="section-subtle">
+        <div className="container-responsive">
+          <h2 className="heading-large text-heading text-center mb-8">
             Our Approach to Success
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -196,37 +196,37 @@ const AboutPage = () => {
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
                 <Code className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">Technical Excellence</h3>
-              <p className="text-muted-foreground text-sm">Cutting-edge technologies and best practices</p>
+              <h3 className="subheading text-heading mb-2">Technical Excellence</h3>
+              <p className="body-small text-body">Cutting-edge technologies and best practices</p>
             </div>
             <div className="text-center p-4">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
                 <Users className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">Client Partnership</h3>
-              <p className="text-muted-foreground text-sm">Collaborative approach to every project</p>
+              <h3 className="subheading text-heading mb-2">Client Partnership</h3>
+              <p className="body-small text-body">Collaborative approach to every project</p>
             </div>
             <div className="text-center p-4">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
                 <Rocket className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">Innovation Focus</h3>
-              <p className="text-muted-foreground text-sm">Forward-thinking solutions for modern challenges</p>
+              <h3 className="subheading text-heading mb-2">Innovation Focus</h3>
+              <p className="body-small text-body">Forward-thinking solutions for modern challenges</p>
             </div>
             <div className="text-center p-4">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
                 <Globe className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">Global Impact</h3>
-              <p className="text-muted-foreground text-sm">Solutions that scale across markets</p>
+              <h3 className="subheading text-heading mb-2">Global Impact</h3>
+              <p className="body-small text-body">Solutions that scale across markets</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Core Values Section */}
-      <section className="py-12 px-4 bg-background">
-        <div className="container mx-auto">
+      <section className="section-primary">
+        <div className="container-responsive">
           <h2 className="text-3xl lg:text-4xl font-bold text-center mb-8 text-foreground">
             Our Core Values
           </h2>
@@ -257,17 +257,27 @@ const AboutPage = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-12 px-4 bg-card">
-        <div className="container mx-auto">
+      <section className="section-subtle">
+        <div className="container-responsive">
           <h2 className="text-3xl lg:text-4xl font-bold text-center mb-8 text-foreground">
             Meet Our Team
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center p-5 bg-background rounded-xl border border-border hover:shadow-md transition-all duration-300">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3 text-primary-foreground text-lg font-bold">
-                JD
+                AE
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-foreground">John Doe</h3>
+              <h3 className="text-lg font-semibold mb-2 text-foreground">Ahyam Emad</h3>
+              <p className="text-primary mb-2 text-sm font-medium">Project Manager</p>
+              <p className="text-xs text-muted-foreground">
+                Experienced project manager ensuring smooth delivery and client satisfaction.
+              </p>
+            </div>
+            <div className="text-center p-5 bg-background rounded-xl border border-border hover:shadow-md transition-all duration-300">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3 text-primary-foreground text-lg font-bold">
+                SA
+              </div>
+              <h3 className="text-lg font-semibold mb-2 text-foreground">Sara Ahmed</h3>
               <p className="text-primary mb-2 text-sm font-medium">Lead Software Engineer</p>
               <p className="text-xs text-muted-foreground">
                 Full-stack developer with expertise in React, Node.js, and cloud architecture.
@@ -275,22 +285,12 @@ const AboutPage = () => {
             </div>
             <div className="text-center p-5 bg-background rounded-xl border border-border hover:shadow-md transition-all duration-300">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3 text-primary-foreground text-lg font-bold">
-                JS
+                JH
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-foreground">Jane Smith</h3>
+              <h3 className="text-lg font-semibold mb-2 text-foreground">Jana Hazem</h3>
               <p className="text-primary mb-2 text-sm font-medium">UI/UX Designer</p>
               <p className="text-xs text-muted-foreground">
                 Creative designer focused on user experience and modern interface design.
-              </p>
-            </div>
-            <div className="text-center p-5 bg-background rounded-xl border border-border hover:shadow-md transition-all duration-300">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3 text-primary-foreground text-lg font-bold">
-                MJ
-              </div>
-              <h3 className="text-lg font-semibold mb-2 text-foreground">Mike Johnson</h3>
-              <p className="text-primary mb-2 text-sm font-medium">Project Manager</p>
-              <p className="text-xs text-muted-foreground">
-                Experienced project manager ensuring smooth delivery and client satisfaction.
               </p>
             </div>
           </div>
@@ -298,8 +298,8 @@ const AboutPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 px-4 bg-primary text-primary-foreground">
-        <div className="container mx-auto text-center">
+      <section className="section-gradient">
+        <div className="container-responsive text-center">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
             Ready to Build Something Amazing?
           </h2>
@@ -315,7 +315,7 @@ const AboutPage = () => {
             >
               <Link href="/consultation">
                 <Zap className="w-4 h-4 mr-2" />
-                Get Free Strategy Session
+                Start a project
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </Button>
@@ -323,7 +323,7 @@ const AboutPage = () => {
               asChild
               variant="outline" 
               size="lg" 
-              className="border-primary-foreground/30 bg-primary-foreground text-primary hover:bg-primary-foreground/90 px-6 py-3"
+              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 px-6 py-3"
             >
               <Link href="/work">
                 <Eye className="w-4 h-4 mr-2" />

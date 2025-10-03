@@ -7,7 +7,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card"
       className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        "bg-white text-card-foreground flex flex-col gap-6 rounded-xl border border-primary/10 py-6 shadow-sm transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/15 hover:border-accent",
         className
       )}
       {...props}
@@ -32,7 +32,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-title"
-      className={cn("leading-none font-semibold", className)}
+      className={cn("leading-none font-semibold text-primary", className)}
       {...props}
     />
   )
@@ -81,6 +81,19 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+function CardAccent({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-accent"
+      className={cn(
+        "bg-white text-card-foreground flex flex-col gap-6 rounded-xl border border-primary/10 py-6 shadow-sm transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/15 hover:border-accent border-l-4 border-l-accent pl-8",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
 export {
   Card,
   CardHeader,
@@ -89,4 +102,5 @@ export {
   CardAction,
   CardDescription,
   CardContent,
+  CardAccent,
 }

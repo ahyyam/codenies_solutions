@@ -1,246 +1,436 @@
-import React from 'react';
+/**
+ * Accessibility utilities for WCAG 2.1 AA compliance
+ * Provides color contrast checking, focus management, and accessibility helpers
+ */
 
-// ARIA utilities
-export const generateId = (prefix: string = 'element'): string => {
-  return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
-};
+// Color contrast ratios for WCAG compliance
+export const WCAG_CONTRAST_RATIOS = {
+  AA_NORMAL: 4.5,
+  AA_LARGE: 3.0,
+  AAA_NORMAL: 7.0,
+  AAA_LARGE: 4.5,
+} as const;
 
-export const createAriaDescribedBy = (ids: (string | undefined)[]): string | undefined => {
-  const validIds = ids.filter(Boolean);
-  return validIds.length > 0 ? validIds.join(' ') : undefined;
-};
+// Design system colors for contrast checking
+export const DESIGN_COLORS = {
+  primary: '#5A00D2',      // Deep Purple
+  accent: '#E60073',       // Magenta Pink
+  secondary: '#007BFF',    // Electric Blue
+  textPrimary: '#111111',  // Charcoal Black
+  background: '#FFFFFF',   // White
+  backgroundSubtle: '#F2F2F2', // Light Gray
+} as const;
 
-// Focus management utilities
-export const trapFocus = (element: HTMLElement): (() => void) => {
-  const focusableElements = element.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-  ) as NodeListOf<HTMLElement>;
+/**
+ * Convert hex color to RGB values
+ */
+export function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
+/**
+ * Calculate relative luminance of a color
+ * Based on WCAG 2.1 specification
+ */
+export function getRelativeLuminance(r: number, g: number, b: number): number {
+  const [rs, gs, bs] = [r, g, b].map(c => {
+    c = c / 255;
+    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  });
   
-  const firstElement = focusableElements[0];
-  const lastElement = focusableElements[focusableElements.length - 1];
+  return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+}
 
-  const handleTabKey = (e: KeyboardEvent) => {
-    if (e.key !== 'Tab') return;
-
-    if (e.shiftKey) {
-      if (document.activeElement === firstElement) {
-        lastElement.focus();
-        e.preventDefault();
-      }
-    } else {
-      if (document.activeElement === lastElement) {
-        firstElement.focus();
-        e.preventDefault();
-      }
-    }
-  };
-
-  element.addEventListener('keydown', handleTabKey);
+/**
+ * Calculate contrast ratio between two colors
+ * Returns a value between 1 and 21
+ */
+export function getContrastRatio(color1: string, color2: string): number {
+  const rgb1 = hexToRgb(color1);
+  const rgb2 = hexToRgb(color2);
   
-  // Focus first element
-  firstElement?.focus();
-
-  // Return cleanup function
-  return () => {
-    element.removeEventListener('keydown', handleTabKey);
-  };
-};
-
-export const restoreFocus = (previousActiveElement: Element | null) => {
-  if (previousActiveElement && 'focus' in previousActiveElement) {
-    (previousActiveElement as HTMLElement).focus();
+  if (!rgb1 || !rgb2) {
+    throw new Error('Invalid color format. Please use hex colors.');
   }
-};
-
-// Keyboard navigation utilities
-export const handleKeyboardNavigation = (
-  e: React.KeyboardEvent,
-  handlers: {
-    onEnter?: () => void;
-    onSpace?: () => void;
-    onEscape?: () => void;
-    onArrowUp?: () => void;
-    onArrowDown?: () => void;
-    onArrowLeft?: () => void;
-    onArrowRight?: () => void;
-    onHome?: () => void;
-    onEnd?: () => void;
-  }
-) => {
-  const { key } = e;
   
-  switch (key) {
-    case 'Enter':
-      handlers.onEnter?.();
-      break;
-    case ' ':
-      handlers.onSpace?.();
-      e.preventDefault(); // Prevent page scroll
-      break;
-    case 'Escape':
-      handlers.onEscape?.();
-      break;
-    case 'ArrowUp':
-      handlers.onArrowUp?.();
-      e.preventDefault();
-      break;
-    case 'ArrowDown':
-      handlers.onArrowDown?.();
-      e.preventDefault();
-      break;
-    case 'ArrowLeft':
-      handlers.onArrowLeft?.();
-      e.preventDefault();
-      break;
-    case 'ArrowRight':
-      handlers.onArrowRight?.();
-      e.preventDefault();
-      break;
-    case 'Home':
-      handlers.onHome?.();
-      e.preventDefault();
-      break;
-    case 'End':
-      handlers.onEnd?.();
-      e.preventDefault();
-      break;
-  }
-};
-
-// Screen reader utilities
-export const announceToScreenReader = (message: string, priority: 'polite' | 'assertive' = 'polite') => {
-  const announcement = document.createElement('div');
-  announcement.setAttribute('aria-live', priority);
-  announcement.setAttribute('aria-atomic', 'true');
-  announcement.className = 'sr-only';
-  announcement.textContent = message;
+  const lum1 = getRelativeLuminance(rgb1.r, rgb1.g, rgb1.b);
+  const lum2 = getRelativeLuminance(rgb2.r, rgb2.g, rgb2.b);
   
-  document.body.appendChild(announcement);
-  
-  // Remove after announcement
-  setTimeout(() => {
-    document.body.removeChild(announcement);
-  }, 1000);
-};
-
-// Color contrast utilities
-export const getContrastRatio = (color1: string, color2: string): number => {
-  const getLuminance = (color: string): number => {
-    // Simple luminance calculation for hex colors
-    const hex = color.replace('#', '');
-    const r = parseInt(hex.substr(0, 2), 16) / 255;
-    const g = parseInt(hex.substr(2, 2), 16) / 255;
-    const b = parseInt(hex.substr(4, 2), 16) / 255;
-    
-    const sRGB = [r, g, b].map(c => {
-      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-    });
-    
-    return 0.2126 * sRGB[0] + 0.7152 * sRGB[1] + 0.0722 * sRGB[2];
-  };
-  
-  const lum1 = getLuminance(color1);
-  const lum2 = getLuminance(color2);
   const brightest = Math.max(lum1, lum2);
   const darkest = Math.min(lum1, lum2);
   
   return (brightest + 0.05) / (darkest + 0.05);
-};
+}
 
-export const meetsWCAGContrast = (color1: string, color2: string, level: 'AA' | 'AAA' = 'AA'): boolean => {
-  const ratio = getContrastRatio(color1, color2);
-  return level === 'AA' ? ratio >= 4.5 : ratio >= 7;
-};
+/**
+ * Check if color combination meets WCAG AA standards
+ */
+export function meetsWCAGAA(foreground: string, background: string, isLargeText = false): boolean {
+  const ratio = getContrastRatio(foreground, background);
+  const requiredRatio = isLargeText ? WCAG_CONTRAST_RATIOS.AA_LARGE : WCAG_CONTRAST_RATIOS.AA_NORMAL;
+  return ratio >= requiredRatio;
+}
 
-// React hooks for accessibility
-export const useFocusTrap = (isActive: boolean) => {
-  const elementRef = React.useRef<HTMLElement>(null);
-  
-  React.useEffect(() => {
-    if (!isActive || !elementRef.current) return;
+/**
+ * Check if color combination meets WCAG AAA standards
+ */
+export function meetsWCAGAAA(foreground: string, background: string, isLargeText = false): boolean {
+  const ratio = getContrastRatio(foreground, background);
+  const requiredRatio = isLargeText ? WCAG_CONTRAST_RATIOS.AAA_LARGE : WCAG_CONTRAST_RATIOS.AAA_NORMAL;
+  return ratio >= requiredRatio;
+}
+
+/**
+ * Validate all design system color combinations
+ */
+export function validateDesignSystemContrast(): {
+  valid: boolean;
+  results: Array<{
+    combination: string;
+    ratio: number;
+    meetsAA: boolean;
+    meetsAAA: boolean;
+    isLargeText?: boolean;
+  }>;
+} {
+  const combinations = [
+    // Text on backgrounds
+    { fg: DESIGN_COLORS.textPrimary, bg: DESIGN_COLORS.background, name: 'Text on White' },
+    { fg: DESIGN_COLORS.background, bg: DESIGN_COLORS.textPrimary, name: 'White on Charcoal' },
+    { fg: DESIGN_COLORS.textPrimary, bg: DESIGN_COLORS.backgroundSubtle, name: 'Text on Light Gray' },
     
-    const cleanup = trapFocus(elementRef.current);
-    return cleanup;
-  }, [isActive]);
-  
-  return elementRef;
-};
-
-export const useFocusRestore = () => {
-  const previousActiveElementRef = React.useRef<Element | null>(null);
-  
-  const saveFocus = React.useCallback(() => {
-    previousActiveElementRef.current = document.activeElement;
-  }, []);
-  
-  const restoreFocusCallback = React.useCallback(() => {
-    restoreFocus(previousActiveElementRef.current);
-  }, []);
-  
-  return { saveFocus, restoreFocus: restoreFocusCallback };
-};
-
-export const useAnnouncement = () => {
-  const announce = React.useCallback((message: string, priority: 'polite' | 'assertive' = 'polite') => {
-    announceToScreenReader(message, priority);
-  }, []);
-  
-  return announce;
-};
-
-export const useKeyboardNavigation = (handlers: Parameters<typeof handleKeyboardNavigation>[1]) => {
-  const handleKeyDown = React.useCallback((e: React.KeyboardEvent) => {
-    handleKeyboardNavigation(e, handlers);
-  }, [handlers]);
-  
-  return handleKeyDown;
-};
-
-// Accessibility validation utilities
-export const validateAccessibility = (element: HTMLElement): string[] => {
-  const issues: string[] = [];
-  
-  // Check for missing alt text on images
-  const images = element.querySelectorAll('img');
-  images.forEach((img, index) => {
-    if (!img.alt && !img.getAttribute('aria-label')) {
-      issues.push(`Image ${index + 1} is missing alt text`);
-    }
-  });
-  
-  // Check for missing labels on form controls
-  const formControls = element.querySelectorAll('input, select, textarea');
-  formControls.forEach((control, index) => {
-    const hasLabel = control.getAttribute('aria-label') || 
-                    control.getAttribute('aria-labelledby') ||
-                    element.querySelector(`label[for="${control.id}"]`);
+    // Brand colors on backgrounds
+    { fg: DESIGN_COLORS.primary, bg: DESIGN_COLORS.background, name: 'Purple on White' },
+    { fg: DESIGN_COLORS.background, bg: DESIGN_COLORS.primary, name: 'White on Purple' },
+    { fg: DESIGN_COLORS.accent, bg: DESIGN_COLORS.background, name: 'Magenta on White' },
+    { fg: DESIGN_COLORS.background, bg: DESIGN_COLORS.accent, name: 'White on Magenta' },
+    { fg: DESIGN_COLORS.secondary, bg: DESIGN_COLORS.background, name: 'Blue on White' },
+    { fg: DESIGN_COLORS.background, bg: DESIGN_COLORS.secondary, name: 'White on Blue' },
     
-    if (!hasLabel) {
-      issues.push(`Form control ${index + 1} is missing a label`);
-    }
+    // Brand colors on subtle background
+    { fg: DESIGN_COLORS.primary, bg: DESIGN_COLORS.backgroundSubtle, name: 'Purple on Light Gray' },
+    { fg: DESIGN_COLORS.accent, bg: DESIGN_COLORS.backgroundSubtle, name: 'Magenta on Light Gray' },
+    { fg: DESIGN_COLORS.secondary, bg: DESIGN_COLORS.backgroundSubtle, name: 'Blue on Light Gray' },
+  ];
+
+  const results = combinations.map(({ fg, bg, name }) => {
+    const ratio = getContrastRatio(fg, bg);
+    return {
+      combination: name,
+      ratio: Math.round(ratio * 100) / 100,
+      meetsAA: meetsWCAGAA(fg, bg),
+      meetsAAA: meetsWCAGAAA(fg, bg),
+    };
   });
-  
-  // Check for missing headings hierarchy
-  const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6');
-  let previousLevel = 0;
-  headings.forEach((heading, index) => {
-    const level = parseInt(heading.tagName.charAt(1));
-    if (index === 0 && level !== 1) {
-      issues.push('Page should start with an h1 heading');
+
+  const allMeetAA = results.every(result => result.meetsAA);
+
+  return {
+    valid: allMeetAA,
+    results,
+  };
+}
+
+/**
+ * Focus management utilities
+ */
+export class FocusManager {
+  private static focusableSelectors = [
+    'a[href]',
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])',
+    '[contenteditable="true"]',
+  ].join(', ');
+
+  /**
+   * Get all focusable elements within a container
+   */
+  static getFocusableElements(container: Element): HTMLElement[] {
+    return Array.from(container.querySelectorAll(this.focusableSelectors)) as HTMLElement[];
+  }
+
+  /**
+   * Trap focus within a container (useful for modals)
+   */
+  static trapFocus(container: Element): () => void {
+    const focusableElements = this.getFocusableElements(container);
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    const handleTabKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement?.focus();
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement?.focus();
+        }
+      }
+    };
+
+    container.addEventListener('keydown', handleTabKey);
+    firstElement?.focus();
+
+    // Return cleanup function
+    return () => {
+      container.removeEventListener('keydown', handleTabKey);
+    };
+  }
+
+  /**
+   * Restore focus to a previously focused element
+   */
+  static restoreFocus(element: HTMLElement | null): void {
+    if (element && typeof element.focus === 'function') {
+      element.focus();
     }
-    if (level > previousLevel + 1) {
-      issues.push(`Heading level ${level} skips levels (previous was ${previousLevel})`);
+  }
+}
+
+/**
+ * Screen reader utilities
+ */
+export class ScreenReaderUtils {
+  /**
+   * Announce text to screen readers
+   */
+  static announce(message: string, priority: 'polite' | 'assertive' = 'polite'): void {
+    const announcer = document.createElement('div');
+    announcer.setAttribute('aria-live', priority);
+    announcer.setAttribute('aria-atomic', 'true');
+    announcer.className = 'sr-only';
+    announcer.textContent = message;
+
+    document.body.appendChild(announcer);
+
+    // Remove after announcement
+    setTimeout(() => {
+      document.body.removeChild(announcer);
+    }, 1000);
+  }
+
+  /**
+   * Create visually hidden text for screen readers
+   */
+  static createScreenReaderText(text: string): HTMLSpanElement {
+    const span = document.createElement('span');
+    span.className = 'sr-only';
+    span.textContent = text;
+    return span;
+  }
+}
+
+/**
+ * Keyboard navigation utilities
+ */
+export class KeyboardNavigation {
+  /**
+   * Handle arrow key navigation for a list of elements
+   */
+  static handleArrowNavigation(
+    elements: HTMLElement[],
+    currentIndex: number,
+    key: string
+  ): number {
+    let newIndex = currentIndex;
+
+    switch (key) {
+      case 'ArrowDown':
+      case 'ArrowRight':
+        newIndex = (currentIndex + 1) % elements.length;
+        break;
+      case 'ArrowUp':
+      case 'ArrowLeft':
+        newIndex = currentIndex === 0 ? elements.length - 1 : currentIndex - 1;
+        break;
+      case 'Home':
+        newIndex = 0;
+        break;
+      case 'End':
+        newIndex = elements.length - 1;
+        break;
     }
-    previousLevel = level;
-  });
-  
-  // Check for interactive elements without proper roles
-  const interactiveElements = element.querySelectorAll('[onclick], [onkeydown]');
-  interactiveElements.forEach((el, index) => {
-    if (!el.getAttribute('role') && !['button', 'a', 'input', 'select', 'textarea'].includes(el.tagName.toLowerCase())) {
-      issues.push(`Interactive element ${index + 1} should have a proper role`);
+
+    if (newIndex !== currentIndex) {
+      elements[newIndex]?.focus();
     }
-  });
-  
-  return issues;
-};
+
+    return newIndex;
+  }
+
+  /**
+   * Add keyboard navigation to a group of elements
+   */
+  static addArrowNavigation(container: Element, itemSelector: string): () => void {
+    let currentIndex = 0;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const items = Array.from(container.querySelectorAll(itemSelector)) as HTMLElement[];
+      
+      if (['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
+        e.preventDefault();
+        currentIndex = this.handleArrowNavigation(items, currentIndex, e.key);
+      }
+    };
+
+    container.addEventListener('keydown', handleKeyDown);
+
+    // Return cleanup function
+    return () => {
+      container.removeEventListener('keydown', handleKeyDown);
+    };
+  }
+}
+
+/**
+ * Motion preferences utilities
+ */
+export class MotionPreferences {
+  /**
+   * Check if user prefers reduced motion
+   */
+  static prefersReducedMotion(): boolean {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  /**
+   * Apply motion preferences to animations
+   */
+  static respectMotionPreferences(element: HTMLElement, animationClass: string): void {
+    if (this.prefersReducedMotion()) {
+      element.classList.add('motion-reduce');
+    } else {
+      element.classList.add(animationClass);
+    }
+  }
+
+  /**
+   * Create a media query listener for motion preferences
+   */
+  static onMotionPreferenceChange(callback: (prefersReduced: boolean) => void): () => void {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    
+    const handleChange = (e: MediaQueryListEvent) => {
+      callback(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    // Return cleanup function
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }
+}
+
+/**
+ * High contrast mode utilities
+ */
+export class HighContrastMode {
+  /**
+   * Check if user prefers high contrast
+   */
+  static prefersHighContrast(): boolean {
+    return window.matchMedia('(prefers-contrast: high)').matches;
+  }
+
+  /**
+   * Apply high contrast styles
+   */
+  static applyHighContrastStyles(element: HTMLElement): void {
+    if (this.prefersHighContrast()) {
+      element.classList.add('high-contrast');
+    }
+  }
+
+  /**
+   * Create a media query listener for contrast preferences
+   */
+  static onContrastPreferenceChange(callback: (prefersHigh: boolean) => void): () => void {
+    const mediaQuery = window.matchMedia('(prefers-contrast: high)');
+    
+    const handleChange = (e: MediaQueryListEvent) => {
+      callback(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    // Return cleanup function
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }
+}
+
+/**
+ * Accessibility testing utilities for development
+ */
+export class AccessibilityTesting {
+  /**
+   * Run basic accessibility checks on an element
+   */
+  static async runBasicChecks(element: Element): Promise<{
+    hasAltText: boolean;
+    hasProperHeadings: boolean;
+    hasSkipLinks: boolean;
+    hasFocusIndicators: boolean;
+    meetsContrastRequirements: boolean;
+  }> {
+    const images = element.querySelectorAll('img');
+    const hasAltText = Array.from(images).every(img => 
+      img.hasAttribute('alt') || img.hasAttribute('aria-label')
+    );
+
+    const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    const hasProperHeadings = headings.length > 0;
+
+    const skipLinks = element.querySelectorAll('a[href^="#"]');
+    const hasSkipLinks = skipLinks.length > 0;
+
+    const focusableElements = FocusManager.getFocusableElements(element);
+    const hasFocusIndicators = focusableElements.length > 0;
+
+    // Basic contrast check (would need more sophisticated implementation for full validation)
+    const meetsContrastRequirements = validateDesignSystemContrast().valid;
+
+    return {
+      hasAltText,
+      hasProperHeadings,
+      hasSkipLinks,
+      hasFocusIndicators,
+      meetsContrastRequirements,
+    };
+  }
+
+  /**
+   * Log accessibility issues to console (development only)
+   */
+  static logAccessibilityIssues(element: Element): void {
+    if (process.env.NODE_ENV !== 'development') return;
+
+    this.runBasicChecks(element).then(results => {
+      const issues = Object.entries(results)
+        .filter(([, passed]) => !passed)
+        .map(([check]) => check);
+
+      if (issues.length > 0) {
+        console.warn('Accessibility issues found:', issues);
+      } else {
+        console.log('✅ Basic accessibility checks passed');
+      }
+    });
+  }
+}

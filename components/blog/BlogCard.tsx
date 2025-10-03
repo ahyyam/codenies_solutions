@@ -34,9 +34,9 @@ export function BlogCard({ post, variant = 'default', showStats = true }: BlogCa
   return (
     <article className={cardClasses[variant]}>
       <Link href={`/blog/${post.slug}`} className="block h-full">
-        <div className="bg-card border border-border rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:border-primary/20 h-full flex flex-col">
+        <div className="blog-card h-full flex flex-col">
           {/* Image Container */}
-          <div className={`${imageClasses[variant]} bg-muted overflow-hidden relative`}>
+          <div className={`blog-card-image ${imageClasses[variant]} bg-muted relative`}>
             <BlogImage
               src={post.featuredImage?.url || "/placeholder.svg"}
               alt={post.featuredImage?.alt || post.title}
@@ -70,7 +70,7 @@ export function BlogCard({ post, variant = 'default', showStats = true }: BlogCa
           </div>
           
           {/* Content Container */}
-          <div className="p-6 lg:p-8 flex-1 flex flex-col">
+          <div className="blog-card-content flex-1 flex flex-col">
             {/* Meta Information */}
             <div className="flex items-center justify-between mb-4 text-sm text-muted-foreground">
               <div className="flex items-center gap-4">
@@ -97,12 +97,12 @@ export function BlogCard({ post, variant = 'default', showStats = true }: BlogCa
             </div>
             
             {/* Title */}
-            <h3 className={`${titleClasses[variant]} text-foreground group-hover:text-primary transition-colors line-clamp-2`}>
+            <h3 className={`blog-card-title ${titleClasses[variant]} group-hover:text-accent transition-colors line-clamp-2`}>
               {post.title}
             </h3>
             
             {/* Excerpt */}
-            <p className={`text-muted-foreground mb-6 leading-relaxed flex-1 ${
+            <p className={`blog-card-excerpt mb-6 flex-1 ${
               variant === 'featured' ? 'text-base line-clamp-3' : 
               variant === 'compact' ? 'text-sm line-clamp-2' : 
               'text-sm line-clamp-3'

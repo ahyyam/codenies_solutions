@@ -17,16 +17,21 @@ interface SEOConfig {
 const defaultSEOConfig: SEOConfig = {
   siteName: 'Codenies',
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://codenies.com',
-  defaultTitle: 'Codenies - Professional Web Development & Software Solutions',
-  defaultDescription: 'Transform your business with custom web development, SaaS solutions, and AI integration. Professional software development services that drive growth and innovation.',
+  defaultTitle: 'Codenies - Tech Innovation & Modern Software Development',
+  defaultDescription: 'Leading tech innovation agency specializing in cutting-edge software development, AI integration, and modern digital solutions. Transform your business with our expertise in SaaS, mobile apps, and advanced UI/UX design.',
   defaultKeywords: [
-    'web development',
+    'tech innovation',
     'software development',
-    'SaaS development',
     'AI integration',
-    'custom software',
-    'business solutions',
-    'digital transformation'
+    'modern web development',
+    'SaaS development',
+    'digital transformation',
+    'UI/UX design',
+    'mobile app development',
+    'custom software solutions',
+    'business technology',
+    'innovation consulting',
+    'tech expertise'
   ],
   twitterHandle: '@codenies',
   organizationName: 'Codenies',
@@ -185,6 +190,7 @@ export function generateOrganizationStructuredData() {
     url: config.siteUrl,
     logo: `${config.siteUrl}${config.organizationLogo}`,
     description: config.defaultDescription,
+    slogan: 'Transforming Ideas into Innovation',
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'US'
@@ -192,10 +198,11 @@ export function generateOrganizationStructuredData() {
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Customer Service',
-      url: `${config.siteUrl}/consultation`
+      url: `${config.siteUrl}/consultation`,
+      availableLanguage: ['English']
     },
     sameAs: [
-      // Add social media URLs here
+      // Add social media URLs here when available
     ],
     foundingDate: '2020',
     numberOfEmployees: {
@@ -203,21 +210,80 @@ export function generateOrganizationStructuredData() {
       value: '10-50'
     },
     knowsAbout: [
-      'Web Development',
+      'Tech Innovation',
       'Software Development',
-      'SaaS Development',
       'AI Integration',
+      'Modern Web Development',
+      'SaaS Development',
       'Digital Transformation',
-      'Custom Software Solutions'
+      'UI/UX Design',
+      'Mobile App Development',
+      'Custom Software Solutions',
+      'Business Technology Consulting'
     ],
     areaServed: 'Worldwide',
     serviceType: [
-      'Web Development',
-      'Software Development',
+      'Tech Innovation Consulting',
+      'Custom Software Development',
+      'AI Integration Services',
+      'Modern Web Development',
       'SaaS Development',
       'Mobile App Development',
       'UI/UX Design',
-      'AI Integration'
+      'Digital Transformation'
+    ],
+    brand: {
+      '@type': 'Brand',
+      name: config.organizationName,
+      description: 'Leading tech innovation agency',
+      logo: `${config.siteUrl}${config.organizationLogo}`,
+      color: '#5A00D2', // Deep Purple - Primary brand color
+      additionalProperty: [
+        {
+          '@type': 'PropertyValue',
+          name: 'Primary Color',
+          value: '#5A00D2',
+          description: 'Deep Purple - Innovation and expertise'
+        },
+        {
+          '@type': 'PropertyValue',
+          name: 'Accent Color',
+          value: '#E60073',
+          description: 'Magenta Pink - Energy and creativity'
+        },
+        {
+          '@type': 'PropertyValue',
+          name: 'Secondary Color',
+          value: '#007BFF',
+          description: 'Electric Blue - Tech-forward thinking'
+        },
+        {
+          '@type': 'PropertyValue',
+          name: 'Design Philosophy',
+          value: 'Minimal Tech-Innovation',
+          description: 'Clean, modern design emphasizing innovation and technology'
+        }
+      ]
+    },
+    makesOffer: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Tech Innovation Consulting',
+          description: 'Strategic technology consulting to drive business innovation'
+        },
+        category: 'Technology Consulting'
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI Integration Services',
+          description: 'Cutting-edge AI integration for modern business solutions'
+        },
+        category: 'Artificial Intelligence'
+      }
     ]
   };
 }
@@ -331,32 +397,77 @@ export function generateWebsiteStructuredData() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: config.siteName,
+    alternateName: 'Codenies Tech Innovation Agency',
     url: config.siteUrl,
     description: config.defaultDescription,
+    about: {
+      '@type': 'Thing',
+      name: 'Tech Innovation',
+      description: 'Cutting-edge technology solutions and software development services'
+    },
     publisher: {
       '@type': 'Organization',
       name: config.organizationName,
-      logo: `${config.siteUrl}${config.organizationLogo}`
+      logo: `${config.siteUrl}${config.organizationLogo}`,
+      description: 'Leading tech innovation agency specializing in modern software development'
     },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${config.siteUrl}/blog?search={search_term_string}`
+    potentialAction: [
+      {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${config.siteUrl}/blog?search={search_term_string}`
+        },
+        'query-input': 'required name=search_term_string'
       },
-      'query-input': 'required name=search_term_string'
-    },
+      {
+        '@type': 'ContactAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${config.siteUrl}/consultation`
+        }
+      }
+    ],
     mainEntity: {
       '@type': 'Organization',
       name: config.organizationName,
-      url: config.siteUrl
+      url: config.siteUrl,
+      description: 'Tech innovation agency transforming businesses with cutting-edge software solutions'
     },
+    keywords: [
+      'tech innovation',
+      'software development',
+      'AI integration',
+      'modern web development',
+      'UI/UX design',
+      'digital transformation',
+      'business technology'
+    ],
     inLanguage: 'en-US',
     copyrightYear: new Date().getFullYear(),
     copyrightHolder: {
       '@type': 'Organization',
       name: config.organizationName
-    }
+    },
+    audience: {
+      '@type': 'BusinessAudience',
+      audienceType: 'Business'
+    },
+    category: 'Technology Services',
+    additionalProperty: [
+      {
+        '@type': 'PropertyValue',
+        name: 'Design System',
+        value: 'Minimal Tech-Innovation Palette',
+        description: 'Modern design system emphasizing innovation and technology'
+      },
+      {
+        '@type': 'PropertyValue',
+        name: 'Primary Focus',
+        value: 'Tech Innovation',
+        description: 'Specializing in cutting-edge technology solutions'
+      }
+    ]
   };
 }
 
@@ -417,26 +528,56 @@ export function generateServiceStructuredData(service: {
     provider: {
       '@type': 'Organization',
       name: config.organizationName,
-      url: config.siteUrl
+      url: config.siteUrl,
+      brand: {
+        '@type': 'Brand',
+        name: config.organizationName,
+        description: 'Leading tech innovation agency'
+      }
     },
     areaServed: 'Worldwide',
     serviceType: service.name,
+    category: 'Technology Services',
+    audience: {
+      '@type': 'BusinessAudience',
+      audienceType: 'Business'
+    },
     ...(service.image && { image: `${config.siteUrl}${service.image}` }),
     ...(service.priceRange && { priceRange: service.priceRange }),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: `${service.name} Services`,
+      description: `Professional ${service.name.toLowerCase()} services with cutting-edge technology`,
       itemListElement: [
         {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
             name: service.name,
-            description: service.description
+            description: service.description,
+            category: 'Technology Innovation'
+          },
+          seller: {
+            '@type': 'Organization',
+            name: config.organizationName
           }
         }
       ]
-    }
+    },
+    additionalProperty: [
+      {
+        '@type': 'PropertyValue',
+        name: 'Innovation Focus',
+        value: 'true',
+        description: 'Service emphasizes cutting-edge technology and innovation'
+      },
+      {
+        '@type': 'PropertyValue',
+        name: 'Expertise Level',
+        value: 'Expert',
+        description: 'Professional-grade service delivery'
+      }
+    ]
   };
 }
 

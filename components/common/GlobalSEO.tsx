@@ -22,43 +22,43 @@ export function GlobalSEO({
   // Generate website structured data
   const websiteData = generateWebsiteStructuredData();
 
-  // Generate service structured data for main services
+  // Generate service structured data for main services with innovation focus
   const services = [
     {
-      name: 'Web Development',
-      description: 'Custom web development solutions using modern technologies and frameworks.',
+      name: 'Modern Web Development',
+      description: 'Cutting-edge web development solutions using the latest technologies, frameworks, and design systems for exceptional user experiences.',
       url: '/services/website-development',
-      priceRange: '$$'
+      priceRange: '$'
     },
     {
-      name: 'SaaS Development',
-      description: 'End-to-end SaaS application development with scalable architecture.',
+      name: 'SaaS Innovation',
+      description: 'End-to-end SaaS application development with scalable architecture, modern UI/UX design, and advanced technology integration.',
       url: '/services/saas-development',
-      priceRange: '$$$'
+      priceRange: '$'
     },
     {
-      name: 'Mobile App Development',
-      description: 'Native and cross-platform mobile application development.',
+      name: 'Mobile App Innovation',
+      description: 'Native and cross-platform mobile application development with modern design principles and cutting-edge technology.',
       url: '/services/mobile-applications',
-      priceRange: '$$'
+      priceRange: '$'
     },
     {
-      name: 'AI Integration',
-      description: 'Integrate artificial intelligence and machine learning into your applications.',
+      name: 'AI Integration & Innovation',
+      description: 'Advanced artificial intelligence and machine learning integration to transform your business with intelligent automation and insights.',
       url: '/services/ai-integration',
-      priceRange: '$$$'
+      priceRange: '$'
     },
     {
-      name: 'UI/UX Design',
-      description: 'User-centered design solutions that enhance user experience and engagement.',
+      name: 'Advanced UI/UX Design',
+      description: 'User-centered design solutions with modern design systems, accessibility focus, and innovation-driven user experiences.',
       url: '/services/ui-ux-design',
-      priceRange: '$$'
+      priceRange: '$'
     },
     {
-      name: 'E-commerce Solutions',
-      description: 'Complete e-commerce platforms and online store development.',
+      name: 'E-commerce Innovation',
+      description: 'Complete e-commerce platforms with modern design, advanced functionality, and seamless user experiences.',
       url: '/services/ecommerce-solutions',
-      priceRange: '$$'
+      priceRange: '$'
     }
   ];
 
@@ -71,13 +71,22 @@ export function GlobalSEO({
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
       
-      {/* Theme and App Configuration */}
-      <meta name="theme-color" content="#000000" />
-      <meta name="msapplication-TileColor" content="#000000" />
+      {/* Theme and App Configuration - Updated with brand colors */}
+      <meta name="theme-color" content="#5A00D2" />
+      <meta name="msapplication-TileColor" content="#5A00D2" />
       <meta name="application-name" content={siteName} />
       <meta name="apple-mobile-web-app-title" content={siteName} />
       <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      
+      {/* Brand Color Meta Tags */}
+      <meta name="brand-primary-color" content="#5A00D2" />
+      <meta name="brand-accent-color" content="#E60073" />
+      <meta name="brand-secondary-color" content="#007BFF" />
+      <meta name="design-system" content="Minimal Tech-Innovation" />
+      
+      {/* Innovation and Tech Expertise Keywords */}
+      <meta name="keywords" content="tech innovation, software development, AI integration, modern web development, UI/UX design, SaaS development, mobile app development, digital transformation, custom software solutions, business technology consulting, innovation consulting, tech expertise, cutting-edge technology, modern design systems" />
       
       {/* Security Headers */}
       <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />

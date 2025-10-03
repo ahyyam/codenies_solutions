@@ -120,10 +120,10 @@ const Navigation: React.FC<NavigationProps> = ({
       <div
         className={cn(
           'flex items-center justify-between w-full px-3 py-2 text-sm font-medium rounded-md transition-colors',
-          'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
-          isActive && 'bg-blue-50 text-blue-700',
+          'focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:ring-offset-2',
+          isActive && 'bg-primary/10 text-primary',
           item.disabled && 'opacity-50 cursor-not-allowed',
-          variant === 'primary' ? 'text-gray-700 hover:text-gray-900 hover:bg-gray-50' : 'text-gray-600 hover:text-gray-800',
+          variant === 'primary' ? 'text-foreground hover:text-accent hover:bg-accent/10' : 'text-muted-foreground hover:text-foreground',
           level > 0 && 'ml-4'
         )}
         role="menuitem"

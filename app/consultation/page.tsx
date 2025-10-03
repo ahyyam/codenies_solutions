@@ -1,89 +1,189 @@
-'use client';
 
+import type { Metadata } from "next"
+import { redirect } from "next/navigation"
+import nodemailer from "nodemailer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowLeft, Code, CheckCircle, Clock, Users, Zap } from "lucide-react"
 import Link from "next/link"
+import { GradientText, GradientCard, GradientButton, GradientHighlight } from "@/components/common"
 
-export default function ConsultationPage() {
+export const metadata: Metadata = {
+  title: "Free Consultation - codenies",
+  description: "Schedule a free strategic consultation with codenies. Discuss goals, timelines, budget, and the right tech approach for your project.",
+  keywords: [
+    "free consultation",
+    "project discovery",
+    "software consultation",
+    "codenies",
+  ],
+  openGraph: {
+    title: "Free Consultation - codenies",
+    description: "Schedule a free strategic consultation with codenies.",
+    type: "website",
+    url: "/consultation",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Consultation - codenies",
+    description: "Schedule a free strategic consultation with codenies.",
+  },
+}
+
+async function submitConsultation(formData: FormData) {
+  'use server'
+  try {
+    const get = (key: string) => String(formData.get(key) || '')
+    const firstName = get('firstName')
+    const lastName = get('lastName')
+    const email = get('email')
+    const company = get('company')
+    const phone = get('phone')
+    const projectType = get('projectType')
+    const budget = get('budget')
+    const timeline = get('timeline')
+    const description = get('description')
+    const newsletter = formData.get('newsletter') ? 'Yes' : 'No'
+
+    if (!firstName || !lastName || !email || !projectType || !description) {
+      redirect('/consultation?sent=0')
+    }
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT || 587),
+      secure: Boolean(process.env.SMTP_SECURE === 'true'),
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    })
+
+    const toAddress = process.env.CONSULTATION_TO || 'hello@codenies.com'
+
+    const html = `
+      <h1>New Consultation Request</h1>
+      <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Company:</strong> ${company}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Project Type:</strong> ${projectType}</p>
+      <p><strong>Budget:</strong> ${budget}</p>
+      <p><strong>Timeline:</strong> ${timeline}</p>
+      <p><strong>Newsletter:</strong> ${newsletter}</p>
+      <p><strong>Description:</strong><br/>${description.replace(/\n/g, '<br/>')}</p>
+    `
+
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM || 'codenies <no-reply@codenies.com>',
+      to: toAddress,
+      subject: `New Consultation Request: ${projectType} - ${firstName} ${lastName}`,
+      replyTo: email,
+      html,
+    })
+
+    redirect('/consultation?sent=1')
+  } catch (error) {
+    console.error('consultation submit error', error)
+    redirect('/consultation?sent=0')
+  }
+}
+
+export default function ConsultationPage({ searchParams }: { searchParams?: { sent?: string } }) {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       {/* Skip to main content link for accessibility */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-gray-900 text-white px-4 py-2 rounded-md z-50">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[var(--primary)] text-primary-foreground px-4 py-2 rounded-md z-50">
         Skip to main content
       </a>
-
-
-      <div className="container mx-auto px-4 py-12 pt-20">
+      <div className="container-mobile section-padding pt-20">
         <div className="max-w-4xl mx-auto">
           {/* Hero Section */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 mb-4">Get Your Free Consultation</h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto font-cursive">
-              Let's discuss your project and explore how we can help transform your business with cutting-edge
-              technology solutions.
+            <GradientText 
+              variant="innovation" 
+              hero 
+              animated 
+              as="h1" 
+              className="text-4xl md:text-5xl font-elegant font-bold mb-4"
+            >
+              Start a project
+            </GradientText>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-cursive">
+              Tell us about your goals, timeline, and constraints. We’ll propose the fastest, safest path to ship.
             </p>
           </div>
+
+          {searchParams?.sent === '1' && (
+            <div className="mb-8 rounded-md border border-green-200 bg-green-50 text-green-800 p-4 text-sm text-center">
+              Thank you! Your consultation request has been sent.
+            </div>
+          )}
+          {searchParams?.sent === '0' && (
+            <div className="mb-8 rounded-md border border-red-200 bg-red-50 text-red-800 p-4 text-sm text-center">
+              Sorry, we couldn't send your request. Please try again.
+            </div>
+          )}
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Benefits */}
             <div className="lg:col-span-1 space-y-6">
-              <Card className="border-gray-200 hover:shadow-lg transition-all duration-300">
+              <Card className="border-border hover:shadow-lg transition-all duration-300 bg-card">
                 <CardHeader>
-                  <CardTitle className="text-lg text-gray-900">What You'll Get</CardTitle>
+                  <CardTitle className="text-lg text-foreground">What you'll get</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start space-x-3 group">
-                    <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                      <CheckCircle className="w-4 h-4 text-gray-600" />
+                    <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                      <CheckCircle className="w-4 h-4 text-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-gray-900">Project Assessment</h3>
-                      <p className="text-sm text-gray-600">Detailed analysis of your requirements and goals</p>
+                      <h3 className="font-medium text-foreground">Project assessment</h3>
+                      <p className="text-sm text-muted-foreground">Clear scope, priorities, and success metrics</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3 group">
-                    <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                      <Clock className="w-4 h-4 text-gray-600" />
+                    <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                      <Clock className="w-4 h-4 text-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-gray-900">Timeline & Budget</h3>
-                      <p className="text-sm text-gray-600">Realistic project timeline and cost estimation</p>
+                      <h3 className="font-medium text-foreground">Timeline & budget</h3>
+                      <p className="text-sm text-muted-foreground">Phased plan and transparent cost ranges</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3 group">
-                    <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                      <Zap className="w-4 h-4 text-gray-600" />
+                    <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                      <Zap className="w-4 h-4 text-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-gray-900">Technology Recommendations</h3>
-                      <p className="text-sm text-gray-600">Best tech stack for your specific needs</p>
+                      <h3 className="font-medium text-foreground">Technology recommendations</h3>
+                      <p className="text-sm text-muted-foreground">Practical stack aligned to your team and roadmap</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3 group">
-                    <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                      <Users className="w-4 h-4 text-gray-600" />
+                    <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                      <Users className="w-4 h-4 text-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-gray-900">Team Introduction</h3>
-                      <p className="text-sm text-gray-600">Meet the experts who'll work on your project</p>
+                      <h3 className="font-medium text-foreground">Team introduction</h3>
+                      <p className="text-sm text-muted-foreground">Direct access to the senior team who will ship it</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-all duration-300">
+              <div className="bg-secondary rounded-lg p-6 border border-border hover:shadow-lg transition-all duration-300">
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-gray-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 bg-[var(--primary)] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle className="w-6 h-6 text-primary-foreground" />
                   </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">100% Free</h3>
+                  <h3 className="font-semibold text-foreground mb-2">100% Free</h3>
                   <p className="text-sm text-gray-600 mb-4">
-                    No strings attached. Get expert advice and project insights at no cost.
+                    No strings attached. Get expert advice, quick sizing, and risk flags at no cost.
                   </p>
-                  <div className="text-3xl font-bold text-gray-600 mb-1">$0</div>
-                  <div className="text-sm text-gray-500 mb-4">Usually $200 value</div>
-                  <div className="text-xs text-gray-600 font-medium bg-gray-200 px-2 py-1 rounded-full">
+                  <div className="text-3xl font-bold text-foreground mb-1">$0</div>
+                  <div className="text-sm text-muted-foreground mb-4">Usually $200 value</div>
+                  <div className="text-xs text-muted-foreground font-medium bg-secondary px-2 py-1 rounded-full">
                     Limited Time Offer
                   </div>
                 </div>
@@ -92,87 +192,93 @@ export default function ConsultationPage() {
 
             {/* Form */}
             <div className="lg:col-span-2">
-              <Card className="border-gray-200">
+              <Card className="border-border bg-card">
                 <CardHeader>
-                  <CardTitle className="text-gray-900">Tell Us About Your Project</CardTitle>
-                  <CardDescription className="text-gray-600">
-                    Fill out the form below and we'll get back to you within 24 hours.
+                  <CardTitle className="text-foreground">Tell Us About Your Project</CardTitle>
+                  <CardDescription className="text-muted-foreground">
+                    Fill out the form and we’ll reply within 24 hours with next steps.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form className="space-y-6" noValidate onSubmit={(e) => e.preventDefault()}>
+                  <form className="space-y-6" noValidate action={submitConsultation}>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <label htmlFor="firstName" className="block text-gray-900 font-medium">
+                        <label htmlFor="firstName" className="block text-foreground font-medium">
                           First Name *
                         </label>
                         <input
                           id="firstName"
                           type="text"
                           placeholder="John"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                          className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--ring)] bg-background text-foreground"
+                          name="firstName"
                           required
                         />
                       </div>
                       <div className="space-y-2">
-                        <label htmlFor="lastName" className="block text-gray-900 font-medium">
+                        <label htmlFor="lastName" className="block text-foreground font-medium">
                           Last Name *
                         </label>
                         <input
                           id="lastName"
                           type="text"
                           placeholder="Doe"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                          className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--ring)] bg-background text-foreground"
+                          name="lastName"
                           required
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="email" className="block text-gray-900 font-medium">
+                      <label htmlFor="email" className="block text-foreground font-medium">
                         Email Address *
                       </label>
                       <input
                         id="email"
                         type="email"
                         placeholder="john@company.com"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                        className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--ring)] bg-background text-foreground"
+                        name="email"
                         required
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="company" className="block text-gray-900 font-medium">
+                      <label htmlFor="company" className="block text-foreground font-medium">
                         Company Name
                       </label>
                       <input
                         id="company"
                         type="text"
                         placeholder="Your Company"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                        className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--ring)] bg-background text-foreground"
+                        name="company"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="phone" className="block text-gray-900 font-medium">
+                      <label htmlFor="phone" className="block text-foreground font-medium">
                         Phone Number
                       </label>
                       <input
                         id="phone"
                         type="tel"
                         placeholder="+1 (555) 123-4567"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                        className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--ring)] bg-background text-foreground"
+                        name="phone"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="projectType" className="block text-gray-900 font-medium">
+                      <label htmlFor="projectType" className="block text-foreground font-medium">
                         Project Type *
                       </label>
                       <select
                         id="projectType"
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                        className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--ring)] bg-background text-foreground"
+                        name="projectType"
                       >
                         <option value="">Select project type</option>
                         <option value="saas">SaaS Development</option>
@@ -186,30 +292,30 @@ export default function ConsultationPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="budget" className="block text-gray-900 font-medium">
+                      <label htmlFor="budget" className="block text-foreground font-medium">
                         Project Budget
                       </label>
                       <select
                         id="budget"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                        className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--ring)] bg-background text-foreground"
+                        name="budget"
                       >
                         <option value="">Select budget range</option>
-                        <option value="under-10k">Under $10,000</option>
-                        <option value="10k-25k">$10,000 - $25,000</option>
-                        <option value="25k-50k">$25,000 - $50,000</option>
+                        <option value="1k-10k">$1,000 - $10,000</option>
+                        <option value="10k-50k">$10,000 - $50,000</option>
                         <option value="50k-100k">$50,000 - $100,000</option>
-                        <option value="over-100k">Over $100,000</option>
-                        <option value="discuss">Let's discuss</option>
+                        <option value="open">Open budget</option>
                       </select>
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="timeline" className="block text-gray-900 font-medium">
+                      <label htmlFor="timeline" className="block text-foreground font-medium">
                         Desired Timeline
                       </label>
                       <select
                         id="timeline"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                        className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--ring)] bg-background text-foreground"
+                        name="timeline"
                       >
                         <option value="">When do you need this completed?</option>
                         <option value="asap">ASAP</option>
@@ -221,13 +327,14 @@ export default function ConsultationPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="description" className="block text-gray-900 font-medium">
+                      <label htmlFor="description" className="block text-foreground font-medium">
                         Project Description *
                       </label>
                       <textarea
                         id="description"
                         placeholder="Tell us about your project, goals, and any specific requirements..."
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 min-h-[120px]"
+                        className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--ring)] min-h-[120px] bg-background text-foreground"
+                        name="description"
                         required
                       />
                     </div>
@@ -236,9 +343,10 @@ export default function ConsultationPage() {
                       <input
                         id="newsletter"
                         type="checkbox"
-                        className="h-4 w-4 text-gray-600 focus:ring-gray-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-foreground focus:ring-[var(--ring)] border-border rounded"
+                        name="newsletter"
                       />
-                      <label htmlFor="newsletter" className="text-sm text-gray-600">
+                      <label htmlFor="newsletter" className="text-sm text-muted-foreground">
                         I'd like to receive updates about new services and industry insights
                       </label>
                     </div>
@@ -248,16 +356,21 @@ export default function ConsultationPage() {
                         id="terms"
                         type="checkbox"
                         required
-                        className="h-4 w-4 text-gray-600 focus:ring-gray-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-foreground focus:ring-[var(--ring)] border-border rounded"
+                        name="terms"
                       />
-                      <label htmlFor="terms" className="text-sm text-gray-600">
+                      <label htmlFor="terms" className="text-sm text-muted-foreground">
                         I agree to the terms of service and privacy policy *
                       </label>
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full bg-gray-900 hover:bg-gray-800 text-white focus:ring-2 focus:ring-gray-900 focus:ring-offset-2">
+                    <GradientButton 
+                      variant="innovation" 
+                      type="submit" 
+                      className="w-full text-lg py-4 focus:ring-2 focus:ring-[var(--ring)] focus:ring-offset-2"
+                    >
                       Schedule My Free Consultation
-                    </Button>
+                    </GradientButton>
                   </form>
                 </CardContent>
               </Card>
@@ -266,17 +379,17 @@ export default function ConsultationPage() {
 
           {/* Additional Info */}
           <div className="mt-12 text-center">
-            <p className="text-gray-600 mb-4">
+            <p className="text-muted-foreground mb-4">
               Questions? Email us at{" "}
-                              <a href="mailto:hello@codenies.com" className="text-gray-900 font-medium hover:underline">
+                              <a href="mailto:hello@codenies.com" className="text-foreground font-medium hover:underline">
                   hello@codenies.com
               </a>{" "}
               or call{" "}
-              <a href="tel:+201287800800" className="text-gray-900 font-medium hover:underline">
+              <a href="tel:+201287800800" className="text-foreground font-medium hover:underline">
                 +201287800800
               </a>
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-muted-foreground">
               We typically respond within 2-4 hours during business hours (9 AM - 6 PM EST)
             </p>
           </div>

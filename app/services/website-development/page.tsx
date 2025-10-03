@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import Link from 'next/link';
+import PageHero from '@/components/common/PageHero';
 
 export const metadata: Metadata = {
   title: 'Website Development - codenies',
@@ -11,59 +12,72 @@ export const metadata: Metadata = {
 const WebsiteDevelopmentPage = () => {
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 text-white overflow-hidden min-h-screen flex items-center pt-20">
-        <div className="container-mobile section-padding relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-elegant font-bold mb-6 text-white leading-tight">
-              Website Development
-            </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed mb-8 font-cursive">
-              High-performance websites that convert visitors into customers with optimal user experience, 
-              modern design, and powerful functionality.
-            </p>
-            <Link href="/consultation" className="btn-primary bg-white text-gray-800 hover:bg-gray-100 text-lg px-8 py-4">
-              Get Free Consultation
-            </Link>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Services"
+        title="Website Development"
+        subtitle="High‑performance websites engineered to rank, convert, and tell your story."
+        ctaHref="/consultation"
+        ctaLabel="Start a project"
+      />
 
       {/* What We Offer Section */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-background">
         <div className="container-mobile">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-gray-900">
+              <h2 className="heading-large text-heading mb-6">
                 Professional Website Development
               </h2>
-              <p className="text-mobile text-gray-600 leading-relaxed mb-6">
-                We create custom websites that not only look stunning but also perform exceptionally well. 
+              <p className="body-large text-body leading-relaxed mb-6">
+                We create custom websites that not only look stunning but also perform exceptionally well.
                 Our websites are built with modern technologies, SEO best practices, and conversion optimization.
               </p>
-              <p className="text-mobile text-gray-600 leading-relaxed">
-                From simple landing pages to complex web applications, we deliver solutions that 
+              <p className="body-large text-body leading-relaxed">
+                From simple landing pages to complex web applications, we deliver solutions that
                 meet your business objectives and exceed user expectations.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Key Features</h3>
-              <ul className="space-y-3">
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">Responsive design</span>
+            <div className="card-accent">
+              <div className="w-12 h-12 bg-gradient-innovation rounded-lg flex items-center justify-center mb-4">
+                <span className="text-2xl">🚀</span>
+              </div>
+              <h3 className="heading-medium text-heading mb-4">Key Features</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">Responsive design</span>
+                    <p className="body-small text-muted mt-1">Optimized for all devices and screen sizes</p>
+                  </div>
                 </li>
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">SEO optimization</span>
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">SEO optimization</span>
+                    <p className="body-small text-muted mt-1">Built for search engine visibility</p>
+                  </div>
                 </li>
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">Fast loading</span>
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">Fast loading</span>
+                    <p className="body-small text-muted mt-1">Optimized performance and speed</p>
+                  </div>
                 </li>
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">Conversion focused</span>
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">Conversion focused</span>
+                    <p className="body-small text-muted mt-1">Designed to turn visitors into customers</p>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -72,15 +86,24 @@ const WebsiteDevelopmentPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-gray-700 to-gray-800 text-white">
-        <div className="container-mobile text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+      <section className="bg-gradient-innovation relative overflow-hidden section-py-lg">
+        <div className="absolute inset-0 bg-gradient-radial-innovation opacity-30" aria-hidden="true" />
+        <div className="container-mobile text-center relative z-10">
+          <h2 className="heading-large text-white mb-6">
             Ready to Build Your Website?
           </h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+          <p className="body-large text-white/90 mb-8 max-w-2xl mx-auto">
             Let's create a website that represents your brand and drives business results.
           </p>
-          <Link href="/consultation" className="btn-primary bg-white text-gray-800 hover:bg-gray-100">
+          <div className="flex items-center justify-center gap-4 text-sm text-white/90 mb-6">
+            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> Free consultation</div>
+            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> Custom design</div>
+            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> Fast delivery</div>
+          </div>
+          <Link 
+            href="/consultation" 
+            className="btn-primary bg-white text-foreground hover:bg-gray-100 px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          >
             Start Your Project
           </Link>
         </div>

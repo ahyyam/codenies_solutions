@@ -77,7 +77,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
   return (
     <div className={cn('relative flex items-center', className)}>
       <div className="relative flex-1">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           type="text"
           placeholder={placeholder}
@@ -85,7 +85,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           disabled={disabled}
-          className="pl-10 pr-10"
+          className="pl-10 pr-10 bg-background text-foreground border-border focus:ring-[var(--ring)]"
           aria-label="Search"
         />
         {showClearButton && internalValue && (

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import Link from 'next/link';
+import PageHero from '@/components/common/PageHero';
 
 export const metadata: Metadata = {
   title: 'AI Integration - codenies',
@@ -11,60 +12,73 @@ export const metadata: Metadata = {
 const AIIntegrationPage = () => {
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 text-white overflow-hidden min-h-screen flex items-center pt-20">
-        <div className="container-mobile section-padding relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-elegant font-bold mb-6 text-white leading-tight">
-              AI Integration
-            </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed mb-8 font-cursive">
-              Cutting-edge artificial intelligence solutions to automate processes and enhance functionality 
-              with modern AI technologies and machine learning capabilities.
-            </p>
-            <Link href="/consultation" className="btn-primary bg-white text-gray-800 hover:bg-gray-100 text-lg px-8 py-4">
-              Get Free Consultation
-            </Link>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Services"
+        title="AI Integration"
+        subtitle="Automate processes and enhance functionality with practical machine learning."
+        ctaHref="/consultation"
+        ctaLabel="Start a project"
+      />
 
       {/* What We Offer Section */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-background">
         <div className="container-mobile">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-gray-900">
+              <h2 className="heading-large text-heading mb-6">
                 AI-Powered Solutions
               </h2>
-              <p className="text-mobile text-gray-600 leading-relaxed mb-6">
+              <p className="body-large text-body leading-relaxed mb-6">
                 We integrate artificial intelligence into your existing systems to automate repetitive tasks, 
                 provide intelligent insights, and enhance user experience. Our AI solutions are designed 
                 to be scalable, secure, and cost-effective.
               </p>
-              <p className="text-mobile text-gray-600 leading-relaxed">
+              <p className="body-large text-body leading-relaxed">
                 From chatbots to predictive analytics, we help businesses leverage AI to gain competitive 
                 advantages and improve operational efficiency.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Key Features</h3>
-              <ul className="space-y-3">
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">Machine learning</span>
+            <div className="card-accent">
+              <div className="w-12 h-12 bg-gradient-tech rounded-lg flex items-center justify-center mb-4">
+                <span className="text-2xl">🤖</span>
+              </div>
+              <h3 className="heading-medium text-heading mb-4">Key Features</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">Machine learning</span>
+                    <p className="body-small text-muted mt-1">Intelligent algorithms that learn and adapt</p>
+                  </div>
                 </li>
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">Natural language processing</span>
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">Natural language processing</span>
+                    <p className="body-small text-muted mt-1">Understanding and processing human language</p>
+                  </div>
                 </li>
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">Predictive analytics</span>
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">Predictive analytics</span>
+                    <p className="body-small text-muted mt-1">Forecasting trends and outcomes</p>
+                  </div>
                 </li>
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">Process automation</span>
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">Process automation</span>
+                    <p className="body-small text-muted mt-1">Streamlining workflows and operations</p>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -73,15 +87,24 @@ const AIIntegrationPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-gray-700 to-gray-800 text-white">
-        <div className="container-mobile text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+      <section className="bg-gradient-tech relative overflow-hidden section-py-lg">
+        <div className="absolute inset-0 bg-gradient-radial-tech opacity-30" aria-hidden="true" />
+        <div className="container-mobile text-center relative z-10">
+          <h2 className="heading-large text-white mb-6">
             Ready to Integrate AI?
           </h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+          <p className="body-large text-white/90 mb-8 max-w-2xl mx-auto">
             Let's leverage artificial intelligence to transform your business operations.
           </p>
-          <Link href="/consultation" className="btn-primary bg-white text-gray-800 hover:bg-gray-100">
+          <div className="flex items-center justify-center gap-4 text-sm text-white/90 mb-6">
+            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> Smart automation</div>
+            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> Data insights</div>
+            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> Future-ready</div>
+          </div>
+          <Link 
+            href="/consultation" 
+            className="btn-primary bg-white text-foreground hover:bg-gray-100 px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          >
             Start Your Project
           </Link>
         </div>

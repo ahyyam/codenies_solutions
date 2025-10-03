@@ -113,13 +113,13 @@ const Modal: React.FC<ModalProps> = ({
       aria-describedby={description ? 'modal-description' : undefined}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-50 transition-opacity" />
+      <div className="absolute inset-0 bg-black/60 transition-opacity" />
       
       {/* Modal content */}
       <div
         ref={modalRef}
         className={cn(
-          'relative w-full bg-white rounded-lg shadow-xl',
+          'relative w-full bg-card text-foreground rounded-lg shadow-xl border border-border',
           sizes[size],
           className
         )}
@@ -127,15 +127,15 @@ const Modal: React.FC<ModalProps> = ({
       >
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <div className="flex items-center justify-between p-6 border-b border-border">
             <div>
               {title && (
-                <h2 id="modal-title" className="text-lg font-semibold text-gray-900">
+                <h2 id="modal-title" className="text-lg font-semibold text-foreground">
                   {title}
                 </h2>
               )}
               {description && (
-                <p id="modal-description" className="mt-1 text-sm text-gray-600">
+                <p id="modal-description" className="mt-1 text-sm text-muted-foreground">
                   {description}
                 </p>
               )}

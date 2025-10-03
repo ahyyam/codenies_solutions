@@ -1,70 +1,83 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import Link from 'next/link';
+import PageHero from '@/components/common/PageHero';
 
 export const metadata: Metadata = {
   title: 'UI/UX Design - codenies',
-  description: 'Intuitive and beautiful interfaces that prioritize user experience and business goals with modern design principles.',
-  keywords: ['UI design', 'UX design', 'user interface', 'user experience', 'web design', 'mobile design'],
+  description: 'User-centered UI/UX design services that improve conversion and reduce friction.',
+  keywords: ['ui ux design', 'product design', 'user experience', 'wireframes', 'prototyping'],
 };
 
-const UIUXDesignPage = () => {
+const UIDesignPage = () => {
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 text-white overflow-hidden min-h-screen flex items-center pt-20">
-        <div className="container-mobile section-padding relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-elegant font-bold mb-6 text-white leading-tight">
-              UI/UX Design
-            </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed mb-8 font-cursive">
-              Intuitive and beautiful interfaces that prioritize user experience and business goals 
-              with modern design principles and user-centered methodologies.
-            </p>
-            <Link href="/consultation" className="btn-primary bg-white text-gray-700 hover:bg-gray-100 text-lg px-8 py-4">
-              Get Free Consultation
-            </Link>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Services"
+        title="UI/UX Design"
+        subtitle="User‑centered design that reduces friction and increases conversion."
+        ctaHref="/consultation"
+        ctaLabel="Start a project"
+      />
 
       {/* What We Offer Section */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-background">
         <div className="container-mobile">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-gray-900">
-                User-Centered Design
+              <h2 className="heading-large text-heading mb-6">
+                Design That Drives Outcomes
               </h2>
-              <p className="text-mobile text-gray-600 leading-relaxed mb-6">
-                We create designs that not only look beautiful but also function flawlessly. Our UI/UX 
-                design process focuses on understanding user needs, creating intuitive interfaces, and 
-                optimizing user journeys for maximum engagement and conversion.
+              <p className="body-large text-body leading-relaxed mb-6">
+                We design interfaces that are delightful and clear, using research and rapid prototyping
+                to validate ideas and remove friction across the journey.
               </p>
-              <p className="text-mobile text-gray-600 leading-relaxed">
-                From wireframes to high-fidelity prototypes, we deliver designs that enhance user 
-                experience and drive business results.
+              <p className="body-large text-body leading-relaxed">
+                From discovery workshops to handoff, we collaborate closely with your team to ensure
+                the shipped product matches user needs and business goals.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Key Features</h3>
-              <ul className="space-y-3">
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">User research</span>
+            <div className="card-accent">
+              <div className="w-12 h-12 bg-gradient-innovation rounded-lg flex items-center justify-center mb-4">
+                <span className="text-2xl">🎨</span>
+              </div>
+              <h3 className="heading-medium text-heading mb-4">Key Features</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-accent rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">User research</span>
+                    <p className="body-small text-muted mt-1">Understanding user needs and behaviors</p>
+                  </div>
                 </li>
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">Wireframing</span>
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-accent rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">Wireframing</span>
+                    <p className="body-small text-muted mt-1">Structural blueprints for optimal flow</p>
+                  </div>
                 </li>
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">Prototyping</span>
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-accent rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">Prototyping</span>
+                    <p className="body-small text-muted mt-1">Interactive mockups for validation</p>
+                  </div>
                 </li>
-                <li className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span className="text-gray-700">User testing</span>
+                <li className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 bg-accent rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="body-large text-body font-medium">User testing</span>
+                    <p className="body-small text-muted mt-1">Validating design decisions with real users</p>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -73,15 +86,24 @@ const UIUXDesignPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-gray-600 to-gray-700 text-white">
-        <div className="container-mobile text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Ready to Design Your Interface?
+      <section className="bg-gradient-innovation relative overflow-hidden section-py-lg">
+        <div className="absolute inset-0 bg-gradient-radial-innovation opacity-30" aria-hidden="true" />
+        <div className="container-mobile text-center relative z-10">
+          <h2 className="heading-large text-white mb-6">
+            Ready to Elevate Your Product?
           </h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-            Let's create designs that delight your users and achieve your business goals.
+          <p className="body-large text-white/90 mb-8 max-w-2xl mx-auto">
+            Let’s redesign with clarity and speed to increase conversion and satisfaction.
           </p>
-          <Link href="/consultation" className="btn-primary bg-white text-gray-700 hover:bg-gray-100">
+          <div className="flex items-center justify-center gap-4 text-sm text-white/90 mb-6">
+            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> User-centered design</div>
+            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> Conversion focused</div>
+            <div className="flex items-center gap-2"><span className="inline-block w-2 h-2 rounded-full bg-white/80" /> Rapid prototyping</div>
+          </div>
+          <Link 
+            href="/consultation" 
+            className="btn-primary bg-white text-foreground hover:bg-gray-100 px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          >
             Start Your Project
           </Link>
         </div>
@@ -90,4 +112,4 @@ const UIUXDesignPage = () => {
   );
 };
 
-export default UIUXDesignPage;
+export default UIDesignPage;

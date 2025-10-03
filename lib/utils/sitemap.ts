@@ -62,7 +62,7 @@ export class SitemapGenerator {
         url: '/services/website-development',
         lastModified: now,
         changeFrequency: 'monthly',
-        priority: 0.8
+        priority: 0.85 // Higher priority for design-focused services
       },
       {
         url: '/services/saas-development',
@@ -86,13 +86,13 @@ export class SitemapGenerator {
         url: '/services/ui-ux-design',
         lastModified: now,
         changeFrequency: 'monthly',
-        priority: 0.8
+        priority: 0.9 // Highest priority for UX design service
       },
       {
         url: '/services/ai-integration',
         lastModified: now,
         changeFrequency: 'monthly',
-        priority: 0.8
+        priority: 0.85 // Higher priority for innovation-focused AI service
       },
       {
         url: '/blog',
@@ -104,13 +104,13 @@ export class SitemapGenerator {
         url: '/work',
         lastModified: now,
         changeFrequency: 'weekly',
-        priority: 0.8
+        priority: 0.85 // Higher priority for showcasing design work
       },
       {
         url: '/consultation',
         lastModified: now,
         changeFrequency: 'monthly',
-        priority: 0.7
+        priority: 0.75 // Slightly higher for business conversion
       },
       {
         url: '/privacy',

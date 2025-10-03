@@ -38,8 +38,8 @@ export function ProjectCard({ project, onViewDetails, className = '' }: ProjectC
   };
 
   return (
-    <Card 
-      className={`group relative overflow-hidden bg-card border border-border hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 ${className}`}
+    <div 
+      className={`project-card group relative ${className}`}
     >
       {/* Featured Badge */}
       {project.featured && (
@@ -52,7 +52,7 @@ export function ProjectCard({ project, onViewDetails, className = '' }: ProjectC
       )}
 
       {/* Project Image */}
-      <div className="relative aspect-video overflow-hidden bg-muted">
+      <div className="project-card-image bg-muted">
         {!imageError ? (
           <ProjectImage
             src={primaryImage}
@@ -116,7 +116,7 @@ export function ProjectCard({ project, onViewDetails, className = '' }: ProjectC
         </div>
       </div>
 
-      <CardContent className="p-4">
+      <div className="project-card-content">
         {/* Category and Status */}
         <div className="flex items-center justify-between mb-2">
           <Badge variant="outline" className="text-xs">
@@ -132,11 +132,11 @@ export function ProjectCard({ project, onViewDetails, className = '' }: ProjectC
         </div>
 
         {/* Title and Description */}
-        <h3 className="font-semibold text-lg text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+        <h3 className="project-card-title line-clamp-2 group-hover:text-accent transition-colors">
           {project.title}
         </h3>
         
-        <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+        <p className="project-card-description text-sm mb-4 line-clamp-3">
           {project.description}
         </p>
 
@@ -202,7 +202,7 @@ export function ProjectCard({ project, onViewDetails, className = '' }: ProjectC
           View Case Study
           <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
         </Button>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

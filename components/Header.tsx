@@ -6,6 +6,29 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronRight, ArrowRight } from "lucide-react";
 
+type LogoProps = {
+  linkClassName?: string;
+  imageClassName?: string;
+  onClick?: () => void;
+};
+
+const Logo = ({ linkClassName, imageClassName, onClick }: LogoProps) => (
+  <Link 
+    href="/" 
+    className={linkClassName ?? "flex items-center space-x-2 group"}
+    onClick={onClick}
+    aria-label="codenies - Home"
+  >
+    <Image
+      src="/logo/web.png"
+      alt="codenies"
+      width={160}
+      height={160}
+      className={`h-12 lg:h-10 w-auto ${imageClassName ?? ""}`}
+    />
+  </Link>
+);
+
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -21,56 +44,48 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Prevent body scroll when mobile menu is open and handle keyboard navigation
+  // Prevent body scroll when mobile menu is open, handle keyboard + touch, and manage focus
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden';
-      
-      // Handle escape key to close menu
-      const handleEscape = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          setOpen(false);
-        }
-      };
-
-      // Handle swipe gestures for mobile
-      let startX = 0;
-      let startY = 0;
-      
-      const handleTouchStart = (e: TouchEvent) => {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-      };
-
-      const handleTouchEnd = (e: TouchEvent) => {
-        if (!startX || !startY) return;
-        
-        const endX = e.changedTouches[0].clientX;
-        const endY = e.changedTouches[0].clientY;
-        
-        const diffX = startX - endX;
-        const diffY = startY - endY;
-        
-        // Swipe right to close (when swiping from left edge)
-        if (Math.abs(diffX) > Math.abs(diffY) && diffX < -50 && startX < 50) {
-          setOpen(false);
-        }
-      };
-
-      document.addEventListener('keydown', handleEscape);
-      document.addEventListener('touchstart', handleTouchStart, { passive: true });
-      document.addEventListener('touchend', handleTouchEnd, { passive: true });
-      
-      return () => {
-        document.removeEventListener('keydown', handleEscape);
-        document.removeEventListener('touchstart', handleTouchStart);
-        document.removeEventListener('touchend', handleTouchEnd);
-      };
-    } else {
+    if (!open) {
       document.body.style.overflow = 'unset';
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
     }
 
+    document.body.style.overflow = 'hidden';
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+
+    let startX = 0;
+    let startY = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    };
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!startX || !startY) return;
+      const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+      const diffX = startX - endX;
+      const diffY = startY - endY;
+      if (Math.abs(diffX) > Math.abs(diffY) && diffX < -50 && startX < 50) setOpen(false);
+    };
+
+    // Focus the first navigation item when menu opens
+    const firstNavItem = document.querySelector('#mobile-menu a');
+    if (firstNavItem instanceof HTMLElement) setTimeout(() => firstNavItem.focus(), 100);
+
+    document.addEventListener('keydown', handleEscape);
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
+
     return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchend', handleTouchEnd);
       document.body.style.overflow = 'unset';
     };
   }, [open]);
@@ -79,47 +94,25 @@ const Header = () => {
     setOpen(false);
   };
 
-  // Focus management for accessibility
-  useEffect(() => {
-    if (open) {
-      // Focus the first navigation item when menu opens
-      const firstNavItem = document.querySelector('#mobile-menu a');
-      if (firstNavItem instanceof HTMLElement) {
-        setTimeout(() => firstNavItem.focus(), 100);
-      }
-    }
-  }, [open]);
+  // (Focus management merged into the open effect above)
 
   const navigationItems = [
-    { href: "/about", label: "About" },
+    { href: "/services", label: "Services" },
     { href: "/work", label: "Work" },
+    { href: "/about", label: "About" },
     { href: "/blog", label: "Blog" },
   ];
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled 
-        ? 'bg-background/95 backdrop-blur-md border-b border-border/50 shadow-lg' 
-        : 'bg-background/80 backdrop-blur-sm'
+        ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-lg' 
+        : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-14 lg:h-12">
+        <div className="flex items-center justify-between h-20 lg:h-16">
           {/* Logo */}
-          <Link 
-            href="/" 
-            className="flex items-center space-x-2 group"
-            onClick={handleNavigation}
-            aria-label="codenies - Home"
-          >
-            <Image
-              src="/logo/web.png"
-              alt="codenies"
-              width={160}
-              height={160}
-              className="h-14 lg:h-12 w-auto group-hover:opacity-80 transition-opacity duration-200 font-bold"
-              style={{ filter: 'contrast(1.3) saturate(1.2) brightness(1.1)' }}
-            />
-          </Link>
+          <Logo onClick={handleNavigation} />
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:block">
@@ -128,18 +121,18 @@ const Header = () => {
                 <li key={item.href}>
                   <Link 
                     href={item.href} 
-                    className="relative text-foreground/80 hover:text-primary transition-colors duration-200 font-elegant font-medium leading-normal group"
+                    className="relative text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors duration-200 font-medium leading-normal group"
                     onClick={handleNavigation}
                   >
                     {item.label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--color-accent)] transition-all duration-200 group-hover:w-full"></span>
                   </Link>
                 </li>
               ))}
               <li>
-                <Button asChild size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 group">
-                  <Link href="/consultation" onClick={handleNavigation}>
-                    Get Started
+                <Button asChild size="sm" className="bg-[var(--color-primary)] hover:bg-[var(--gradient-hover)] text-white shadow-sm hover:shadow-md transition-all duration-300 group px-3 py-1.5 text-xs rounded-md whitespace-nowrap">
+                  <Link href="/consultation" onClick={handleNavigation} aria-label="Start a project">
+                    Start a project
                     <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
@@ -149,7 +142,7 @@ const Header = () => {
 
           {/* Mobile Navigation Button */}
           <div className="lg:hidden">
-            <Button 
+              <Button 
               variant="ghost" 
               size="icon" 
               onClick={() => setOpen(!open)}
@@ -159,7 +152,7 @@ const Header = () => {
                   setOpen(!open);
                 }
               }}
-              className="relative min-w-[44px] min-h-[44px] w-12 h-12 hover:bg-primary/10 transition-colors duration-200 touch-manipulation focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="relative touch-target hover:bg-[var(--color-accent)]/10 transition-colors duration-300 no-tap-highlight focus-mobile"
               aria-label={open ? "Close mobile menu" : "Open mobile menu"}
               aria-expanded={open}
               aria-controls="mobile-menu"
@@ -177,7 +170,7 @@ const Header = () => {
 
       {/* Mobile Menu Overlay */}
       <div 
-        className={`lg:hidden fixed inset-0 z-50 transition-all duration-300 ease-in-out ${
+        className={`lg:hidden fixed inset-0 z-50 transition-all duration-300 ease-out ${
           open 
             ? 'opacity-100 visible' 
             : 'opacity-0 invisible'
@@ -189,12 +182,12 @@ const Header = () => {
         }}
       >
         {/* Backdrop */}
-        <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
+            <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
         
         {/* Slide-in Menu */}
         <div 
           id="mobile-menu"
-          className={`absolute right-0 top-0 h-full w-full max-w-sm bg-background shadow-2xl transform transition-transform duration-300 ease-in-out ${
+          className={`absolute right-0 top-0 h-full w-full max-w-sm bg-background shadow-2xl transform transition-all duration-300 ease-out ${
             open ? 'translate-x-0' : 'translate-x-full'
           }`}
           role="dialog" 
@@ -205,26 +198,16 @@ const Header = () => {
           <div className="flex flex-col h-full w-full relative">
             {/* Mobile Header - Clean and Simple */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-background">
-              <Link 
-                href="/" 
-                className="flex items-center min-h-[44px] min-w-[44px] touch-manipulation"
+              <Logo 
                 onClick={handleNavigation}
-                aria-label="codenies - Home"
-              >
-                <Image
-                  src="/logo/web.png"
-                  alt="codenies"
-                  width={160}
-                  height={160}
-                  className="h-14 lg:h-12 w-auto"
-                  style={{ filter: 'contrast(1.3) saturate(1.2) brightness(1.1)' }}
-                />
-              </Link>
+                linkClassName="flex items-center touch-target no-tap-highlight"
+                imageClassName=""
+              />
               <Button 
                 variant="ghost" 
                 size="icon" 
                 onClick={() => setOpen(false)}
-                className="min-w-[44px] min-h-[44px] w-12 h-12 hover:bg-muted rounded-lg transition-colors touch-manipulation focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                className="touch-target hover:bg-[var(--color-accent)]/10 rounded-lg transition-colors duration-300 no-tap-highlight focus-mobile"
                 aria-label="Close mobile menu"
               >
                 <X className="h-6 w-6" />
@@ -238,7 +221,7 @@ const Header = () => {
                   <li key={item.href} role="listitem">
                     <Link 
                       href={item.href} 
-                      className="block text-lg font-medium text-foreground hover:text-primary py-4 px-4 rounded-lg hover:bg-primary/10 transition-all duration-200 bg-background min-h-[44px] touch-manipulation focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none"
+                      className="nav-touch text-lg font-medium text-[var(--color-text-primary)] hover:text-[var(--color-accent)] rounded-lg hover:bg-[var(--color-accent)]/10 transition-all duration-300 bg-background focus-mobile"
                       onClick={handleNavigation}
                       tabIndex={open ? 0 : -1}
                       aria-describedby={`nav-item-${index}`}
@@ -253,7 +236,7 @@ const Header = () => {
               <div className="mt-8">
                 <Button 
                   asChild 
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 rounded-lg min-h-[44px] touch-manipulation focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200"
+                  className="w-full bg-[var(--color-primary)] hover:bg-[var(--gradient-hover)] text-white py-2 rounded-md no-tap-highlight focus-mobile transition-all duration-300 whitespace-nowrap"
                 >
                   <Link 
                     href="/consultation" 

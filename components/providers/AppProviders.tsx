@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { ToastProvider } from '@/lib/contexts/ToastContext';
 import { ErrorBoundary } from '@/components/organisms/ErrorBoundary';
 import { ToastContainer } from '@/components/organisms/ToastContainer';
+import { AccessibilityProvider } from './AccessibilityProvider';
 import { setupGlobalErrorHandling } from '@/lib/utils/error-handling-enhanced';
 
 export interface AppProvidersProps {
@@ -24,10 +25,12 @@ export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
         }
       }}
     >
-      <ToastProvider>
-        {children}
-        <ToastContainer position="top-right" />
-      </ToastProvider>
+      <AccessibilityProvider>
+        <ToastProvider>
+          {children}
+          <ToastContainer position="top-right" />
+        </ToastProvider>
+      </AccessibilityProvider>
     </ErrorBoundary>
   );
 };
