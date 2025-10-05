@@ -6,6 +6,9 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import GlobalSEO from "@/components/common/GlobalSEO"
 import PerformanceMonitor from "@/components/common/PerformanceMonitor"
+import { AuthProvider } from "@/lib/contexts/AuthContext"
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics"
+import { MetaPixel } from "@/components/analytics/MetaPixel"
 
 export const metadata: Metadata = {
   title: {
@@ -284,12 +287,16 @@ export default function RootLayout({
         }} />
       </head>
       <body suppressHydrationWarning={true} className="font-loading">
-        <PerformanceMonitor />
-        <Header />
-        <main id="main-content" role="main" className="pt-20 lg:pt-16">
-          {children}
-        </main>
-        <Footer />
+        <AuthProvider>
+          <PerformanceMonitor />
+          <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''} />
+          <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID || ''} />
+          <Header />
+          <main id="main-content" role="main" className="pt-20 lg:pt-16">
+            {children}
+          </main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   )

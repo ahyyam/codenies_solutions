@@ -7,34 +7,34 @@ import { Label } from '@/components/ui/label';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { BlogManagement } from '@/components/admin/BlogManagement';
 import { ProjectManagement } from '@/components/admin/ProjectManagement';
+import { useAuth } from '@/lib/contexts/AuthContext';
 import { createPortal } from 'react-dom';
 
-const ADMIN_PASSWORD = 'AhyamEmad@315';
-
 export default function AdminPage() {
-  const [isAuthed, setIsAuthed] = useState(false);
+  const { user, loading, signIn, signOut, error, clearError } = useAuth();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const saved = localStorage.getItem('admin_auth');
-    if (saved === '1') setIsAuthed(true);
   }, []);
 
-  function handleLogin(e: React.FormEvent) {
+  async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      setIsAuthed(true);
-      localStorage.setItem('admin_auth', '1');
-    } else {
-      alert('Incorrect password');
+    try {
+      await signIn(email, password);
+    } catch (err) {
+      // Error is handled by the auth context
     }
   }
 
-  function handleLogout() {
-    localStorage.removeItem('admin_auth');
-    setIsAuthed(false);
+  async function handleLogout() {
+    try {
+      await signOut();
+    } catch (err) {
+      // Error is handled by the auth context
+    }
   }
 
   // Render blog management content into the tab
@@ -61,14 +61,54 @@ export default function AdminPage() {
     );
   };
 
-  if (!isAuthed) {
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center px-4">
+        <div className="w-full max-w-sm bg-card border border-border rounded-lg p-6 space-y-4 text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center px-4">
         <form onSubmit={handleLogin} className="w-full max-w-sm bg-card border border-border rounded-lg p-6 space-y-4">
           <div className="text-center">
-            <Badge className="mb-2">Admin</Badge>
-            <h1 className="text-xl font-semibold">Enter Password</h1>
+            <Badge className="mb-2">Admin Login</Badge>
+            <h1 className="text-xl font-semibold">Sign In</h1>
           </div>
+          
+          {error && (
+            <div className="bg-destructive/10 border border-destructive/20 rounded-md p-3">
+              <p className="text-destructive text-sm">{error}</p>
+              <Button 
+                type="button" 
+                variant="ghost" 
+                size="sm" 
+                onClick={clearError}
+                className="mt-1 text-destructive hover:text-destructive"
+              >
+                Dismiss
+              </Button>
+            </div>
+          )}
+          
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-3 py-2 border border-border rounded-md bg-background"
+              placeholder="admin@codenies.com"
+              required
+            />
+          </div>
+          
           <div>
             <Label htmlFor="password">Password</Label>
             <input
@@ -78,9 +118,13 @@ export default function AdminPage() {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2 border border-border rounded-md bg-background"
               placeholder="••••••••"
+              required
             />
           </div>
-          <Button type="submit" className="w-full">Unlock</Button>
+          
+          <Button type="submit" className="w-full" disabled={loading}>
+            {loading ? 'Signing In...' : 'Sign In'}
+          </Button>
         </form>
       </div>
     );
