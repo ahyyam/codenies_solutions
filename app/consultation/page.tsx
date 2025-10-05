@@ -12,6 +12,9 @@ export const metadata: Metadata = {
 
 async function submitConsultation(formData: FormData) {
   'use server'
+  
+  console.log('=== CONSULTATION FORM SUBMISSION STARTED ===')
+  
   try {
     const get = (key: string) => String(formData.get(key) || '')
     const firstName = get('firstName')
@@ -24,8 +27,11 @@ async function submitConsultation(formData: FormData) {
     const timeline = get('timeline')
     const description = get('description')
     const newsletter = formData.get('newsletter') ? 'Yes' : 'No'
+    
+    console.log('Form data received:', { firstName, lastName, email, projectType, description: description?.substring(0, 50) + '...' })
 
     if (!firstName || !lastName || !email || !projectType || !description) {
+      console.error('Missing required fields:', { firstName, lastName, email, projectType, description })
       redirect('/consultation?sent=0')
     }
 
@@ -37,6 +43,8 @@ async function submitConsultation(formData: FormData) {
       },
     })
 
+    console.log('Sending email to:', process.env.CONTACT_EMAIL)
+    
     const info = await transporter.sendMail({
       from: `"${firstName} ${lastName}" <${email}>`,
       to: process.env.CONTACT_EMAIL,
@@ -47,7 +55,7 @@ async function submitConsultation(formData: FormData) {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Company:</strong> ${company || 'Not provided'}</p>
         <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-        <p><strong>TType:</strong> ${projectType}</p>
+        <p><strong>Project Type:</strong> ${projectType}</p>
         <p><strong>Budget:</strong> ${budget || 'Not specified'}</p>
         <p><strong>Timeline:</strong> ${timeline || 'Not specified'}</p>
         <p><strong>Newsletter:</strong> ${newsletter}</p>
@@ -56,8 +64,13 @@ async function submitConsultation(formData: FormData) {
       `,
     })
 
+    console.log('Email sent successfully:', info.messageId)
+    console.log('=== REDIRECTING TO SUCCESS ===')
     redirect('/consultation?sent=1')
   } catch (error) {
+    console.error('=== EMAIL SENDING ERROR ===')
+    console.error('Email sending error:', error)
+    console.log('=== REDIRECTING TO ERROR ===')
     redirect('/consultation?sent=0')
   }
 }

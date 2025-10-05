@@ -153,6 +153,12 @@ export default function RootLayout({
               text-rendering: optimizeLegibility;
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;
+              transition: opacity ease-in 0.2s;
+            }
+            
+            body[unresolved] {
+              opacity: 0;
+              display: none;
             }
             
             /* Prevent layout shift during font load */
@@ -237,7 +243,7 @@ export default function RootLayout({
                   const entries = list.getEntries();
                   const lastEntry = entries[entries.length - 1];
                   if (lastEntry) {
-                    performance.mark('lcp', lastEntry.startTime);
+                    performance.mark('lcp-' + lastEntry.startTime);
                   }
                 }).observe({entryTypes: ['largest-contentful-paint']});
               } catch (e) {}
@@ -248,7 +254,7 @@ export default function RootLayout({
                   const firstInput = list.getEntries()[0];
                   if (firstInput) {
                     const fid = firstInput.processingStart - firstInput.startTime;
-                    performance.mark('fid', fid);
+                    performance.mark('fid-' + fid);
                   }
                 }).observe({entryTypes: ['first-input']});
               } catch (e) {}
@@ -262,7 +268,7 @@ export default function RootLayout({
                       clsValue += entry.value;
                     }
                   }
-                  performance.mark('cls', clsValue);
+                  performance.mark('cls-' + clsValue);
                 }).observe({entryTypes: ['layout-shift']});
               } catch (e) {}
             }
@@ -270,7 +276,7 @@ export default function RootLayout({
             // Font loading optimization
             if ('fonts' in document) {
               document.fonts.ready.then(() => {
-                performance.mark('fonts-loaded');
+                performance.mark('fonts-loaded-' + performance.now());
                 document.body.classList.remove('font-loading');
               });
             } else {

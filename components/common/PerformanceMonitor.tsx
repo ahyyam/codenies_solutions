@@ -26,7 +26,7 @@ export default function PerformanceMonitor() {
           const lastEntry = entries[entries.length - 1];
           if (lastEntry) {
             vitals.lcp = lastEntry.startTime;
-            performance.mark('lcp', { startTime: lastEntry.startTime });
+            performance.mark('lcp-' + lastEntry.startTime);
             
             // Log for debugging
             if (vitals.lcp > 2500) {
@@ -45,7 +45,7 @@ export default function PerformanceMonitor() {
           if (firstInput) {
             const fid = (firstInput as any).processingStart - firstInput.startTime;
             vitals.fid = fid;
-            performance.mark('fid', { startTime: fid });
+            performance.mark('fid-' + fid);
             
             if (fid > 100) {
               console.warn(`FID is ${fid}ms - consider optimization`);
@@ -66,7 +66,7 @@ export default function PerformanceMonitor() {
             }
           }
           vitals.cls = clsValue;
-          performance.mark('cls', { startTime: clsValue });
+          performance.mark('cls-' + clsValue);
           
           if (clsValue > 0.1) {
             console.warn(`CLS is ${clsValue} - consider reducing layout shifts`);
@@ -83,7 +83,7 @@ export default function PerformanceMonitor() {
           const firstEntry = entries[0];
           if (firstEntry) {
             vitals.fcp = firstEntry.startTime;
-            performance.mark('fcp', { startTime: firstEntry.startTime });
+            performance.mark('fcp-' + firstEntry.startTime);
             
             if (vitals.fcp > 1800) {
               console.warn(`FCP is ${vitals.fcp}ms - consider optimization`);
@@ -99,7 +99,7 @@ export default function PerformanceMonitor() {
         const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
         if (navigationEntry) {
           vitals.ttfb = navigationEntry.responseStart - navigationEntry.requestStart;
-          performance.mark('ttfb', { startTime: vitals.ttfb });
+          performance.mark('ttfb-' + vitals.ttfb);
           
           if (vitals.ttfb > 600) {
             console.warn(`TTFB is ${vitals.ttfb}ms - consider server optimization`);
@@ -136,7 +136,7 @@ export default function PerformanceMonitor() {
         
         document.fonts.ready.then(() => {
           const fontLoadTime = performance.now() - fontLoadStartTime;
-          performance.mark('fonts-loaded', { startTime: fontLoadTime });
+          performance.mark('fonts-loaded-' + fontLoadTime);
           
           // Remove loading class
           document.body.classList.remove('font-loading');

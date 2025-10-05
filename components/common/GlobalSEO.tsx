@@ -1,6 +1,3 @@
-'use client';
-
-import Head from 'next/head';
 import { 
   generateOrganizationStructuredData, 
   generateWebsiteStructuredData,
@@ -65,7 +62,7 @@ export function GlobalSEO({
   const serviceStructuredData = services.map(service => generateServiceStructuredData(service));
 
   return (
-    <Head>
+    <>
       {/* Global Meta Tags */}
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -104,14 +101,14 @@ export function GlobalSEO({
       <link rel="dns-prefetch" href="//fonts.googleapis.com" />
       <link rel="dns-prefetch" href="//fonts.gstatic.com" />
       
-      {/* Font Preloading */}
-      <link 
+      {/* Font Preloading - Commented out until font file is available */}
+      {/* <link 
         rel="preload" 
         href="/fonts/geist-sans.woff2" 
         as="font" 
         type="font/woff2" 
         crossOrigin="anonymous" 
-      />
+      /> */}
       
       {/* Global Structured Data */}
       <script
@@ -141,7 +138,7 @@ export function GlobalSEO({
       
       {/* Cache Control for Static Assets */}
       <meta httpEquiv="Cache-Control" content="public, max-age=31536000, immutable" />
-    </Head>
+    </>
   );
 }
 
