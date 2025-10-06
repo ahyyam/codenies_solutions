@@ -9,6 +9,8 @@ import PerformanceMonitor from "@/components/common/PerformanceMonitor"
 import { AuthProvider } from "@/lib/contexts/AuthContext"
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics"
 import { MetaPixel } from "@/components/analytics/MetaPixel"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: {
@@ -298,6 +300,8 @@ export default function RootLayout({
           <PerformanceMonitor />
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''} />
           <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID || ''} />
+          <SpeedInsights />
+          <Analytics />
           <Header />
           <main id="main-content" role="main" className="pt-20 lg:pt-16">
             {children}
